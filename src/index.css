@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#root, body, html {
+    overflow: hidden;
+    background-color: #f1f5f9;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
 .game-mode {
     --color01: #0097F4;
     --color02: #228ACA;
@@ -9,6 +19,7 @@
     --color04: #3B5F75;
     --color05: #32414B;
     --color06: #2B3033;
+    --transitioncolor: #3B5F75;
 }
 
 .movie-mode {
@@ -17,5 +28,6 @@
     --color03: #A04235;
     --color04: #75413B;
     --color05: #4B3532;
-    --color06: #4B3532;
+    --color06: #3D3433;
+    --transitioncolor: #75413B;
 }

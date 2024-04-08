@@ -25,7 +25,7 @@ const Header = () => {
         ANIMATION.classList.add('w-[100vw]')
         ANIMATION.classList.add('absolute')
         ANIMATION.classList.add('top-0')
-        ANIMATION.classList.add('bg-slate-400')
+        ANIMATION.classList.add('bg-transitioncolor')
         return ANIMATION
     }
 
@@ -98,16 +98,16 @@ const Header = () => {
 
     return (
     <>
-        <div className="grid place-items-center font-bold text-xl">
-            Games
+        <div className="grid place-items-center text-2xl text-white font-bold">
+            GAMES
         </div>
 
         <div className="grid place-items-center">
             <input type="checkbox" className="toggle toggle-lg [--tglbg:white] bg-black hover:bg-slate-500 border-2 border-black" onClick={handleToggle}/>
         </div>
 
-        <div className="grid place-items-center font-bold text-xl">
-            Movies
+        <div className="grid place-items-center text-2xl text-white font-bold">
+            MOVIES
         </div>
     </>
   )

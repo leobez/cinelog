@@ -4,45 +4,30 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import { ModeContextProvider } from './context/ModeContext'
 import Footer from './components/Footer'
+import Categories from './components/Categories'
 
 function App() {
 
   return (
     <>  
 
-      {/*
-      <div className='h-[100vh] w-[100vw] bg-slate-500 absolute animate-in slide-out-to-right-'>
-
-      </div>  
-      */}
-
       <div className='h-screen flex flex-col'>
 
         <ModeContextProvider>
 
-          <header className='flex-none h-24 p-4 border-b-2 border-color01 flex justify-between align-middle bg-color02'>
+          <header className='flex-none h-24 p-4 flex justify-between align-middle bg-color05'>
             <Header/>
           </header>
 
           <BrowserRouter>
 
-            <div className='flex-grow bg-slate-200 flex gap-1 overflow-y-hidden'>
+            <div className='flex-grow flex gap-1 bg-slate-300 overflow-y-hidden w-9/12 m-auto  shadow-lg'>
 
-              <nav className='max-h-full w-52 bg-slate-100 p-2 overflow-y-auto'>
-                <ul>
-                  <li className='h-24'>
-                    LINK
-                  </li>
-                  <li className='h-24'>
-                    LINK
-                  </li>
-                  <li className='h-24'>
-                    LINK
-                  </li>
-                </ul>
-              </nav>
+              <div className='max-h-full w-44 bg-white border-x-2 border-color05 p-2 overflow-y-scroll scrollbar-thin'>
+                <Categories/>
+              </div>
 
-              <main className='max-h-full flex-grow bg-slate-100 p-2 overflow-y-auto'>
+              <main className='max-h-full flex-grow bg-white p-2 overflow-y-auto'>
                 <Routes>
                   <Route path='*' element={<div>404</div>}></Route>
                   <Route path='/' element={<Home/>}></Route>
@@ -53,7 +38,7 @@ function App() {
 
           </BrowserRouter>
           
-          <footer className='flex-none h-24 border-t-2 border-black p-4 grid place-items-center text-xl font-bold'>
+          <footer className='flex-none h-24 p-4 grid place-items-center bg-color05'>
             <Footer/>
           </footer>
 
