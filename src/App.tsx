@@ -10,15 +10,17 @@ function App() {
   return (
     <>  
 
-{/*       <div className='h-[100vh] w-[100vw] bg-slate-500 absolute animate-in slide-out-to-right-'>
+      {/*
+      <div className='h-[100vh] w-[100vw] bg-slate-500 absolute animate-in slide-out-to-right-'>
 
-      </div>  */}
+      </div>  
+      */}
 
       <div className='h-screen flex flex-col'>
 
         <ModeContextProvider>
 
-          <header className='flex-none h-24 p-4 border-b-2 border-color01 flex justify-between align-middle'>
+          <header className='flex-none h-24 p-4 border-b-2 border-color01 flex justify-between align-middle bg-color02'>
             <Header/>
           </header>
 

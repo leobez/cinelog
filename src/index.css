@@ -3,8 +3,19 @@
 @tailwind utilities;
 
 .game-mode {
-    --color01: blue;
+    --color01: #0097F4;
+    --color02: #228ACA;
+    --color03: #3577A0;
+    --color04: #3B5F75;
+    --color05: #32414B;
+    --color06: #2B3033;
 }
+
 .movie-mode {
-    --color01: red;
+    --color01: #F51F01;
+    --color02: #CA3522;
+    --color03: #A04235;
+    --color04: #75413B;
+    --color05: #4B3532;
+    --color06: #4B3532;
 }

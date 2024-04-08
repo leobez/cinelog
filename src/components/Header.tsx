@@ -6,7 +6,7 @@ const Header = () => {
     const {mode, toggleMode} = useContext(ModeContext) as ModeContextType
     const [allowed, setAllowed] = useState<boolean>(true)
 
-    // Fix initial mode theme 
+    // Set initial mode theme 
     // As of right now, only initiates on game-mode, maybe use local storage to save it later
     useEffect(() => {
 
@@ -18,7 +18,6 @@ const Header = () => {
         return () => setAllowed(false)
 
     }, [mode])
-
 
     const createAnimationElement = ():HTMLElement => {
         const ANIMATION = document.createElement('div')
