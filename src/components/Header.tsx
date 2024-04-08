@@ -1,9 +1,24 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState} from "react"
 import ModeContext, { ModeContextType } from "../context/ModeContext"
 
 const Header = () => {
 
     const {mode, toggleMode} = useContext(ModeContext) as ModeContextType
+    const [allowed, setAllowed] = useState<boolean>(true)
+
+    // Fix initial mode theme 
+    // As of right now, only initiates on game-mode, maybe use local storage to save it later
+    useEffect(() => {
+
+        if (!allowed) return;
+
+        const ROOT  = document.querySelector("div#root")
+        ROOT?.classList.add('game-mode')
+
+        return () => setAllowed(false)
+
+    }, [mode])
+
 
     const createAnimationElement = ():HTMLElement => {
         const ANIMATION = document.createElement('div')
@@ -61,23 +76,31 @@ const Header = () => {
 
     const handleToggle = () => {
 
+        const ROOT  = document.querySelector("div#root")
+
         toggleMode()
 
+        /* Going from game to movie */
         if (mode === 'game') {
             /* Animate from  right to left*/
             AnimateLeftToRight()
+            ROOT?.classList.remove('game-mode')
+            ROOT?.classList.add('movie-mode')
         }
+
+        /* Going from movie to game */
         if (mode === 'movie') {
             /* Animate from  left to right*/
             AnimateRightToLeft()
+            ROOT?.classList.remove('movie-mode')
+            ROOT?.classList.add('game-mode')
         }
     }
 
     return (
-    <header className='p-4 border-2 border-black flex justify-between align-middle'>
-
+    <>
         <div className="grid place-items-center font-bold text-xl">
-            G A M E S
+            Games
         </div>
 
         <div className="grid place-items-center">
@@ -85,10 +108,9 @@ const Header = () => {
         </div>
 
         <div className="grid place-items-center font-bold text-xl">
-            M O V I E S
+            Movies
         </div>
-
-    </header>
+    </>
   )
 }
 

@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        color01: {
+          DEFAULT: 'var(--color01)'
+        }
+      }
+    }
+
   },
   plugins: [require("daisyui"), require('tailwindcss-animate')],
 }

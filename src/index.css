@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.game-mode {
+    --color01: blue;
+}
+.movie-mode {
+    --color01: red;
+}
