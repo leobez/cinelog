@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState} from "react"
+import { createElement, useContext, useEffect, useState} from "react"
 import ModeContext, { ModeContextType } from "../context/ModeContext"
 
 const Header = () => {
@@ -19,13 +19,33 @@ const Header = () => {
 
     }, [mode])
 
-    const createAnimationElement = ():HTMLElement => {
+    const createAnimationElement = (text:string):HTMLElement => {
         const ANIMATION = document.createElement('div')
         ANIMATION.classList.add('h-[100vh]')
         ANIMATION.classList.add('w-[100vw]')
         ANIMATION.classList.add('absolute')
         ANIMATION.classList.add('top-0')
         ANIMATION.classList.add('bg-transitioncolor')
+        ANIMATION.classList.add('grid')
+        ANIMATION.classList.add('place-items-center')
+        ANIMATION.classList.add('border-[3px]')
+        ANIMATION.classList.add('border-color02')
+
+
+        const TEXT = document.createElement('p')
+        TEXT.classList.add('text-4xl')
+        TEXT.classList.add('text-white')
+        TEXT.classList.add('font-bold')
+        TEXT.innerText = text
+
+        const LOADING = document.createElement('span')
+        LOADING.classList.add('loading')
+        LOADING.classList.add('loading-spinner')
+        LOADING.classList.add('loading-lg')
+
+        ANIMATION.appendChild(TEXT)
+        ANIMATION.appendChild(LOADING)
+
         return ANIMATION
     }
 
@@ -33,7 +53,7 @@ const Header = () => {
         const ROOT  = document.querySelector("div#root")
 
         /* CREATE ELEMENT */
-        const ANIMATION = createAnimationElement()
+        const ANIMATION = createAnimationElement('MOVING TO GAMES...')
         ANIMATION.classList.add('animate-in')
         ANIMATION.classList.add('slide-in-from-right')
         ROOT?.appendChild(ANIMATION)
@@ -55,7 +75,7 @@ const Header = () => {
         const ROOT  = document.querySelector("div#root")
 
         /* CREATE ELEMENT */
-        const ANIMATION = createAnimationElement()
+        const ANIMATION = createAnimationElement('MOVING TO MOVIES...')
         ANIMATION.classList.add('animate-in')
         ANIMATION.classList.add('slide-in-from-left')
         ROOT?.appendChild(ANIMATION)
