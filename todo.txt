@@ -15,4 +15,6 @@ TODO:
     -> Search bar
     -> Loading, error states
     -> Issues with too many requests being made
+    -> Tipagem correta
     -> Pick a movie
+  
