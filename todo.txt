@@ -1,0 +1,9 @@
+FUNCTIONALITIES (MOVIES):
+    -> Filter by genre
+    -> Filter by top-rated
+    -> Filter by popular
+    -> Filter by upcoming
+    -> Filter by search bar
+    -> Randomly choose one
+    -> Pagination
+    -> Visualize movie in separate page

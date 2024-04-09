@@ -5,6 +5,7 @@ import Header from './components/Header'
 import { ModeContextProvider } from './context/ModeContext'
 import Footer from './components/Footer'
 import Categories from './components/Categories'
+import Movie from './pages/Movie'
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
 
         <ModeContextProvider>
 
-          <header className='flex-none h-24 p-4 flex justify-between align-middle bg-color05'>
+          <header className='flex-none h-16 p-4 flex justify-between align-middle bg-color05'>
             <Header/>
           </header>
 
@@ -27,10 +28,11 @@ function App() {
                 <Categories/>
               </div>
 
-              <main className='max-h-full flex-grow bg-white p-2 overflow-y-auto'>
+              <main className='max-h-full flex-grow bg-white p-2 overflow-y-auto scrollbar-thin'>
                 <Routes>
                   <Route path='*' element={<div>404</div>}></Route>
                   <Route path='/' element={<Home/>}></Route>
+                  {/* <Route path='/movie/:id' element={<Movie/>}></Route> */}
                 </Routes>            
               </main>
 
@@ -38,7 +40,7 @@ function App() {
 
           </BrowserRouter>
           
-          <footer className='flex-none h-24 p-4 grid place-items-center bg-color05'>
+          <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
             <Footer/>
           </footer>
 
