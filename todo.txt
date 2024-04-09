@@ -6,4 +6,13 @@ FUNCTIONALITIES (MOVIES):
     -> Filter by search bar
     -> Randomly choose one
     -> Pagination
-    -> Visualize movie in separate page
+    -> Modal for movie cards
+
+TODO: 
+    -> Horizontal/complete modal when clicking movie
+    -> Pagination
+    -> Filter by genre
+    -> Search bar
+    -> Loading, error states
+    -> Issues with too many requests being made
+    -> Pick a movie

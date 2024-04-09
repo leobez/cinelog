@@ -26,7 +26,7 @@ const Categories = () => {
         <>
 
             <div role="tablist" className="tabs tabs-bordered p-2" ref={tabRef}>
-                <a role="tab" id="top_rated" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Top rated movies </a>
+                <a role="tab" id="top_rated" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Top rated</a>
                 <a role="tab" id="popular" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Popular </a>
                 <a role="tab" id="upcoming" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Upcoming </a>
             </div>

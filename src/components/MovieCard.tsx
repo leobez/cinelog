@@ -1,6 +1,3 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
 type Props = {
     MovieInfo: any
 }
@@ -26,17 +23,47 @@ const MovieCard = ({MovieInfo}: Props) => {
 
     const posterURL = `${POSTER_URL}/${MovieRelevantInfo.poster_path}`
 
-    console.log(MovieRelevantInfo)
-
     return (
         
-        <div className='h-full w-full'>
-            <Link to={`/movie/${MovieRelevantInfo.id}`}>
+        <>
+            <div className='h-full w-full cursor-pointer' onClick={()=>document.getElementById(`modal_${MovieRelevantInfo.id}`)?.showModal()}>
                 <figure className='h-full w-full'>
                     <img src={posterURL} alt={MovieRelevantInfo.title} className='object-cover h-full w-full'/>
                 </figure>
-            </Link>
-        </div>
+            </div>
+
+            <dialog id={`modal_${MovieRelevantInfo.id}`} className="modal">
+
+                <div className="modal-box h-[75%] p-0 bg-slate-200 scrollbar-thin">
+
+                    <figure className='h-[700px] w-full'>
+                        <img src={posterURL} alt={MovieRelevantInfo.title} className='object-cover h-full w-full'/>
+                    </figure>
+
+                    <div className='divider'/>
+
+                    <h3 className="font-bold text-xl text-black">
+                        {MovieRelevantInfo.title}
+                    </h3>
+
+                    <p className="">
+                        {MovieRelevantInfo.original_title}
+                    </p>
+
+                    <div className="modal-action w-full">
+                        <form method="dialog" className="grid place-items-center w-full p-2">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">
+                                Close
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </dialog>
+        </>
+
     )
 }
 
