@@ -1,55 +1,59 @@
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './pages/Home'
 import Header from './components/Header'
-import { ModeContextProvider } from './context/ModeContext'
 import Footer from './components/Footer'
+import Genres from './components/Genres'
 import Categories from './components/Categories'
-import Movie from './pages/Movie'
+import MovieHome from './pages/movie/MovieHome'
+import GameHome from './pages/GameHome'
 
 function App() {
 
-  return (
-    <>  
+    return (
+      <>  
+        <div className='h-screen flex flex-col'>
+          
+            <header className='flex-none h-16 p-4 flex justify-between align-middle bg-color05'>
+              <Header/>
+            </header>
 
-      <div className='h-screen flex flex-col'>
+            <BrowserRouter>
 
-        <ModeContextProvider>
+              <div className='flex-grow flex gap-1 bg-slate-300 overflow-y-hidden w-9/12 m-auto  shadow-lg'>
 
-          <header className='flex-none h-16 p-4 flex justify-between align-middle bg-color05'>
-            <Header/>
-          </header>
+                <div className='max-h-full w-44 bg-white border-x-2 border-color05 p-2 overflow-y-scroll scrollbar-thin'>
+                  <Genres/>
+                </div>
 
-          <BrowserRouter>
+                <main className='max-h-full flex-grow bg-white p-2 overflow-y-auto scrollbar-thin'>
 
-            <div className='flex-grow flex gap-1 bg-slate-300 overflow-y-hidden w-9/12 m-auto  shadow-lg'>
+                  <div>
+                    <Categories/>
+                  </div>
 
-              <div className='max-h-full w-44 bg-white border-x-2 border-color05 p-2 overflow-y-scroll scrollbar-thin'>
-                <Categories/>
+                  <Routes>
+
+                    <Route path='*' element={<div>404</div>}></Route>
+                    <Route path='/game' element={<GameHome/>}></Route>
+                    <Route path='/movie' element={<MovieHome/>}></Route>
+
+                  </Routes>  
+
+                </main>
+
               </div>
 
-              <main className='max-h-full flex-grow bg-white p-2 overflow-y-auto scrollbar-thin'>
-                <Routes>
-                  <Route path='*' element={<div>404</div>}></Route>
-                  <Route path='/' element={<Home/>}></Route>
-                  {/* <Route path='/movie/:id' element={<Movie/>}></Route> */}
-                </Routes>            
-              </main>
+            </BrowserRouter>
+            
+            <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
+              <Footer/>
+            </footer>
 
-            </div>
+        </div>
 
-          </BrowserRouter>
-          
-          <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
-            <Footer/>
-          </footer>
+      </>
 
-        </ModeContextProvider>
-
-      </div>
-    </>
-
-  )
+    )
 }
 
 export default App

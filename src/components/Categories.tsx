@@ -1,46 +1,40 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useGetGenres } from '../hooks/movie/useGetGenres'
-import ModeContext, { ModeContextType } from '../context/ModeContext'
-import { TMDB_GENRES } from '../data/TMDB_GENRES'
+import { useContext, useEffect, useRef } from 'react'
+import CategoryContext, { CategoryContextType } from '../context/CategoryContext'
 
 const Categories = () => {
 
-  const {mode} = useContext(ModeContext) as ModeContextType
-  const [genres, setGenres] = useState<any[]>([])
-  useEffect(() => {console.log('Current genres: ', genres)}, [genres])
+    const {category, changeCategory} = useContext(CategoryContext) as CategoryContextType
 
-  useEffect(() => {
-
-    if (mode === 'game') {
-      setGenres(TMDB_GENRES.genres)
+    const handleCategory = (e:any) => {
+        changeCategory(e.target.id)
     }
 
-    if (mode === 'movie') {
-      setGenres(TMDB_GENRES.genres)
-    }
+    const tabRef:any = useRef()
 
-  }, [mode])
+    /* CHANGE ACTIVE TAB BASED ON CURRENT CATEGORY */
+    useEffect(() => {
+        tabRef.current.childNodes.forEach((child:any) => {
+            if (child.id === category) {
+                child.classList.add('tab-active')
+            } else {
+                child.classList.remove('tab-active')
+            }
+        })
+    }, [category])
 
-  const addToFilter = (e:any) => {
-    console.log(e.target.id)
-  }
+    return (
+        <>
 
-  return (
-    <div>
-      {genres ? (
-        <ul>
-          {genres.map(genre => (
-            <li key={genre.id} id={genre.id} className='p-3 text-sm my-2 bg-color03 text-white font-bold hover:bg-color06 cursor-pointer rounded-lg transition duration-300 hover:translate-x-1 animate-in fade-in' onClick={addToFilter}>
-              {genre.name}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <></>
-      )}
+            <div role="tablist" className="tabs tabs-bordered p-2" ref={tabRef}>
+                <a role="tab" id="top_rated" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Top rated movies </a>
+                <a role="tab" id="popular" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Popular </a>
+                <a role="tab" id="upcoming" className="tab text-color03 text-lg font-bold" onClick={handleCategory}> Upcoming </a>
+            </div>
 
-    </div>
-  )
+            <div className='divider'/>
+
+        </>
+    )
 }
 
 export default Categories

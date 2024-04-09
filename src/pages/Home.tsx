@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useGetTopRatedMovies } from '../hooks/movie/useGetTopRatedMovies'
+import { useGetTopRatedMovies } from '../hooks/movie/useGetMovies'
 import MovieCard from '../components/MovieCard'
 
 type Props = {}
@@ -14,14 +14,6 @@ const Home = (props: Props) => {
 
   return (
     <div className='h-full p-4'>
-
-      <div role="tablist" className="tabs tabs-bordered">
-        <a role="tab" className="tab">Top Rated Movies</a>
-        <a role="tab" className="tab">Popular</a>
-        <a role="tab" className="tab">Upcoming</a>
-      </div>
-
-      <div className='divider'/>
 
       <div className='grid grid-cols-4 gap-4'>
         {list.map((movie) => (
