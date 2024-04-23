@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+* {
+    color: black;
+}
+
 #root, body, html {
     overflow: hidden;
     background-color: #f1f5f9;
