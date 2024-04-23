@@ -2,10 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Genres from './components/Genres'
-import Categories from './components/Categories'
-import MovieHome from './pages/movie/MovieHome'
-import GameHome from './pages/GameHome'
+import Home from './pages/Home'
 
 function App() {
 
@@ -19,23 +16,19 @@ function App() {
 
             <BrowserRouter>
 
-              <div className='flex-grow flex gap-1 bg-slate-300 overflow-y-hidden w-9/12 m-auto  shadow-lg'>
+              <div className='flex-grow flex gap-1 bg-slate-300 overflow-y-hidden m-auto shadow-lg w-full justify-center'>
 
                 <div className='max-h-full w-44 bg-white border-x-2 border-color05 p-2 overflow-y-scroll scrollbar-thin'>
-                  <Genres/>
+                    {/* Search bar */}
+                    {/* Filter */}
                 </div>
 
-                <main className='max-h-full flex-grow bg-white p-2 overflow-y-auto scrollbar-thin'>
-
-                  <div>
-                    <Categories/>
-                  </div>
+                <main className='max-w-[1000px] max-h-full flex-grow bg-white p-2 overflow-y-auto scrollbar-thin'>
 
                   <Routes>
 
                     <Route path='*' element={<div>404</div>}></Route>
-                    <Route path='/game' element={<GameHome/>}></Route>
-                    <Route path='/movie' element={<MovieHome/>}></Route>
+                    <Route path='/' element={<Home/>}></Route>
 
                   </Routes>  
 
@@ -50,7 +43,6 @@ function App() {
             </footer>
 
         </div>
-
       </>
 
     )

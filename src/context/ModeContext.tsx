@@ -10,7 +10,7 @@ const ModeContext = createContext<ModeContextType|null>(null)
 
 export const ModeContextProvider = ({children}:any) => {
 
-    const [mode, setMode] = useState<string>('game')
+    const [mode, setMode] = useState<string>('movie')
 
     const toggleMode = () => {
         setMode(prevMode => prevMode === 'game' ? 'movie' : 'game')

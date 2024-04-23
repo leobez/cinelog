@@ -10,11 +10,12 @@ FUNCTIONALITIES (MOVIES):
 
 TODO: 
     -> Horizontal/complete modal when clicking movie
-    -> Pagination
-    -> Filter by genre
+    -> infinite scrolling
+    -> Filter by genre / better side-nav
     -> Search bar
     -> Loading, error states
     -> Issues with too many requests being made
     -> Tipagem correta
     -> Pick a movie
+    
   

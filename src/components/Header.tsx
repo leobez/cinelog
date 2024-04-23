@@ -13,7 +13,7 @@ const Header = () => {
         if (!allowed) return;
 
         const ROOT  = document.querySelector("div#root")
-        ROOT?.classList.add('game-mode')
+        ROOT?.classList.add('movie-mode')
 
         return () => setAllowed(false)
 
@@ -114,18 +114,11 @@ const Header = () => {
             ROOT?.classList.remove('movie-mode')
             ROOT?.classList.add('game-mode')
         }
+
     }
 
     return (
     <>
-        <div className="grid place-items-center text-2xl text-white font-bold">
-            GAMES
-        </div>
-
-        <div className="grid place-items-center">
-            <input type="checkbox" className="toggle toggle-lg [--tglbg:white] bg-black hover:bg-slate-500 border-2 border-black" onClick={handleToggle}/>
-        </div>
-
         <div className="grid place-items-center text-2xl text-white font-bold">
             MOVIES
         </div>
