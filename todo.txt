@@ -8,6 +8,8 @@ FUNCTIONALITIES (MOVIES):
     -> Pagination
     -> Modal for movie cards
 
+TRY TO USE ONLY CONTEXT INSTEAD OF HOOK
+
 TODO: 
     -> Horizontal/complete modal when clicking movie
     -> infinite scrolling

@@ -10,7 +10,7 @@ const CategoryContext = createContext<CategoryContextType|null>(null)
 export const CategoryContextProvider = ({children}:any) => {
 
     const [category, setCategory] = useState<string>('top_rated')
-
+    
     const changeCategory = (newCategory:string):void => {
         setCategory(newCategory)
     }

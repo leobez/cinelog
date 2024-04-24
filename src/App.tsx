@@ -51,9 +51,9 @@ function App() {
 
             </BrowserRouter>
             
-            <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
+            {/* <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
               <Footer/>
-            </footer>
+            </footer> */}
 
         </div>
       </>
