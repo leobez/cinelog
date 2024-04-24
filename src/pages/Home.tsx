@@ -1,17 +1,17 @@
-import { useContext, useEffect, useLayoutEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import MovieCard from "../components/MovieCard";
 import MovieListContext, { MovieListContextType } from "../context/MovieListContext";
 
 const Home = () => {
 
-    const {movieList, page, loading, hasMore, resetPage, resetMovieList, getTopRatedMovies} = useContext(MovieListContext) as MovieListContextType
+    const {movieList, loading, hasMore, getTopRatedMovies} = useContext(MovieListContext) as MovieListContextType
 
     // Initial API call
     useEffect(() => {
       getTopRatedMovies(true)
     },[])
 
-    // Get top rated movies
+    // Gets more top rated movies when user has reached bottom of movie container
     const handleScroll = (e:any):void => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if (bottom) { 
@@ -19,39 +19,41 @@ const Home = () => {
         }
     }
 
+    const containerRef:any = useRef<HTMLDivElement>()
 
-/*     const containerRef:any = useRef()
+    const handleClick = ():void => {
+      // Save container current position, so it can be used to move user back to where they were before clicking.
+      window.sessionStorage.setItem('scrollPosition', containerRef.current.scrollTop)
+    }
 
-    useLayoutEffect(() => {
+    // when user returns, return to position that was saved on sessionStorage
+    useEffect(() => {
 
+      // containerRef not loaded yet
       if (!containerRef.current) return;
 
-      // See if there is an id on localStorage that belongs to the element that was clicked by user
-      const id = window.sessionStorage.getItem('clickedId')
+      const scrollPos = window.sessionStorage.getItem('scrollPosition')
 
-      // If there is, move user to that location, so they can continue from where they left
-      if (id) {
-        console.log('moving: ', containerRef.current)
-        containerRef.current.getElementById(id).scrollIntoView();
-      } 
+      // There is no scrollPos in sessionStorage
+      if (!scrollPos) return;
 
-    }, [containerRef]) */
+      // Scroll that should be is not possible because there is not enough height in the element to suport it
+      if (scrollPos > containerRef.current.scrollHeight) return;
+      
+      // It is possible to move scrollBar
+      if (scrollPos) containerRef.current.scrollTop = scrollPos
+      
+    }, [containerRef])
 
-    const handleLoad = (e:any) => {
-      const id = window.sessionStorage.getItem('clickedId')
-      if (id === e.target.id) {
-        console.log(id)
-      }
-    }
 
     return (
       <>
 
-        <div className="grid gap-5 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 overflow-y-auto scrollbar-thin max-h-full relative" onScroll={handleScroll} >
+        <div className="grid gap-5 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 overflow-y-auto scrollbar-thin max-h-full relative" onScroll={handleScroll} ref={containerRef}>
 
           {movieList.length > 0 && movieList.map((movie:any, index:number) => (
-            <div key={`${movie.id}/${index}`} className="border-2 border-black h-80 hover:opacity-50">
-              <MovieCard movie={movie} />
+            <div key={`${movie.id}/${index}`} className="border-2 border-black h-80 hover:opacity-50" onClick={handleClick}>
+              <MovieCard movie={movie}/>
             </div>
           ))}
 
