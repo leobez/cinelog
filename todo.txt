@@ -5,19 +5,17 @@ FUNCTIONALITIES (MOVIES):
     -> Filter by upcoming
     -> Filter by search bar
     -> Randomly choose one
-    -> Pagination
-    -> Modal for movie cards
+    -> Infinite scrolling
+    -> Page for each movie
 
-TRY TO USE ONLY CONTEXT INSTEAD OF HOOK
 
 TODO: 
-    -> Horizontal/complete modal when clicking movie
-    -> infinite scrolling
+    -> Build movie/:id page
+    -> react-query
     -> Filter by genre / better side-nav
     -> Search bar
     -> Loading, error states
-    -> Issues with too many requests being made
-    -> Tipagem correta
-    -> Pick a movie
+    -> CORRECT TYPING
+    -> RNADOM movie
     
   
