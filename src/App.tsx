@@ -7,6 +7,7 @@ import Categories from './components/Categories'
 import Popular from './pages/Popular'
 import Upcoming from './pages/Upcoming'
 import Random from './pages/Random'
+import Movie from './pages/Movie'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
                     <Route path='/popular'    element={<Popular/>}></Route>
                     <Route path='/upcoming'   element={<Upcoming/>}></Route>
                     <Route path='/random'     element={<Random/>}></Route>
+                    <Route path='/movie/:id'  element={<Movie/>}></Route>
                     <Route path='/search'     element={<Home/>}></Route>
                     <Route path='/filter'     element={<Home/>}></Route>
                   </Routes>   
@@ -51,9 +53,9 @@ function App() {
 
             </BrowserRouter>
             
-            {/* <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
+            <footer className='flex-none h-16 p-4 grid place-items-center bg-color05'>
               <Footer/>
-            </footer> */}
+            </footer>
 
         </div>
       </>
