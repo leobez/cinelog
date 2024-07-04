@@ -18,7 +18,7 @@ const Movie = () => {
 
     if (movie) {
         return (
-            <div className='flex justify-center flex-col overflow-y-scroll scrollbar-thin p-4 max-h-full'>
+            <div className='flex justify-center flex-col overflow-y-scroll scrollbar-thin p-4'>
                 
                 <div className='flex justify-center gap-4 '>
 

@@ -1,21 +1,22 @@
-FUNCTIONALITIES (MOVIES):
-    -> Filter by genre
-    -> Filter by top-rated
-    -> Filter by popular
-    -> Filter by upcoming
-    -> Filter by search bar
-    -> Randomly choose one
-    -> Infinite scrolling
-    -> Page for each movie
+-> Turn all (popular, upcoming and top rated) pages into one component.
+-> Redo movielist context using oop principles (define entities first then create crud for each)
+-> Finish all categories pages
 
 
 TODO: 
-    -> Build movie/:id page
-    -> react-query
-    -> Filter by genre / better side-nav
-    -> Search bar
-    -> Loading, error states
-    -> CORRECT TYPING
-    -> RNADOM movie
+    -> Finish scrollbars and layout (respon).
+
+    -> Fix movie/:id page
+        -> Similar movies
+
+    -> Side-nav
+        -> Extra infor (current mode)
+        -> Search bar
+        -> Filter by genre
+        -> Select random movie
+
+    -> Create area for loading, error and states.
+
+    -> Games...
     
   

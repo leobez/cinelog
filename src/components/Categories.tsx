@@ -15,11 +15,11 @@ const Categories = () => {
         <>
             <div role="tablist" className="tabs tabs-bordered p-2">
 
-                <NavLink to='/' id="top_rated" className={({ isActive, isPending }) => isPending ? "tab text-lg" : isActive ? "tab text-lg font-bold text-color03" : "tab text-lg"} onClick={handleClick}> Top rated</NavLink>
+                <NavLink to='/' id="top_rated" className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md"} onClick={handleClick}> Top rated</NavLink>
 
-                <NavLink to='/popular' id="popular" className={({ isActive, isPending }) => isPending ? "tab text-lg" : isActive ? "tab text-lg font-bold text-color03" : "tab text-lg"} onClick={handleClick}> Popular</NavLink>
+                <NavLink to='/popular' id="popular" className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md"} onClick={handleClick}> Popular</NavLink>
 
-                <NavLink to='/upcoming' id="upcoming" className={({ isActive, isPending }) => isPending ? "tab text-lg" : isActive ? "tab text-lg font-bold text-color03" : "tab text-lg"} onClick={handleClick}> Upcoming</NavLink>
+                <NavLink to='/upcoming' id="upcoming" className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md"} onClick={handleClick}> Upcoming</NavLink>
 
             </div>
 

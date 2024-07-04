@@ -46,23 +46,13 @@ const Popular = () => {
 
 
     return (
-      <>
-
-        <div className="grid gap-5 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 overflow-y-auto scrollbar-thin max-h-full relative" onScroll={handleScroll} ref={containerRef}>
-
-          {movieList.length > 0 && movieList.map((movie:any, index:number) => (
-            <div key={`${movie.id}/${index}`} className="border-2 border-black h-80 hover:opacity-50" onClick={handleClick}>
-              <MovieCard movie={movie}/>
-            </div>
-          ))}
-
-        </div>
-
-        {movieList.length === 0 && <div>Empty list.</div>}
-        {loading && <div className="loading-spinner"></div>}
-        {!hasMore && <div>End.</div>}
-
-      </>
+      <div className="grid gap-5 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 overflow-y-auto scrollbar-thin max-h-full relative" onScroll={handleScroll} ref={containerRef}>
+        {movieList.length > 0 && movieList.map((movie:any, index:number) => (
+          <div key={`${movie.id}/${index}`} className="border-2 border-black h-80 hover:opacity-50" onClick={handleClick}>
+            <MovieCard movie={movie}/>
+          </div>
+        ))}
+      </div>
     )
 }
 
