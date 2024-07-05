@@ -8,21 +8,8 @@ import Upcoming from './pages/Upcoming'
 import Random from './pages/Random'
 import Movie from './pages/Movie'
 import Sidebar from './components/Sidebar'
-import MovieListContext, { MovieListContextType } from './context/MovieListContext'
-import { useContext } from 'react'
 
 function App() {
-
-    const {updatePage} = useContext(MovieListContext) as MovieListContextType
-
-    // Gets more movies after reached bottom of scroll space
-    const handleScroll = (e:any):void => {
-        const ElementToCalc = e.target
-        const bottom = ElementToCalc.scrollHeight - ElementToCalc.scrollTop === ElementToCalc.clientHeight;
-        if (bottom) { 
-          updatePage()
-        }
-    }
 
     return (
       <div className='h-screen flex flex-col pb-2 gap-2'>

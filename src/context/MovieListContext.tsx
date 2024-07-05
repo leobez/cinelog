@@ -37,8 +37,11 @@ export const MovieListContextProvider = ({children}:any) => {
     const updateCategory = (newCategory:string):void => {
         const validCategories = ['top_rated', 'popular', 'upcoming']
         if (validCategories.includes(newCategory)) {
-            resetList()
-            resetPage()
+            // Only reset list and page when user actually changes categories.
+            if (category !== newCategory) {
+                resetList()
+                resetPage()
+            }
             setCategory(newCategory)
         } else {
             console.log("Invalid Category.")

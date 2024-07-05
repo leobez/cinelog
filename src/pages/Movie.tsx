@@ -17,6 +17,7 @@ const Movie = () => {
     } 
 
     if (movie) {
+        
         return (
             <div className='flex justify-center flex-col overflow-y-scroll scrollbar-thin p-4'>
                 

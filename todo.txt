@@ -1,6 +1,11 @@
--> Turn all (popular, upcoming and top rated) pages into one component.
--> Redo movielist context using oop principles (define entities first then create crud for each)
--> Finish all categories pages
+-> Save scroll position
+    -> Create scroll posision on context as well, so it can reset when changing categories
+
+-> Finish Movie/:id page
+    -> Fix layout
+    -> Create link to go back
+    -> Similar movies
+
 
 
 TODO: 
@@ -9,11 +14,12 @@ TODO:
     -> Fix movie/:id page
         -> Similar movies
 
-    -> Side-nav
-        -> Extra infor (current mode)
+    -> Sidebar
+        -> Layout
+        -> Extra information (footer info) such as current mode (movie, game etc)
         -> Search bar
         -> Filter by genre
-        -> Select random movie
+        -> Select random movie by genre
 
     -> Create area for loading, error and states.
 

@@ -9,6 +9,7 @@ const Home = () => {
     // Initial API call
     useEffect(() => {
       updateCategory('top_rated')
+      console.log('run')
     },[])
 
     return (

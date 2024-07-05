@@ -16,6 +16,7 @@ const MovieList = ({movieList}: Props) => {
         // Save container current position, so it can be used to move user back to where they were before clicking.
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode
         window.sessionStorage.setItem('scrollPosition', ScrollNode.scrollTop)
+        console.log('saving on session storage: ', ScrollNode.scrollTop)
     }
 
     const handleLoadMore = ():void => {
@@ -30,9 +31,9 @@ const MovieList = ({movieList}: Props) => {
         if (!containerRef.current) return;
 
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode
-
         const scrollPos = window.sessionStorage.getItem('scrollPosition')
-  
+        console.log('scrolling from session storage: ', scrollPos)
+
         // There is no scrollPos in sessionStorage
         if (!scrollPos) return;
   
@@ -42,7 +43,7 @@ const MovieList = ({movieList}: Props) => {
         // It is possible to move scrollBar
         if (scrollPos) ScrollNode.scrollTop = scrollPos
         
-      }, [containerRef])
+    }, [containerRef])
 
     return (
         <>
