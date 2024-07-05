@@ -4,11 +4,10 @@ import MovieListContext, { MovieListContextType } from '../context/MovieListCont
 
 const Categories = () => {
 
-    const {resetList, resetPage} = useContext(MovieListContext) as MovieListContextType
+    const {updateCategory} = useContext(MovieListContext) as MovieListContextType
 
-    const handleClick = ():void => {
-        resetList()
-        resetPage()
+    const handleClick = (e:any):void => {
+        updateCategory(e.target.id)
     }
 
     return (

@@ -31,7 +31,7 @@ function App() {
             <Header/>
           </header>
 
-          <main className='flex justify-center h-full overflow-y-auto' onScroll={handleScroll}>
+          <main className='flex justify-center h-full overflow-y-auto'>
             
             {/* WRAPPER */}
             <div className='max-w-[900px] w-[900px] min-w-[900px] flex gap-2 h-fit'>
