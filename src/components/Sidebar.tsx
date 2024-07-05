@@ -1,6 +1,6 @@
 const Sidebar = () => {
     return (
-        <div className="border-black border-2 p-4 h-full sticky">
+        <div className="">
             Sidebar
         </div>
     )

@@ -12,11 +12,13 @@ const Home = () => {
     },[])
 
     return (
-
-      <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 relative" >
-        <MovieList movieList={movieList} category="top_rated" />
-      </div>
-
+      <>
+        {movieList && 
+          <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 relative" >
+            <MovieList movieList={movieList}/>
+          </div>
+        }
+      </>
     )
 }
 

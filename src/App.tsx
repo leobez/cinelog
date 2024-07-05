@@ -25,19 +25,19 @@ function App() {
     }
 
     return (
-      <div className='h-screen flex flex-col pb-1 gap-2'>
+      <div className='h-screen flex flex-col pb-2 gap-2'>
         
-          <header className='h-18 p-4 flex justify-between align-middle bg-color05'>
+          <header className='h-18 p-4 flex justify-between align-middle bg-color05 relative'>
             <Header/>
           </header>
 
           <main className='flex justify-center h-full overflow-y-auto' onScroll={handleScroll}>
             
             {/* WRAPPER */}
-            <div className='max-w-[800px] w-[800px] flex gap-5'>
+            <div className='max-w-[900px] w-[900px] min-w-[900px] flex gap-2 h-fit'>
 
               {/* SIDE-BAR */}
-              <div className='w-24 h-full'>
+              <div className='w-40 h-full top-0 sticky border-black border-2'>
                 <Sidebar/>
               </div>
 
@@ -45,9 +45,9 @@ function App() {
               <BrowserRouter>
                 
                 {/* CONTENT */}
-                <div className='flex-grow'>
+                <div className='flex-grow flex flex-col gap-2'>
 
-                  <div>
+                  <div className='border-2 border-black sticky top-0 bg-white z-10'>
                     <Categories/>
                   </div>
 

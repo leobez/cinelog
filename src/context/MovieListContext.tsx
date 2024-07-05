@@ -26,6 +26,8 @@ export const MovieListContextProvider = ({children}:any) => {
     useEffect(() => (console.log('current movie list: ', movieList)), [movieList])
 
     const [page, setPage] = useState<number>(1)
+    useEffect(() => (console.log('page: ', page)), [page])
+
     const [loading, setLoading] = useState<boolean>(false)
     const [hasMore, setHasMore] = useState<boolean>(true)
 
