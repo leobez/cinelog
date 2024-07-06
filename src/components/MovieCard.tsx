@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { getMovieUsefulInfo, MovieInfo } from "../utils/getMovieUsefulInfo"
+import { getMovieUsefulInfo } from "../utils/getMovieUsefulInfo"
 
 type Props = {
     movie: any
@@ -9,7 +9,7 @@ const POSTER_URL = import.meta.env.VITE_POSTER_URL
 
 const MovieCard = ({movie}: Props) => {
 
-    const movieInfo:MovieInfo = getMovieUsefulInfo(movie)
+    const movieInfo:any = getMovieUsefulInfo(movie)
 
     return (
         

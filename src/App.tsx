@@ -21,10 +21,10 @@ function App() {
           <main className='flex justify-center h-full overflow-y-auto'>
             
             {/* WRAPPER */}
-            <div className='max-w-[900px] w-[900px] min-w-[900px] flex gap-2 h-fit'>
+            <div className='w-[900px] flex gap-2 h-fit'>
 
               {/* SIDE-BAR */}
-              <div className='w-40 h-full top-0 sticky border-black border-2'>
+              <div className='w-1/6 h-full top-0 sticky border-black border-2'>
                 <Sidebar/>
               </div>
 
@@ -32,7 +32,7 @@ function App() {
               <BrowserRouter>
                 
                 {/* CONTENT */}
-                <div className='flex-grow flex flex-col gap-2'>
+                <div className='w-5/6 flex flex-col gap-2'>
 
                   <div className='border-2 border-black sticky top-0 bg-white z-10'>
                     <Categories/>

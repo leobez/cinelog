@@ -1,19 +1,15 @@
--> Save scroll position
-    -> Create scroll posision on context as well, so it can reset when changing categories
+-> In all api calls: sanitize only valid info and remove movies that lack important info.
+-> Create interfaces for objects.
 
--> Finish Movie/:id page
-    -> Fix layout
-    -> Create link to go back
-    -> Similar movies
+--/--
 
+-> Create link to go back on movie/:id
+-> Layout and responsivity on all pages.
+-> Add animation to prod details on movie/:id
+-> Add carousel effect on similar movies
 
 
 TODO: 
-    -> Finish scrollbars and layout (respon).
-
-    -> Fix movie/:id page
-        -> Similar movies
-
     -> Sidebar
         -> Layout
         -> Extra information (footer info) such as current mode (movie, game etc)
@@ -25,4 +21,6 @@ TODO:
 
     -> Games...
     
-  
+
+MAYBE:
+-> Save scroll position on context, so it can reset when changing categories (?)
