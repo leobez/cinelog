@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-export type MovieListContextType = {
+export type MovieContextType = {
 
     category:string;
     updateCategory:(newCategory:string) => void;
@@ -12,6 +12,14 @@ export type MovieListContextType = {
     resetList:() => void;
     consoleList:() => void
 
+    movieById:any
+    getMovieById:(id:number)=>Promise<void>;
+    resetMovieById:()=>void;
+
+    movieByGenres:any[];
+    getMovieByGenres:(lang:string, genres:number[])=>Promise<void>;
+    resetMovieByGenres:()=>void;
+
     page: number;
     updatePage:() => void;
     resetPage:() => void;
@@ -21,18 +29,21 @@ export type MovieListContextType = {
     hasMore: boolean;
 }
 
-const MovieListContext = createContext<MovieListContextType|null>(null)
+const MovieContext = createContext<MovieContextType|null>(null)
 
 export const MovieListContextProvider = ({children}:any) => {
 
     // Attributes
     const [category, setCategory] = useState<string>('top_rated')
     const [list, setList] = useState<any[]>([])
+    const [movieById, setMovieById] = useState<any>(null)
+    const [movieByGenres, setMovieByGenres] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)
     const [loading, setLoading] = useState<boolean>(false)
     const [hasMore, setHasMore] = useState<boolean>(true)
 
-    // Methods
+    // METHODS
+
     // Category methods
     const updateCategory = (newCategory:string):void => {
         const validCategories = ['top_rated', 'popular', 'upcoming']
@@ -51,6 +62,7 @@ export const MovieListContextProvider = ({children}:any) => {
         console.log(category)
     }
 
+
     // List methods
     const updateList = (newList:any[]):void => {
         setList(newList)
@@ -64,18 +76,6 @@ export const MovieListContextProvider = ({children}:any) => {
     const consoleList = ():void => {
         console.log(list)
     }
-
-    // Page methods
-    const updatePage = ():void => {
-        setPage(prev => prev+1)
-    }
-    const resetPage = ():void => {
-        setPage(1)
-    }
-    const consolePage = ():void => {
-        console.log(page)
-    }
-
     useEffect(() => {
         
         const getMovies = async():Promise<void> => {
@@ -123,11 +123,76 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }, [category, page])
 
+
+    // MovieById methods
+    const getMovieById = async(id:number):Promise<void> => {
+        try {
+            const URL = `${import.meta.env.VITE_FIND_BY_ID}/${id}?api_key=${import.meta.env.VITE_API_KEY}`
+            setLoading(true)
+            const result = await fetch(URL)
+            const data = await result.json()
+            console.log(data)
+            setMovieById(data)
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+        }
+    }
+    const resetMovieById = ():void => {
+        setMovieById(null)
+    }
+
+    // MovieByGenres methods
+    const getMovieByGenres = async(lang:string, genres:number[]):Promise<void> => {
+        try {
+            const genreIds = genres.map((genre:any) => genre.id)
+            const URL = `${import.meta.env.VITE_DISCOVER}/movie?api_key=${import.meta.env.VITE_API_KEY}&language=${lang}&sort_by=release_date.desc&page=1&with_genres=${genreIds.join(',')}`
+            setLoading(true)
+            const result = await fetch(URL)
+            const data = await result.json()
+            console.log('data.results: ', data.results)
+            
+            let filteredData:any = []
+
+            for (let movie of data.results) {
+                if (movie.poster_path) {
+                    filteredData.push(movie)
+                }
+            }
+
+            console.log('filteredData: ', filteredData)
+            setMovieByGenres(filteredData)
+            setLoading(false)
+
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+        }
+    }
+    const resetMovieByGenres = ():void => {
+        setMovieByGenres([])
+    }
+
+    // Page methods
+    const updatePage = ():void => {
+        setPage(prev => prev+1)
+    }
+    const resetPage = ():void => {
+        setPage(1)
+    }
+    const consolePage = ():void => {
+        console.log(page)
+    }
+
+
     return (
-        <MovieListContext.Provider value={
+        <MovieContext.Provider value={
                 {
                     category, updateCategory, consoleCategory,
                     list, updateList, appendToList, resetList, consoleList,
+                    movieById, getMovieById, resetMovieById,
+                    movieByGenres, getMovieByGenres, resetMovieByGenres,
                     page, updatePage, resetPage, consolePage,
                     loading, hasMore
                 }
@@ -135,9 +200,9 @@ export const MovieListContextProvider = ({children}:any) => {
 
             {children}
 
-        </MovieListContext.Provider>
+        </MovieContext.Provider>
     )
 
 }
 
-export default MovieListContext
+export default MovieContext

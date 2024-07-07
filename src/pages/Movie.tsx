@@ -1,35 +1,24 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { useGetMovieById } from '../hooks/useGetMovieById'
-import { useGetMovieByGenres } from '../hooks/useGetMovieByGenres'
 import MovieCard from '../components/MovieCard'
+import MovieContext, { MovieContextType } from '../context/MovieContext'
 
 const Movie = () => {
     
     const {id} = useParams()
 
-    const prodDetail:any = useRef<HTMLDivElement>()
-
-    const {loading, error, movie} = useGetMovieById(Number(id))
-
-    const {fetchMoviesByGenres, loading:listLoading, error:errorLoading} = useGetMovieByGenres()
-
-    const [similarMovies, setSimilarMovies] = useState<any[]>([])
+    const {loading, movieById:movie, getMovieById, movieByGenres, getMovieByGenres} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
+        getMovieById(Number(id))
+    }, [id])
 
+    useEffect(() => {
         if (!movie) return;
-
-        const fetchAsync = async(original_language:string, genres:any[]) => {
-            const similarMovies = await fetchMoviesByGenres(original_language, genres)
-            console.log('similar movies: ', similarMovies)
-            setSimilarMovies(similarMovies)
-        }
-
-        fetchAsync(movie.original_language, movie.genres)
-
+        getMovieByGenres(movie.original_language, movie.genres);
     }, [movie])
 
+    const prodDetail:any = useRef<HTMLDivElement>()
     const toggleProdDetail = () => {
         const classNames = prodDetail.current.className.split(' ')
         if (classNames.includes('hidden')) {
@@ -44,52 +33,43 @@ const Movie = () => {
         }
     }
 
-    useEffect(() => {
-        console.log(movie)
-    }, [movie])
-
-    if (loading) {
-        return (<div className='loading-spinner'></div>)
-    } 
-
     if (movie) {
         
         return (
-
-            <div className='flex justify-center flex-col overflow-y-scroll scrollbar-thin border-black bg-white gap-4 p-2'>
+            <div className='flex justify-center flex-col scrollbar-thin border-black gap-4 '>
                 
                 {/* MOVIE */}
                 <div className='flex justify-center gap-4 '>
 
                     {/* POSTER */}
-                    <div className='h-[700px] flex w-2/6'>
+                    <div className='h-[700px] flex w-3/6 border-black border-2'>
                         <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover' />
                     </div>
 
                     {/* INFORMATION */}
-                    <div className='flex flex-col gap-4 w-4/6'>
+                    <div className='flex flex-col gap-4 w-3/6'>
                         
                         {/* TITLE */}
-                        <div className='text-left'>
+                        <div className='text-left w-full'>
                             <p title='Title'>{movie.title}</p>
                             <div className='w-full h-[1px] bg-black my-2'></div>
                             <p title='Original title'>{movie.original_title}</p>
                         </div>
 
                         {/* GENRES */}
-                        <div className='flex gap-2'>
+                        <div className='flex flex-wrap gap-2 w-full'>
                             {movie.genres.map((genre:any) => (
                                 <div key={genre.id} className='badge p-3' title='Genres'>{genre.name}</div>
                             ))}
                         </div>
                         
                         {/* OVERVIEW */}
-                        <div className='w-[450px] text-justify' >
+                        <div className='text-justify w-full' >
                             <p title='Overview'>{movie.overview}</p>
                         </div>
                         
                         {/* RELEASE DATE, STATUS AND RUNTIME */}
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto w-full">
                             <table className="table">
                                 {/* head */}
                                 <thead>
@@ -109,7 +89,7 @@ const Movie = () => {
                         </div>
 
                         {/* POPULARITY AND VOTE INFO. */}
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto w-full">
                             <table className="table">
                                 {/* head */}
                                 <thead>
@@ -166,9 +146,9 @@ const Movie = () => {
 
                                     {/* row 5 */}
                                     <tr>
-                                        <td>Production company</td>
+                                        <td>Production companies</td>
                                         <td className='font-bold'>
-                                            {movie.production_compan.map((compan:any) => (
+                                            {movie.production_companies.map((compan:any) => (
                                                 <div key={compan.id}>
                                                     <div>{compan.name} [{compan.origin_country}]</div>
                                                     {/* <img src={`${import.meta.env.VITE_POSTER_URL}/${compan.logo_path}`} alt={compan.name} className='h-12 w-12 object-contain'/> */}
@@ -202,12 +182,12 @@ const Movie = () => {
                 <div className='w-full h-[1px] bg-black my-2'></div>
 
                 {/* SIMILAR MOVIES */}
-                {similarMovies && 
+                {movieByGenres && 
                     <div className='self-start mb-10 w-full'>
                         <p className='text-left my-2'>Similar movies:</p>
                         <div className="overflow-x-auto scrollbar-thin w-full h-80 flex gap-1">
-                            {similarMovies.map((similarMovie:any) => (
-                                <div className='h-full min-w-56'>
+                            {movieByGenres.map((similarMovie:any) => (
+                                <div className='h-full min-w-56' key={similarMovie.id}>
                                     <MovieCard movie={similarMovie}/>
                                 </div>
                             ))}
@@ -216,7 +196,6 @@ const Movie = () => {
                 }
 
             </div>
-
         )
     }
     

@@ -1,14 +1,3 @@
--> In all api calls: sanitize only valid info and remove movies that lack important info.
--> Create interfaces for objects.
-
---/--
-
--> Create link to go back on movie/:id
--> Layout and responsivity on all pages.
--> Add animation to prod details on movie/:id
--> Add carousel effect on similar movies
-
-
 TODO: 
     -> Sidebar
         -> Layout
@@ -17,7 +6,12 @@ TODO:
         -> Filter by genre
         -> Select random movie by genre
 
-    -> Create area for loading, error and states.
+    -> Later:
+        -> Create area for loading, error and states.
+        -> Create separate loading for each state (list, movie and movieByGenres)
+        -> Layout and responsivity on all pages.
+        -> Add animation to prod details on movie/:id
+        -> Add carousel effect on similar movies
 
     -> Games...
     

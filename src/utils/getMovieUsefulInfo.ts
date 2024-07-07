@@ -40,8 +40,6 @@ export type MovieByIdInfo = {
     status              : string,
 }
 
-
-
 /* Filtering only relevant info in movie object */
 export const getMovieUsefulInfo = (movie:any, byId:boolean=false) => {
 

@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
-import MovieListContext, { MovieListContextType } from '../context/MovieListContext'
+import MovieContext, { MovieContextType } from '../context/MovieContext'
 import MovieList from '../components/MovieList'
 
 const Popular = () => {
     
-    const {list, updateCategory} = useContext(MovieListContext) as MovieListContextType
+    const {list, updateCategory} = useContext(MovieContext) as MovieContextType
 
     // Initial API call
     useEffect(() => {

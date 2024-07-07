@@ -1,4 +1,4 @@
-import { createElement, useContext, useEffect, useState} from "react"
+import { useContext, useEffect, useState} from "react"
 import ModeContext, { ModeContextType } from "../context/ModeContext"
 
 const Header = () => {

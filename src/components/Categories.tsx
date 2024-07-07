@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import MovieListContext, { MovieListContextType } from '../context/MovieListContext'
+import MovieContext, { MovieContextType } from '../context/MovieContext'
 
 const Categories = () => {
 
-    const {updateCategory} = useContext(MovieListContext) as MovieListContextType
+    const {updateCategory} = useContext(MovieContext) as MovieContextType
 
     const handleClick = (e:any):void => {
         updateCategory(e.target.id)

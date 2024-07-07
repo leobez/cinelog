@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react"
 import MovieCard from "./MovieCard"
-import MovieListContext, { MovieListContextType } from "../context/MovieListContext"
+import MovieContext, { MovieContextType } from "../context/MovieContext"
 
 type Props = {
     movieList: any[]
@@ -8,7 +8,14 @@ type Props = {
 
 const MovieList = ({movieList}: Props) => {
 
-    const {updatePage} = useContext(MovieListContext) as MovieListContextType
+    const {updatePage, resetMovieById, resetMovieByGenres} = useContext(MovieContext) as MovieContextType
+
+    // Every time this component loads, reset movieById and movieByGenre
+    useEffect(() => {
+        console.log('reseting...')
+        resetMovieById()
+        resetMovieByGenres()
+    }, [])
 
     const containerRef:any = useRef<HTMLDivElement>()
 
@@ -49,7 +56,7 @@ const MovieList = ({movieList}: Props) => {
         <>
             <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 relative" >
                 {movieList.length > 0 && movieList.map((movie:any, index:number) => (
-                    <div key={`${movie.id}/${index}`} className="border-2 border-black h-80 hover:opacity-50" onClick={handleClick} ref={containerRef}>
+                    <div key={`${movie.id}/${index}`} className="border-2 border-black h-80" onClick={handleClick} ref={containerRef}>
                         <MovieCard movie={movie}/>
                     </div>
                 ))}
