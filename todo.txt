@@ -6,12 +6,16 @@ TODO:
         -> Filter by genre
         -> Select random movie by genre
 
+    -> Create area for loading, error and states.
+
     -> Later:
-        -> Create area for loading, error and states.
         -> Create separate loading for each state (list, movie and movieByGenres)
         -> Layout and responsivity on all pages.
         -> Add animation to prod details on movie/:id
         -> Add carousel effect on similar movies
+        -> Only show info that actually exists, if not, show add in a box that tells which info isnt there
+        -> Componentizar +
+        -> Use 'similar' route to get similar movies
 
     -> Games...
     

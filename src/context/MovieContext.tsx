@@ -20,6 +20,10 @@ export type MovieContextType = {
     getMovieByGenres:(lang:string, genres:number[])=>Promise<void>;
     resetMovieByGenres:()=>void;
 
+    moviesByQuery:any[];
+    getMoviesByQuery:(query:string)=>Promise<void>;
+    resetMoviesByQuery:()=>void;
+
     page: number;
     updatePage:() => void;
     resetPage:() => void;
@@ -38,6 +42,8 @@ export const MovieListContextProvider = ({children}:any) => {
     const [list, setList] = useState<any[]>([])
     const [movieById, setMovieById] = useState<any>(null)
     const [movieByGenres, setMovieByGenres] = useState<any[]>([])
+    const [moviesByQuery, setMoviesByQuery] = useState<any[]>([])
+    const [query, setQuery] = useState('')
     const [page, setPage] = useState<number>(1)
     const [loading, setLoading] = useState<boolean>(false)
     const [hasMore, setHasMore] = useState<boolean>(true)
@@ -46,7 +52,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     // Category methods
     const updateCategory = (newCategory:string):void => {
-        const validCategories = ['top_rated', 'popular', 'upcoming']
+        const validCategories = ['top_rated', 'popular', 'upcoming', 'query']
         if (validCategories.includes(newCategory)) {
             // Only reset list and page when user actually changes categories.
             if (category !== newCategory) {
@@ -80,17 +86,17 @@ export const MovieListContextProvider = ({children}:any) => {
         
         const getMovies = async():Promise<void> => {
 
-            let address = ''
+            let URL = ''
 
-            if (category === 'top_rated') address = import.meta.env.VITE_TOP_RATED_MOVIES_URL
-            else if (category === 'popular') address = import.meta.env.VITE_POPULAR_MOVIES_URL
-            else if (category === 'upcoming') address = import.meta.env.VITE_UPCOMING_MOVIES_URL
+            if (category === 'top_rated') URL = `${import.meta.env.VITE_TOP_RATED_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+            else if (category === 'popular') URL = `${import.meta.env.VITE_POPULAR_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+            else if (category === 'upcoming') URL = `${import.meta.env.VITE_UPCOMING_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+            else if (category === 'query') URL = `${import.meta.env.VITE_QUERY}/movie?query=${query}&api_key=${import.meta.env.VITE_API_KEY}&page=1`
             else return;
     
             try {
 
                 setLoading(true)
-                const URL = `${address}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
                 const result = await fetch(URL)
                 const data = await result.json()
                 console.log('data received: ', data)
@@ -174,6 +180,44 @@ export const MovieListContextProvider = ({children}:any) => {
         setMovieByGenres([])
     }
 
+
+    // MoviesByQuery methods
+    const getMoviesByQuery = async(query:string):Promise<void> => {
+
+        //https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=API_KEY
+
+        try {
+            const URL = `${import.meta.env.VITE_QUERY}/movie?query=${query}&api_key=${import.meta.env.VITE_API_KEY}&page=1`
+            setLoading(true)
+            const result = await fetch(URL)
+            const data = await result.json()
+            console.log('data.results: ', data.results)
+            
+            let filteredData:any = []
+
+            for (let movie of data.results) {
+                if (movie.poster_path) {
+                    filteredData.push(movie)
+                }
+            }
+
+            console.log('filteredData: ', filteredData)
+            updateList(filteredData)
+            setMoviesByQuery(filteredData)
+            updateCategory('query')
+            setQuery(query)
+            setLoading(false)
+
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+        }
+    }
+    const resetMoviesByQuery = ():void => {
+        setMoviesByQuery([])
+    }
+
+
     // Page methods
     const updatePage = ():void => {
         setPage(prev => prev+1)
@@ -193,6 +237,7 @@ export const MovieListContextProvider = ({children}:any) => {
                     list, updateList, appendToList, resetList, consoleList,
                     movieById, getMovieById, resetMovieById,
                     movieByGenres, getMovieByGenres, resetMovieByGenres,
+                    moviesByQuery, getMoviesByQuery, resetMoviesByQuery,
                     page, updatePage, resetPage, consolePage,
                     loading, hasMore
                 }
