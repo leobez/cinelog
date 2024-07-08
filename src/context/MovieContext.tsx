@@ -10,12 +10,15 @@ export type MovieContextType = {
     updateQuery:(query:string)=>void;
     updatePage:()=>void;
     updateSimilar:(id:number)=>void;
+    similar:number|null;
 
     // movieCategory can be: by_id, random_by_genre.
     movieCategory:string;
-    updateMovieCategory:(newCategory:string) => void;
+    updateMovieCategory:(newCategory:string)=>void;
     movie: any;
-
+    loadingMovie:boolean;
+    updateMovieId:(id:number)=>void;
+    movieId:number;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
@@ -31,13 +34,13 @@ export const MovieListContextProvider = ({children}:any) => {
     const [query, setQuery] = useState<string>('') // Only used when searching by query
     const [similar, setSimilar] = useState<number|null>(null) // Only used when searching for similar, number represents id of movie you wish to search for similars to.
     const [loadingList, setLoadingList] = useState<boolean>(false)
-    const [hasMore, setHasMore] = useState<boolean>(true)
+    //const [hasMore, setHasMore] = useState<boolean>(true)
 
     // States of individual movies
     const [movieCategory, setMovieCategory] = useState<string>('')
     const [movie, setMovie] = useState<any>(null)
     const [movieId, setMovieId] = useState<number>(-1)
-    const [random, setRandom] = useState<boolean>(false)
+    //const [random, setRandom] = useState<boolean>(false)
     const [loadingMovie, setLoadingMovie] = useState<boolean>(false)
 
 
@@ -100,6 +103,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     console.log('invalid listCategory');
                     break;
             }
+
+            console.log('URL: ', URL)
     
             // Begin API call
             try {
@@ -145,7 +150,6 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }, [listCategory, page, query, similar])
  
-
     const updatePage = ():void => {
         setPage(prev => prev+1)
     }
@@ -158,28 +162,55 @@ export const MovieListContextProvider = ({children}:any) => {
         setSimilar(id)
     }
 
-    const updateGenres = (genres:any):void => {
+/*     const updateGenres = (genres:any):void => {
         setGenres(genres)
-    }
-
-    // Updates movie based on chosen category
-    // (...)
-
-/*     const getMovieById = async(id:number):Promise<void> => {
-        try {
-            const URL = `${import.meta.env.VITE_FIND_BY_ID}/${id}?api_key=${import.meta.env.VITE_API_KEY}`
-            setLoading(true)
-            const result = await fetch(URL)
-            const data = await result.json()
-            console.log(data)
-            setMovieById(data)
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-            console.log(error)
-        }
     } */
 
+    // Updates movie when following states are changed: movieCategory, movieId (...)
+    useEffect(() => {
+
+        if (!movieCategory) return;
+
+        const updateMovie = async():Promise<void> => {
+
+            let URL = ''
+    
+            // Build URL based on which category is currently being used
+            switch (movieCategory) {
+                case 'by_id':
+                    URL = `${import.meta.env.VITE_FIND_BY_ID}/${movieId}?api_key=${import.meta.env.VITE_API_KEY}`
+                    break;
+                case 'random': // 
+                    URL = ``
+                    break;
+                default:
+                    console.log('invalid movieCategory');
+                    break;
+            }
+    
+            // Begin API call
+            try {
+
+                setLoadingMovie(true)
+                const result = await fetch(URL)
+                const data = await result.json()
+                console.log('data received: ', data) // remove
+                setMovie(data)
+                setLoadingMovie(false)
+
+            } catch (error) {
+                setLoadingMovie(false)
+                console.log(error)
+            }
+        }    
+
+        updateMovie()
+
+    }, [movieCategory, movieId])
+
+    const updateMovieId = (id:number) => {
+        setMovieId(id)
+    } 
 
 /*     const getMovieByGenres = async(lang:string, genres:number[]):Promise<void> => {
         try {
@@ -211,9 +242,8 @@ export const MovieListContextProvider = ({children}:any) => {
     return (
         <MovieContext.Provider value={
                 {
-                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar
-            
-                    movieCategory, updateMovieCategory, movie
+                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar, similar,
+                    movieCategory, updateMovieCategory, movie, loadingMovie, updateMovieId, movieId
                 }
             }>
 

@@ -7,16 +7,22 @@ const Movie = () => {
     
     const {id} = useParams()
 
-    const {updateMovieCategory} = useContext(MovieContext) as MovieContextType
+    const {updateMovieId, movieId, updateListCategory, updateMovieCategory, movie, list, updateSimilar, similar} = useContext(MovieContext) as MovieContextType
 
+    useEffect(() => {
+        updateMovieId(Number(id))
+    }, [id])
     useEffect(() => {
         updateMovieCategory('by_id')
-    }, [id])
-
+    }, [movieId])
     useEffect(() => {
         if (!movie) return;
-        getMovieByGenres(movie.original_language, movie.genres);
+        updateSimilar(Number(id))
     }, [movie])
+    useEffect(() => {
+        if (!similar) return;
+        updateListCategory('similar')
+    }, [similar])
 
     const prodDetail:any = useRef<HTMLDivElement>()
     const toggleProdDetail = () => {
@@ -182,12 +188,12 @@ const Movie = () => {
                 <div className='w-full h-[1px] bg-black my-2'></div>
 
                 {/* SIMILAR MOVIES */}
-                {movieByGenres && 
+                {list && 
                     <div className='self-start mb-10 w-full'>
                         <p className='text-left my-2'>Similar movies:</p>
                         <div className="overflow-x-auto scrollbar-thin w-full h-80 flex gap-1">
-                            {movieByGenres.map((similarMovie:any) => (
-                                <div className='h-full min-w-56' key={similarMovie.id}>
+                            {list.map((similarMovie:any) => (
+                                <div className='h-full min-w-56' key={`c_${similarMovie.id}`}>
                                     <MovieCard movie={similarMovie}/>
                                 </div>
                             ))}

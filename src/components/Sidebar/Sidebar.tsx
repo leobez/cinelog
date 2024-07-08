@@ -39,7 +39,7 @@ const Sidebar = () => {
 
             <div className="absolute bottom-0 h-16 border-t-2 border-black grid place-items-center p-2">
                 Desenvolvido por Leonardo de Souza Bezerra
-                API: IMDB e ??
+                API: TMDB e ??
             </div>
 
         </div>

@@ -1,3 +1,6 @@
+Keep creating all api calls and then try to minimize work on components (reeduce effects)
+
+
 TODO: 
     -> Sidebar
         -> Layout
