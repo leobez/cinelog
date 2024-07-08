@@ -7,10 +7,10 @@ const Movie = () => {
     
     const {id} = useParams()
 
-    const {loading, movieById:movie, getMovieById, movieByGenres, getMovieByGenres} = useContext(MovieContext) as MovieContextType
+    const {updateMovieCategory} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
-        getMovieById(Number(id))
+        updateMovieCategory('by_id')
     }, [id])
 
     useEffect(() => {

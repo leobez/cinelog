@@ -2,13 +2,14 @@ import { createContext, useEffect, useState } from "react";
 
 export type MovieContextType = {
 
-    // ListCtegories can be: popular, upcoming, top_rated, by_query, by_genre (TODO: change for similar)
+    // ListCtegories can be: popular, upcoming, top_rated, by_query, similar
     listCategory:string|null;
     updateListCategory:(newCategory:string)=>void;
     list:any[];
     loadingList:boolean;
     updateQuery:(query:string)=>void;
     updatePage:()=>void;
+    updateSimilar:(id:number)=>void;
 
     // movieCategory can be: by_id, random_by_genre.
     movieCategory:string;
@@ -28,7 +29,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1) // Only used on lists
     const [query, setQuery] = useState<string>('') // Only used when searching by query
-    const [genres, setGenres] = useState<number[]>([]) // Only used when searching by genres
+    const [similar, setSimilar] = useState<number|null>(null) // Only used when searching for similar, number represents id of movie you wish to search for similars to.
     const [loadingList, setLoadingList] = useState<boolean>(false)
     const [hasMore, setHasMore] = useState<boolean>(true)
 
@@ -43,7 +44,7 @@ export const MovieListContextProvider = ({children}:any) => {
     // FUNCTIONS
     // Category functions
     const updateListCategory = (newCategory:string):void => {
-        const validCategories = ['top_rated', 'popular', 'upcoming', 'by_genre', 'by_query']
+        const validCategories = ['top_rated', 'popular', 'upcoming', 'by_query', 'similar']
         if (validCategories.includes(newCategory)) {
             // Only reset list and page when user actually changes categories.
             if (listCategory !== newCategory) {
@@ -92,8 +93,8 @@ export const MovieListContextProvider = ({children}:any) => {
                 case 'by_query':
                     URL = `${import.meta.env.VITE_QUERY}/movie?query=${query}&api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
                     break;
-                case 'by_genre': // change for similar...
-                    URL = `${import.meta.env.VITE_DISCOVER}/movie?api_key=${import.meta.env.VITE_API_KEY}&sort_by=release_date.desc&with_genres=${genres}`
+                case 'similar': 
+                    URL = `${import.meta.env.VITE_SIMILAR}/${similar}/similar?api_key=${import.meta.env.VITE_API_KEY}`
                     break;
                 default:
                     console.log('invalid listCategory');
@@ -142,7 +143,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         updateList()
 
-    }, [listCategory, page, query, genres])
+    }, [listCategory, page, query, similar])
  
 
     const updatePage = ():void => {
@@ -151,6 +152,10 @@ export const MovieListContextProvider = ({children}:any) => {
 
     const updateQuery = (query:string):void => {
         setQuery(query)
+    }
+
+    const updateSimilar = (id:number):void => {
+        setSimilar(id)
     }
 
     const updateGenres = (genres:any):void => {
@@ -206,7 +211,7 @@ export const MovieListContextProvider = ({children}:any) => {
     return (
         <MovieContext.Provider value={
                 {
-                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage,
+                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar
             
                     movieCategory, updateMovieCategory, movie
                 }
