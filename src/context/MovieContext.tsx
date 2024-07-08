@@ -2,136 +2,165 @@ import { createContext, useEffect, useState } from "react";
 
 export type MovieContextType = {
 
-    category:string;
-    updateCategory:(newCategory:string) => void;
-    consoleCategory:() => void;
+    // ListCtegories can be: popular, upcoming, top_rated, by_query, by_genre (TODO: change for similar)
+    listCategory:string|null;
+    updateListCategory:(newCategory:string)=>void;
+    list:any[];
+    loadingList:boolean;
+    updateQuery:(query:string)=>void;
+    updatePage:()=>void;
 
-    list: any[]
-    updateList:(newList:any[]) => void;
-    appendToList:(listToAppend:any[]) => void;
-    resetList:() => void;
-    consoleList:() => void
+    // movieCategory can be: by_id, random_by_genre.
+    movieCategory:string;
+    updateMovieCategory:(newCategory:string) => void;
+    movie: any;
 
-    movieById:any
-    getMovieById:(id:number)=>Promise<void>;
-    resetMovieById:()=>void;
-
-    movieByGenres:any[];
-    getMovieByGenres:(lang:string, genres:number[])=>Promise<void>;
-    resetMovieByGenres:()=>void;
-
-    moviesByQuery:any[];
-    getMoviesByQuery:(query:string)=>Promise<void>;
-    resetMoviesByQuery:()=>void;
-
-    page: number;
-    updatePage:() => void;
-    resetPage:() => void;
-    consolePage:() => void;
-
-    loading: boolean;
-    hasMore: boolean;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
 
 export const MovieListContextProvider = ({children}:any) => {
 
-    // Attributes
-    const [category, setCategory] = useState<string>('top_rated')
+    // STATES
+
+    // States of movie lists
+    const [listCategory, setListCategory]   = useState<string|null>(null)
     const [list, setList] = useState<any[]>([])
-    const [movieById, setMovieById] = useState<any>(null)
-    const [movieByGenres, setMovieByGenres] = useState<any[]>([])
-    const [moviesByQuery, setMoviesByQuery] = useState<any[]>([])
-    const [query, setQuery] = useState('')
-    const [page, setPage] = useState<number>(1)
-    const [loading, setLoading] = useState<boolean>(false)
+    const [page, setPage] = useState<number>(1) // Only used on lists
+    const [query, setQuery] = useState<string>('') // Only used when searching by query
+    const [genres, setGenres] = useState<number[]>([]) // Only used when searching by genres
+    const [loadingList, setLoadingList] = useState<boolean>(false)
     const [hasMore, setHasMore] = useState<boolean>(true)
 
-    // METHODS
+    // States of individual movies
+    const [movieCategory, setMovieCategory] = useState<string>('')
+    const [movie, setMovie] = useState<any>(null)
+    const [movieId, setMovieId] = useState<number>(-1)
+    const [random, setRandom] = useState<boolean>(false)
+    const [loadingMovie, setLoadingMovie] = useState<boolean>(false)
 
-    // Category methods
-    const updateCategory = (newCategory:string):void => {
-        const validCategories = ['top_rated', 'popular', 'upcoming', 'query']
+
+    // FUNCTIONS
+    // Category functions
+    const updateListCategory = (newCategory:string):void => {
+        const validCategories = ['top_rated', 'popular', 'upcoming', 'by_genre', 'by_query']
         if (validCategories.includes(newCategory)) {
             // Only reset list and page when user actually changes categories.
-            if (category !== newCategory) {
-                resetList()
-                resetPage()
+            if (listCategory !== newCategory) {
+                setPage(1)
+                setList([])
             }
-            setCategory(newCategory)
+            setListCategory(newCategory)
         } else {
             console.log("Invalid Category.")
         }
     } 
-    const consoleCategory = ():void => {
-        console.log(category)
-    }
 
+    const updateMovieCategory = (newCategory:string):void => {
+        const validCategories = ['by_id', 'random']
+        if (validCategories.includes(newCategory)) {
+            // Only reset list and page when user actually changes categories.
+            if (movieCategory !== newCategory) {
+                setMovie(null)
+            }
+            setMovieCategory(newCategory)
+        } else {
+            console.log("Invalid Category.")
+        }
+    } 
 
-    // List methods
-    const updateList = (newList:any[]):void => {
-        setList(newList)
-    }
-    const appendToList = (listToAppend:any[]):void => {
-        setList((prev) => [...prev, ...listToAppend])
-    }
-    const resetList = ():void => {
-        setList([])
-    }
-    const consoleList = ():void => {
-        console.log(list)
-    }
+    // Updates list of movies when following states are changed: listCategory, page, query, genres.
     useEffect(() => {
-        
-        const getMovies = async():Promise<void> => {
+
+        if (!listCategory) return;
+
+        const updateList = async():Promise<void> => {
 
             let URL = ''
-
-            if (category === 'top_rated') URL = `${import.meta.env.VITE_TOP_RATED_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
-            else if (category === 'popular') URL = `${import.meta.env.VITE_POPULAR_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
-            else if (category === 'upcoming') URL = `${import.meta.env.VITE_UPCOMING_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
-            else if (category === 'query') URL = `${import.meta.env.VITE_QUERY}/movie?query=${query}&api_key=${import.meta.env.VITE_API_KEY}&page=1`
-            else return;
     
+            // Build URL based on which category is currently being used
+            switch (listCategory) {
+                case 'top_rated':
+                    URL = `${import.meta.env.VITE_TOP_RATED_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+                    break;
+                case 'popular':
+                    URL = `${import.meta.env.VITE_POPULAR_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+                    break;
+                case 'upcoming':
+                    URL = `${import.meta.env.VITE_UPCOMING_MOVIES_URL}?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+                    break;
+                case 'by_query':
+                    URL = `${import.meta.env.VITE_QUERY}/movie?query=${query}&api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
+                    break;
+                case 'by_genre': // change for similar...
+                    URL = `${import.meta.env.VITE_DISCOVER}/movie?api_key=${import.meta.env.VITE_API_KEY}&sort_by=release_date.desc&with_genres=${genres}`
+                    break;
+                default:
+                    console.log('invalid listCategory');
+                    break;
+            }
+    
+            // Begin API call
             try {
-
-                setLoading(true)
+    
+                setLoadingList(true)
                 const result = await fetch(URL)
                 const data = await result.json()
-                console.log('data received: ', data)
+                console.log('data received: ', data) // remove
     
                 // Last page reached
                 if (data.results.length === 0) {
-                    setLoading(false)
+                    setLoadingList(false)
                     setHasMore(false)
                     return;
                 }
                 
+                // Filtering only for movies that have a poster to show. Later filter more information.
+                let filteredData:any = []
+                for (let movie of data.results) {
+                    if (movie.poster_path) {
+                        filteredData.push(movie)
+                    }
+                }
+                console.log('filteredData: ', filteredData) // remove
+    
                 if (list.length === 0) {
                     // Inserts into array for the first time.
-                    updateList(data.results)
+                    setList(filteredData)
                 } else {
                     // Inserts into array when its not first time.
-                    appendToList(data.results)
+                    setList((prev) => [...prev, ...filteredData])
                 }
     
-                setLoading(false)
+                setLoadingList(false)
     
             } catch (error) {
-                setLoading(false)
+                setLoadingList(false)
                 console.log(error)
             }
-    
-        }     
+        }    
 
-        getMovies()
+        updateList()
 
-    }, [category, page])
+    }, [listCategory, page, query, genres])
+ 
 
+    const updatePage = ():void => {
+        setPage(prev => prev+1)
+    }
 
-    // MovieById methods
-    const getMovieById = async(id:number):Promise<void> => {
+    const updateQuery = (query:string):void => {
+        setQuery(query)
+    }
+
+    const updateGenres = (genres:any):void => {
+        setGenres(genres)
+    }
+
+    // Updates movie based on chosen category
+    // (...)
+
+/*     const getMovieById = async(id:number):Promise<void> => {
         try {
             const URL = `${import.meta.env.VITE_FIND_BY_ID}/${id}?api_key=${import.meta.env.VITE_API_KEY}`
             setLoading(true)
@@ -144,13 +173,10 @@ export const MovieListContextProvider = ({children}:any) => {
             setLoading(false)
             console.log(error)
         }
-    }
-    const resetMovieById = ():void => {
-        setMovieById(null)
-    }
+    } */
 
-    // MovieByGenres methods
-    const getMovieByGenres = async(lang:string, genres:number[]):Promise<void> => {
+
+/*     const getMovieByGenres = async(lang:string, genres:number[]):Promise<void> => {
         try {
             const genreIds = genres.map((genre:any) => genre.id)
             const URL = `${import.meta.env.VITE_DISCOVER}/movie?api_key=${import.meta.env.VITE_API_KEY}&language=${lang}&sort_by=release_date.desc&page=1&with_genres=${genreIds.join(',')}`
@@ -175,71 +201,14 @@ export const MovieListContextProvider = ({children}:any) => {
             setLoading(false)
             console.log(error)
         }
-    }
-    const resetMovieByGenres = ():void => {
-        setMovieByGenres([])
-    }
-
-
-    // MoviesByQuery methods
-    const getMoviesByQuery = async(query:string):Promise<void> => {
-
-        //https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=API_KEY
-
-        try {
-            const URL = `${import.meta.env.VITE_QUERY}/movie?query=${query}&api_key=${import.meta.env.VITE_API_KEY}&page=1`
-            setLoading(true)
-            const result = await fetch(URL)
-            const data = await result.json()
-            console.log('data.results: ', data.results)
-            
-            let filteredData:any = []
-
-            for (let movie of data.results) {
-                if (movie.poster_path) {
-                    filteredData.push(movie)
-                }
-            }
-
-            console.log('filteredData: ', filteredData)
-            updateList(filteredData)
-            setMoviesByQuery(filteredData)
-            updateCategory('query')
-            setQuery(query)
-            setLoading(false)
-
-        } catch (error) {
-            setLoading(false)
-            console.log(error)
-        }
-    }
-    const resetMoviesByQuery = ():void => {
-        setMoviesByQuery([])
-    }
-
-
-    // Page methods
-    const updatePage = ():void => {
-        setPage(prev => prev+1)
-    }
-    const resetPage = ():void => {
-        setPage(1)
-    }
-    const consolePage = ():void => {
-        console.log(page)
-    }
-
+    } */
 
     return (
         <MovieContext.Provider value={
                 {
-                    category, updateCategory, consoleCategory,
-                    list, updateList, appendToList, resetList, consoleList,
-                    movieById, getMovieById, resetMovieById,
-                    movieByGenres, getMovieByGenres, resetMovieByGenres,
-                    moviesByQuery, getMoviesByQuery, resetMoviesByQuery,
-                    page, updatePage, resetPage, consolePage,
-                    loading, hasMore
+                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage,
+            
+                    movieCategory, updateMovieCategory, movie
                 }
             }>
 

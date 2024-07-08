@@ -4,11 +4,10 @@ import MovieList from '../components/MovieList'
 
 const Upcoming = () => {
 
-    const {list, updateCategory} = useContext(MovieContext) as MovieContextType
+    const {list, updateListCategory} = useContext(MovieContext) as MovieContextType
 
-    // Initial API call
     useEffect(() => {
-      updateCategory('upcoming')
+      updateListCategory('upcoming')
     },[])
 
     return (
@@ -16,6 +15,7 @@ const Upcoming = () => {
         {list &&
           <MovieList movieList={list}/>
         }
+        {/* else ... */}
       </>
     )
 }

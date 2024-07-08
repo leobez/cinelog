@@ -8,14 +8,7 @@ type Props = {
 
 const MovieList = ({movieList}: Props) => {
 
-    const {updatePage, resetMovieById, resetMovieByGenres} = useContext(MovieContext) as MovieContextType
-
-    // Every time this component loads, reset movieById and movieByGenre
-    useEffect(() => {
-        console.log('reseting...')
-        resetMovieById()
-        resetMovieByGenres()
-    }, [])
+    const {updatePage} = useContext(MovieContext) as MovieContextType
 
     const containerRef:any = useRef<HTMLDivElement>()
 
@@ -27,7 +20,6 @@ const MovieList = ({movieList}: Props) => {
     }
 
     const handleLoadMore = ():void => {
-        console.log('load more')
         updatePage()
     }
 

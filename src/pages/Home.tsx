@@ -4,19 +4,18 @@ import MovieList from "../components/MovieList";
 
 const Home = () => {
 
-    const {list, updateCategory} = useContext(MovieContext) as MovieContextType
+    const {updateListCategory, list} = useContext(MovieContext) as MovieContextType
 
-    // Initial API call
     useEffect(() => {
-      updateCategory('top_rated')
-      console.log('run')
+      updateListCategory('top_rated')
     },[])
 
     return (
       <>
-        {list &&
+        {list.length > 0 &&
           <MovieList movieList={list}/>
         }
+        {/* else ... */}
       </>
     )
 }
