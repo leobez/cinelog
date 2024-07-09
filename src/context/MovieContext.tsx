@@ -2,16 +2,18 @@ import { createContext, useEffect, useState } from "react";
 
 export type MovieContextType = {
 
-    // ListCtegories can be: popular, upcoming, top_rated, by_query, similar
+    // ListCtegories can be: popular, upcoming, top_rated, by_query, similar, by_genre
     listCategory:string|null;
     updateListCategory:(newCategory:string)=>void;
     list:any[];
     loadingList:boolean;
     updateQuery:(query:string|null)=>void;
-    updatePage:()=>void;
+    query:string|null;
     updateSimilar:(id:number)=>void;
     similar:number|null;
-    query:string|null;
+    updateGenres:(genresIds:any)=>void;
+    genres:number[]|null;
+    updatePage:()=>void;
 
     // movieCategory can be: by_id, random_by_genre.
     movieCategory:string;
@@ -34,21 +36,22 @@ export const MovieListContextProvider = ({children}:any) => {
     const [page, setPage] = useState<number>(1) 
     const [query, setQuery] = useState<string|null>(null) 
     const [similar, setSimilar] = useState<number|null>(null) // number represents id of movie you wish to search for similars to.
+    const [genres, setGenres] = useState<number[]|null>(null)
     const [loadingList, setLoadingList] = useState<boolean>(false)
-    //const [hasMore, setHasMore] = useState<boolean>(true)
+    const [hasMore, setHasMore] = useState<boolean>(true)
 
     // States of individual movies
     const [movieCategory, setMovieCategory] = useState<string>('')
     const [movie, setMovie] = useState<any>(null)
     const [movieId, setMovieId] = useState<number>(-1)
-    //const [random, setRandom] = useState<boolean>(false)
+    const [random, setRandom] = useState<boolean>(false)
     const [loadingMovie, setLoadingMovie] = useState<boolean>(false)
 
 
     // FUNCTIONS
     // Category functions
     const updateListCategory = (newCategory:string):void => {
-        const validCategories = ['top_rated', 'popular', 'upcoming', 'by_query', 'similar']
+        const validCategories = ['top_rated', 'popular', 'upcoming', 'by_query', 'similar', 'by_genre']
         if (validCategories.includes(newCategory)) {
             // Only reset list and page when user actually changes categories.
             if (listCategory !== newCategory) {
@@ -100,6 +103,9 @@ export const MovieListContextProvider = ({children}:any) => {
                 case 'similar': 
                     URL = `${import.meta.env.VITE_SIMILAR}/${similar}/similar?api_key=${import.meta.env.VITE_API_KEY}`
                     break;
+                case 'by_genre': 
+                    URL = `${import.meta.env.VITE_DISCOVER}/movie?api_key=${import.meta.env.VITE_API_KEY}&sort_by=release_date.desc&page=${page}&with_genres=${genres?.join(',')}`
+                    break;
                 default:
                     console.log('invalid listCategory');
                     break;
@@ -149,7 +155,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         updateList()
 
-    }, [listCategory, page, query])
+    }, [listCategory, page, query, genres])
  
     const updatePage = ():void => {
         setPage(prev => prev+1)
@@ -160,12 +166,23 @@ export const MovieListContextProvider = ({children}:any) => {
             console.log('Query null')
             return;
         }
+        setPage(1)
         setList([])
         setQuery(query)
     }
 
     const updateSimilar = (id:number):void => {
         setSimilar(id)
+    }
+
+    const updateGenres = (genresIds:any):void => {
+        if (genres?.length === 0) {
+            console.log('No genres')
+            return;
+        }
+        setPage(1)
+        setList([])
+        setGenres(genresIds)
     }
 
     // Updates movie when following states are changed: movieCategory, movieId (...)
@@ -214,37 +231,10 @@ export const MovieListContextProvider = ({children}:any) => {
         setMovieId(id)
     } 
 
-/*     const getMovieByGenres = async(lang:string, genres:number[]):Promise<void> => {
-        try {
-            const genreIds = genres.map((genre:any) => genre.id)
-            const URL = `${import.meta.env.VITE_DISCOVER}/movie?api_key=${import.meta.env.VITE_API_KEY}&language=${lang}&sort_by=release_date.desc&page=1&with_genres=${genreIds.join(',')}`
-            setLoading(true)
-            const result = await fetch(URL)
-            const data = await result.json()
-            console.log('data.results: ', data.results)
-            
-            let filteredData:any = []
-
-            for (let movie of data.results) {
-                if (movie.poster_path) {
-                    filteredData.push(movie)
-                }
-            }
-
-            console.log('filteredData: ', filteredData)
-            setMovieByGenres(filteredData)
-            setLoading(false)
-
-        } catch (error) {
-            setLoading(false)
-            console.log(error)
-        }
-    } */
-
     return (
         <MovieContext.Provider value={
                 {
-                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar, similar, query,
+                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar, similar, query, updateGenres, genres,
                     movieCategory, updateMovieCategory, movie, loadingMovie, updateMovieId, movieId
                 }
             }>

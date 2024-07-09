@@ -9,6 +9,7 @@ import Random from './pages/Random'
 import Movie from './pages/Movie'
 import Sidebar from './components/Sidebar/Sidebar'
 import Search from './pages/Search'
+import ByGenre from './pages/ByGenre'
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
                     <Route path='/random' element={<Random/>}></Route>
                     <Route path='/movie/:id' element={<Movie/>}></Route>
                     <Route path='/search' element={<Search/>}></Route>
+                    <Route path='/bygenre' element={<ByGenre/>}></Route>
                   </Routes> 
 
                 </div>

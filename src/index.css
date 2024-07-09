@@ -35,3 +35,12 @@ body {
     --color06: #3D3433;
     --transitioncolor: #75413B;
 }
+
+.selected {
+    background-color: black;
+    color: white;
+}
+.unselected {
+    background-color: white;
+    color: black;
+}
