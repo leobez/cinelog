@@ -7,10 +7,11 @@ export type MovieContextType = {
     updateListCategory:(newCategory:string)=>void;
     list:any[];
     loadingList:boolean;
-    updateQuery:(query:string)=>void;
+    updateQuery:(query:string|null)=>void;
     updatePage:()=>void;
     updateSimilar:(id:number)=>void;
     similar:number|null;
+    query:string|null;
 
     // movieCategory can be: by_id, random_by_genre.
     movieCategory:string;
@@ -30,9 +31,9 @@ export const MovieListContextProvider = ({children}:any) => {
     // States of movie lists
     const [listCategory, setListCategory]   = useState<string|null>(null)
     const [list, setList] = useState<any[]>([])
-    const [page, setPage] = useState<number>(1) // Only used on lists
-    const [query, setQuery] = useState<string>('') // Only used when searching by query
-    const [similar, setSimilar] = useState<number|null>(null) // Only used when searching for similar, number represents id of movie you wish to search for similars to.
+    const [page, setPage] = useState<number>(1) 
+    const [query, setQuery] = useState<string|null>(null) 
+    const [similar, setSimilar] = useState<number|null>(null) // number represents id of movie you wish to search for similars to.
     const [loadingList, setLoadingList] = useState<boolean>(false)
     //const [hasMore, setHasMore] = useState<boolean>(true)
 
@@ -148,23 +149,24 @@ export const MovieListContextProvider = ({children}:any) => {
 
         updateList()
 
-    }, [listCategory, page, query, similar])
+    }, [listCategory, page, query])
  
     const updatePage = ():void => {
         setPage(prev => prev+1)
     }
 
-    const updateQuery = (query:string):void => {
+    const updateQuery = (query:string|null):void => {
+        if (!query) {
+            console.log('Query null')
+            return;
+        }
+        setList([])
         setQuery(query)
     }
 
     const updateSimilar = (id:number):void => {
         setSimilar(id)
     }
-
-/*     const updateGenres = (genres:any):void => {
-        setGenres(genres)
-    } */
 
     // Updates movie when following states are changed: movieCategory, movieId (...)
     useEffect(() => {
@@ -242,7 +244,7 @@ export const MovieListContextProvider = ({children}:any) => {
     return (
         <MovieContext.Provider value={
                 {
-                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar, similar,
+                    listCategory, updateListCategory, list, loadingList, updateQuery, updatePage, updateSimilar, similar, query,
                     movieCategory, updateMovieCategory, movie, loadingMovie, updateMovieId, movieId
                 }
             }>
