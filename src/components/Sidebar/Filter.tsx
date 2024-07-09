@@ -29,7 +29,8 @@ const Filter = () => {
     }
 
     const handleRandom = (e:any):void => {
-
+      // Choose a movie by random (with genres)
+      // Navigate to page of that movie
     }
 
     // ADD LIMIT TO GENRES THAT CAN BE SELECTED

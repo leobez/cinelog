@@ -1,15 +1,9 @@
-- TERMINAR O RANDOM
-Fazer validações: listas e filmes
-
+- Finish random
+- Finish info in Sidebar
+- Fazer validações: listas e filmes
+- Tentar melhorar...
 
 TODO: 
-    -> Sidebar
-        -> Layout
-        -> Extra information (footer info) such as current mode (movie, game etc)
-        -> Search bar
-        -> Filter by genre
-        -> Select random movie by genre
-
     -> Create area for loading, error and states.
 
     -> Later:
@@ -23,6 +17,3 @@ TODO:
 
     -> Games...
     
-
-MAYBE:
--> Save scroll position on context, so it can reset when changing categories (?)
