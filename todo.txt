@@ -1,16 +1,13 @@
+- Layout changes
+- Error and loading states
+- Add animation to prod details and similar movies on movie/:id
+- Componentizar
 - As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req. a nova req ainda ta na página 2.
 
+
+
 TODO: 
-    -> Create area for loading, error and states.
-
-    -> Later:
-        -> Create separate loading for each state (list, movie and movieByGenres)
-        -> Layout and responsivity on all pages.
-        -> Add animation to prod details on movie/:id
-        -> Add carousel effect on similar movies
-        -> Only show info that actually exists, if not, show add in a box that tells which info isnt there
-        -> Componentizar +
-        -> Use 'similar' route to get similar movies
-
+    -> Layout and responsivity on all pages.
+    -> Only show info that actually exists, if not, show add in a box that tells which info isnt there
     -> Games...
     
