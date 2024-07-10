@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import MovieCard from '../components/MovieCard'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
@@ -7,22 +7,24 @@ const Movie = () => {
     
     const {id} = useParams()
 
-    const {updateMovieId, movieId, updateListCategory, updateMovieCategory, movie, list, updateSimilar, similar} = useContext(MovieContext) as MovieContextType
+    const [similarMovies, setSimilarMovies] = useState([])
+    const {updateMovieId, movieId, updateMovieCategory, movie, getSimilar} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
         updateMovieId(Number(id))
     }, [id])
+
     useEffect(() => {
         updateMovieCategory('by_id')
     }, [movieId])
+
     useEffect(() => {
-        if (!movie) return;
-        updateSimilar(Number(id))
-    }, [movie])
-    useEffect(() => {
-        if (!similar) return;
-        updateListCategory('similar')
-    }, [similar])
+        const getSimilarMoviesAsync = async() => {
+            const similarmovies = await getSimilar(Number(id))
+            setSimilarMovies(similarmovies)
+        }
+        getSimilarMoviesAsync()
+    }, [id])
 
     const prodDetail:any = useRef<HTMLDivElement>()
     const toggleProdDetail = () => {
@@ -188,11 +190,11 @@ const Movie = () => {
                 <div className='w-full h-[1px] bg-black my-2'></div>
 
                 {/* SIMILAR MOVIES */}
-                {list && 
+                {similarMovies && similarMovies.length > 0 && 
                     <div className='self-start mb-10 w-full'>
                         <p className='text-left my-2'>Similar movies:</p>
                         <div className="overflow-x-auto scrollbar-thin w-full h-80 flex gap-1">
-                            {list.map((similarMovie:any) => (
+                            {similarMovies.map((similarMovie:any) => (
                                 <div className='h-full min-w-56' key={`c_${similarMovie.id}`}>
                                     <MovieCard movie={similarMovie}/>
                                 </div>

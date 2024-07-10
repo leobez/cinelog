@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { TMDB_GENRES } from "../../data/TMDB_GENRES"
 import { useNavigate } from "react-router-dom"
+import MovieContext, { MovieContextType } from "../../context/MovieContext"
 
 const Filter = () => {
 
-    const navigation = useNavigate()
+    const navigate = useNavigate()
 
     const GENRES = Object.entries(TMDB_GENRES)
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
+
+    const {chooseRandom} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
       console.log('selectedGenres: ', selectedGenres)
@@ -25,12 +28,14 @@ const Filter = () => {
     const handleFilter = (e:any):void => {
       e.preventDefault()
       const args = selectedGenres.join(',')
-      navigation(`/bygenre?genres=${args}`)
+      navigate(`/bygenre?genres=${args}`)
     }
 
-    const handleRandom = (e:any):void => {
-      // Choose a movie by random (with genres)
-      // Navigate to page of that movie
+    const handleRandom = async(e:any):Promise<void> => {
+      e.preventDefault()
+      const randomId = await chooseRandom(selectedGenres)
+      console.log('RANDOM ID: ', randomId)
+      navigate(`/movie/${randomId}`)
     }
 
     // ADD LIMIT TO GENRES THAT CAN BE SELECTED

@@ -1,6 +1,4 @@
-- Finish random
-- Finish info in Sidebar
-- Fazer validações: listas e filmes
+- Fazer validações e limitações: listas e filmes
 - Tentar melhorar...
 
 TODO: 
