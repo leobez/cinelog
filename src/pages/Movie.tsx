@@ -7,23 +7,34 @@ const Movie = () => {
     
     const {id} = useParams()
 
-    const [similarMovies, setSimilarMovies] = useState([])
-    const {updateMovieId, movieId, updateMovieCategory, movie, getSimilar} = useContext(MovieContext) as MovieContextType
+    const [movie, setMovie] = useState<any>(null)
+    const [similarMovies, setSimilarMovies] = useState<any[]|null>(null)
+    const {GET_movie_byid, GET_movies_similar, loading, error} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
-        updateMovieId(Number(id))
-    }, [id])
 
-    useEffect(() => {
-        updateMovieCategory('by_id')
-    }, [movieId])
+        const ASYNC_GET_movie_byid_and_similar = async() => {
 
-    useEffect(() => {
-        const getSimilarMoviesAsync = async() => {
-            const similarmovies = await getSimilar(Number(id))
-            setSimilarMovies(similarmovies)
-        }
-        getSimilarMoviesAsync()
+            const m = await GET_movie_byid(Number(id))
+            const l = await GET_movies_similar(Number(id))
+
+            if (!m) {
+              console.log('no movie')
+              return;
+            }
+
+            if (!l) {
+                console.log('no similar movie')
+                return;
+            }
+
+            setMovie(m)
+            setSimilarMovies(l)
+
+          }
+          
+          ASYNC_GET_movie_byid_and_similar()
+     
     }, [id])
 
     const prodDetail:any = useRef<HTMLDivElement>()

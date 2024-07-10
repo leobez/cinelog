@@ -1,5 +1,4 @@
-- Fazer validações e limitações: listas e filmes
-- Tentar melhorar...
+- As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req. a nova req ainda ta na página 2.
 
 TODO: 
     -> Create area for loading, error and states.

@@ -9,9 +9,13 @@ const Search = () => {
 
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)
-
-    // When params change, resetList to [] and page to 1
     const [params, setParams] = useSearchParams()
+
+    // When params change, reset list to [] and page to 1
+    useEffect(() => {
+      setList([])
+      setPage(1)
+    }, [params])
 
     useEffect(() => {
         

@@ -1,14 +1,14 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export type MovieContextType = {
     GET_movies_toprated:(page:number)=>Promise<any[]>;
     GET_movies_popular:(page:number)=>Promise<any[]>;
     GET_movies_upcoming:(page:number)=>Promise<any[]>;
     GET_movies_byquery:(page:number, query:string)=>Promise<any[]>;
-    /*GET_movies_bygenres:(genres:number[])=>Promise<any[]>;
+    GET_movies_bygenres:(page:number, genres:number[])=>Promise<any[]>;
     GET_movies_similar:(id:number)=>Promise<any[]>;
     GET_movie_byid:(id:number)=>Promise<any>;
-    GET_movie_randombygenres:(genres:any[])=>Promise<number>; */
+    GET_movie_randombygenres:(genres:any[])=>Promise<number>; 
     loading:boolean;
     error:string|null
 }
@@ -53,11 +53,13 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
+            setLoading(false)
             console.log('filteredData: ', filteredData)
 
             return filteredData
 
         } catch (error) {
+            setLoading(false)
             console.log(error)
             return [];
         }
@@ -88,11 +90,13 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
+            setLoading(false)
             console.log('filteredData: ', filteredData)
 
             return filteredData
 
         } catch (error) {
+            setLoading(false)
             console.log(error)
             return [];
         }
@@ -123,11 +127,13 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
+            setLoading(false)
             console.log('filteredData: ', filteredData)
 
             return filteredData
 
         } catch (error) {
+            setLoading(false)
             console.log(error)
             return [];
         }
@@ -158,15 +164,166 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
+            setLoading(false)
             console.log('filteredData: ', filteredData)
 
             return filteredData
 
         } catch (error) {
+            setLoading(false)
             console.log(error)
             return [];
         }
 
+    }
+
+    const GET_movies_bygenres = async(page:number, genres:number[]):Promise<any[]> => {
+
+        try {
+
+            setLoading(true)
+            const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
+            const RESULT = await fetch(URL)
+            const DATA = await RESULT.json()
+            console.log('DATA RECEIVED: ', DATA)
+
+            // Validate data
+            if (DATA.results.length === 0) {
+                setLoading(false)
+                return [];
+            }
+            
+            // Filtering only for movies that have a poster to show. Add more filter later on.
+            let filteredData:any = []
+            for (let movie of DATA.results) {
+                if (movie.poster_path) {
+                    filteredData.push(movie)
+                }
+            }
+
+            console.log('filteredData: ', filteredData)
+            setLoading(false)
+
+            return filteredData
+
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+            return [];
+        }
+
+    }
+
+    const GET_movie_byid = async(id:number):Promise<any> => {
+
+        try {
+
+            setLoading(true)
+            const URL = `${URL_BYID}/${id}?api_key=${API_KEY}`
+            const RESULT = await fetch(URL)
+            const DATA = await RESULT.json()
+            console.log('DATA RECEIVED: ', DATA)
+
+            // Validate data
+            if (!DATA) {
+                setLoading(false)
+                return [];
+            }
+            setLoading(false)
+
+            return DATA
+
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+            return [];
+        }
+
+    }
+
+    const GET_movies_similar = async(id:number):Promise<any[]> => {
+
+        try {
+
+            setLoading(true)
+            const URL = `${URL_SIMILAR}/${id}/similar?api_key=${API_KEY}`
+            const RESULT = await fetch(URL)
+            const DATA = await RESULT.json()
+            console.log('DATA RECEIVED: ', DATA)
+
+            // Validate data
+            if (DATA.results.length === 0) {
+                setLoading(false)
+                return [];
+            }
+            
+            // Filtering only for movies that have a poster to show. Add more filter later on.
+            let filteredData:any = []
+            for (let movie of DATA.results) {
+                if (movie.poster_path) {
+                    filteredData.push(movie)
+                }
+            }
+
+            console.log('filteredData: ', filteredData)
+            setLoading(false)
+
+            return filteredData
+
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+            return [];
+        }
+
+    }
+
+    const GET_movie_randombygenres = async(genres:number[]):Promise<number> => {
+
+        // Begin API call
+        try {
+
+            let moviePool:any[] = []
+
+            setLoading(true)
+
+            for (let page=1; page<=5; page++) {
+
+                const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
+                const RESULT = await fetch(URL)
+                const DATA = await RESULT.json()
+
+                // Last page reached
+                if (DATA.results.length === 0) {
+                    break;
+                }
+
+                // Filtering only for movies that have a poster to show. Later filter more information.
+                let filteredData:any = []
+                for (let movie of DATA.results) {
+                    if (movie.poster_path) {
+                        filteredData.push(movie)
+                    }
+                }
+
+                for (let movie of filteredData) {
+                    moviePool.push(movie)
+                }
+            }
+
+            const max = (moviePool.length-1)
+            const min = 0
+            const randomNum = Math.floor(Math.random() * (max - min + 1) + min)
+
+            setLoading(false)
+
+            return moviePool[randomNum].id
+
+        } catch {
+            setLoading(false)
+            console.log(error)
+            return -1;
+        }
     }
 
     return (
@@ -176,6 +333,10 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movies_popular,
                     GET_movies_upcoming,
                     GET_movies_byquery,
+                    GET_movies_bygenres,
+                    GET_movie_byid,
+                    GET_movies_similar,
+                    GET_movie_randombygenres,
                     loading,
                     error
                 }

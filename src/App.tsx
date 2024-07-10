@@ -46,12 +46,8 @@ function App() {
                     <Route path='/popular' element={<Popular/>}></Route>
                     <Route path='/upcoming' element={<Upcoming/>}></Route>
                     <Route path='/search' element={<Search/>}></Route>
-                    
-                    {/*
-                      <Route path='/bygenre' element={<ByGenre/>}></Route> 
-                      <Route path='/movie/:id' element={<Movie/>}></Route>
-                    */}
-
+                    <Route path='/bygenre' element={<ByGenre/>}></Route> 
+                    <Route path='/movie/:id' element={<Movie/>}></Route>
                   </Routes> 
 
                 </div>

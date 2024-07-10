@@ -11,7 +11,7 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
-    const {chooseRandom} = useContext(MovieContext) as MovieContextType
+    const {GET_movie_randombygenres, loading, error} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
       console.log('selectedGenres: ', selectedGenres)
@@ -33,7 +33,7 @@ const Filter = () => {
 
     const handleRandom = async(e:any):Promise<void> => {
       e.preventDefault()
-      const randomId = await chooseRandom(selectedGenres)
+      const randomId = await GET_movie_randombygenres(selectedGenres)
       console.log('RANDOM ID: ', randomId)
       navigate(`/movie/${randomId}`)
     }
