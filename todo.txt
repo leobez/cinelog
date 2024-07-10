@@ -1,13 +1,16 @@
-- Layout changes
 - Error and loading states
-- Add animation to prod details and similar movies on movie/:id
-- Componentizar
-- As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req. a nova req ainda ta na página 2.
+
+- As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
+
+- Responsividade
+
+- Only show info that actually exists, if not, show in a box that tells which info isnt available
+    - That might require actually creating interfaces for all shit
+
+- Componentizar (both context, elements and functions inside elements with hooks)
 
 
 
 TODO: 
-    -> Layout and responsivity on all pages.
-    -> Only show info that actually exists, if not, show add in a box that tells which info isnt there
-    -> Games...
+    -> Games
     

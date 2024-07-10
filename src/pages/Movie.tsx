@@ -131,8 +131,8 @@ const Movie = () => {
                         
                         {/* PRODUCTION DETAILS */}
                         <div>
-                            <button className='border-2 border-black w-full p-2 hover:bg-black hover:text-white' onClick={toggleProdDetail}>Production details</button>
-                            <div className='hidden border-2 border-black p-2 mt-1 text-left' id='prod-detail' ref={prodDetail}>
+                            <button className='border-2 border-black w-full p-2 hover:bg-black hover:text-white animate-in' onClick={toggleProdDetail}>Production details</button>
+                            <div className='hidden border-2 border-black p-2 text-left animate-in z-10' id='prod-detail' ref={prodDetail}>
                                 <table className="table">
                                     <tbody>
                                     {/* row 1 */}
