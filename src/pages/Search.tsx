@@ -5,31 +5,49 @@ import MovieContext, { MovieContextType } from "../context/MovieContext"
 
 const Search = () => {
 
-    const {updateListCategory, updateQuery, query, list} = useContext(MovieContext) as MovieContextType
+    const {GET_movies_byquery, loading, error} = useContext(MovieContext) as MovieContextType
 
-    const [q, setQ] = useState<string|null>(null)
+    const [list, setList] = useState<any[]>([])
+    const [page, setPage] = useState<number>(1)
+
+    // When params change, resetList to [] and page to 1
     const [params, setParams] = useSearchParams()
 
     useEffect(() => {
-        console.log(params.get('q'))
-        setQ(params.get('q'))
-    }, [params])
-    
-    useEffect(() => {
-        updateQuery(q)
-    }, [q])
+        
+        const ASYNC_GET_movies_byquery = async() => {
 
-    useEffect(() => {
-        console.log('query: ', query)
-        updateListCategory('by_query')
-    }, [query])
+            const query = params.get('q')
+            if (!query) return;
+
+            const l = await GET_movies_byquery(page, query)
+
+            if (l.length === 0) {
+            console.log('no elements in list')
+            return;
+            }
+
+            // Inserting into list for first time
+            if (list.length === 0) {
+              setList(l)
+            } else {
+              setList(prev => [...prev, ...l])
+            }
+        }
+        
+        ASYNC_GET_movies_byquery()
+
+    },[page, params])
+
+    const updatePage = () => {
+      setPage(prev => prev+1)
+    }
 
     return (
-        <>
-         {list.length > 0 &&
-          <MovieList movieList={list}/>
+      <>
+        {list && list.length > 0 &&
+          <MovieList movieList={list} updatePage={updatePage}/>
         }
-        {/* else ... */}
       </>
     )
 }

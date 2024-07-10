@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react"
+import { useContext, useEffect, useRef } from "react"
 import MovieCard from "./MovieCard"
+import MovieContext, { MovieContextType } from "../context/MovieContext"
 
 type Props = {
     movieList: any[];
@@ -7,6 +8,8 @@ type Props = {
 }
 
 const MovieList = ({movieList, updatePage}: Props) => { 
+
+    const {} = useContext(MovieContext) as MovieContextType
 
     const containerRef:any = useRef<HTMLDivElement>()
 
@@ -21,7 +24,7 @@ const MovieList = ({movieList, updatePage}: Props) => {
         updatePage()
     }
 
-    // when user returns to this component, put him into the position that was saved on sessionStorage
+    // when user returns, return to position that was saved on sessionStorage
     useEffect(() => {
 
         // containerRef not loaded yet
