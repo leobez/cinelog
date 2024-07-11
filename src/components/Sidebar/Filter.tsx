@@ -11,7 +11,7 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
-    const {GET_movie_randombygenres, loading} = useContext(MovieContext) as MovieContextType
+    const {GET_movie_randombygenres, loading, loadingRandom} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
       console.log('selectedGenres: ', selectedGenres)
@@ -77,8 +77,29 @@ const Filter = () => {
                     ))}
                 </div>
                 <div className="h-12 flex w-fit gap-1 mt-3">
-                    <button type="submit" className="border-2 border-black px-4 py-1 hover:bg-black hover:text-white cursor-pointer" onClick={handleFilter}> Filter </button>
-                    <button type="submit"  className="border-2 border-black px-4 py-1 hover:bg-black hover:text-white cursor-pointer" onClick={handleRandom}> Random </button>
+
+                    {!loading && !loadingRandom &&
+                      <>
+                        <button type="submit" className="border-2 border-black px-4 py-1 hover:bg-black hover:text-white cursor-pointer" onClick={handleFilter}> 
+                          Filter 
+                        </button>
+                        <button type="submit"  className="border-2 border-black px-4 py-1 hover:bg-black hover:text-white cursor-pointer" onClick={handleRandom}> 
+                          Random 
+                        </button>
+                      </>
+                    }
+
+                    {loadingRandom &&
+                      <>
+                        <button type="submit" className="border-2 border-black px-4 py-1 bg-black text-white cursor-pointer disabled"> 
+                          Filter 
+                        </button>
+                        <button type="submit"  className="border-2 border-black px-4 py-1 bg-black text-white cursor-pointer disabled"> 
+                          Random
+                        </button>
+                      </>
+                    }
+
                 </div>
             </form>
         }

@@ -10,6 +10,7 @@ export type MovieContextType = {
     GET_movie_byid:(id:number)=>Promise<any>;
     GET_movie_randombygenres:(genres:any[])=>Promise<number>; 
     loading:boolean;
+    loadingRandom:boolean;
     error:string|null;
     warning:string|null;
 }
@@ -28,8 +29,13 @@ export const MovieListContextProvider = ({children}:any) => {
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [loadingRandom, setLoadingRandom] = useState<boolean>(false)
     const [error, setError] = useState<string|null>(null)
     const [warning, setWarning] = useState<string|null>(null)
+
+    function sleep(ms:number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     const resetStates = ():void => {
         setLoading(false)
@@ -203,7 +209,6 @@ export const MovieListContextProvider = ({children}:any) => {
     const GET_movies_bygenres = async(page:number, genres:number[]):Promise<any> => {
 
         resetStates()
-        console.log('genres: ', genres)
 
         try {
 
@@ -257,7 +262,6 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                setWarning('No data.')
                 return;
             }
             
@@ -285,6 +289,8 @@ export const MovieListContextProvider = ({children}:any) => {
 
     const GET_movie_byid = async(id:number):Promise<any> => {
 
+        resetStates()
+
         try {
 
             setLoading(true)
@@ -296,28 +302,32 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (!DATA) {
                 setLoading(false)
-                return [];
+                setWarning('No data.')
+                return;
             }
-            setLoading(false)
 
+            setLoading(false)
             return DATA
 
         } catch (error) {
             setLoading(false)
             console.log(error)
-            return [];
+            setError("Something went wrong.")
+            return;
         }
 
     }
 
-    const GET_movie_randombygenres = async(genres:number[]):Promise<number> => {
+    const GET_movie_randombygenres = async(genres:number[]):Promise<any> => {
 
-        // Begin API call
+        resetStates()
+
         try {
 
             let moviePool:any[] = []
 
             setLoading(true)
+            setLoadingRandom(true)
 
             for (let page=1; page<=5; page++) {
 
@@ -343,18 +353,27 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
+            setLoading(false)
+
+            if (moviePool.length === 0) {
+                setWarning('No data.')
+                return;
+            }
+
             const max = (moviePool.length-1)
             const min = 0
             const randomNum = Math.floor(Math.random() * (max - min + 1) + min)
+            await sleep(3000);
 
-            setLoading(false)
+            setLoadingRandom(false)
 
             return moviePool[randomNum].id
 
         } catch {
             setLoading(false)
             console.log(error)
-            return -1;
+            setError("Something went wrong.")
+            return;
         }
     }
 
@@ -370,6 +389,7 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movie_byid,
                     GET_movie_randombygenres,
                     loading,
+                    loadingRandom,
                     error,
                     warning
                 }

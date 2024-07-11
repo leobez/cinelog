@@ -9,28 +9,20 @@ const Movie = () => {
 
     const [movie, setMovie] = useState<any>(null)
     const [similarMovies, setSimilarMovies] = useState<any[]|null>(null)
-    const {GET_movie_byid, GET_movies_similar, loading, error} = useContext(MovieContext) as MovieContextType
+    const {GET_movie_byid, GET_movies_similar} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
 
         const ASYNC_GET_movie_byid_and_similar = async() => {
 
-            const m = await GET_movie_byid(Number(id))
-            const l = await GET_movies_similar(Number(id))
+            const tempMovie = await GET_movie_byid(Number(id))
+            if (!tempMovie) return;
+            setMovie(tempMovie)
 
-            if (!m) {
-              console.log('no movie')
-              return;
-            }
-
-            if (!l) {
-                console.log('no similar movie')
-                return;
-            }
-
-            setMovie(m)
-            setSimilarMovies(l)
-
+            const tempList = await GET_movies_similar(Number(id))
+            if (!tempList) return;
+            setSimilarMovies(tempList)
+            
           }
           
           ASYNC_GET_movie_byid_and_similar()
@@ -53,7 +45,7 @@ const Movie = () => {
     }
 
     if (movie) {
-        
+
         return (
             <div className='flex justify-center flex-col scrollbar-thin border-black gap-4 '>
                 

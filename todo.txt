@@ -1,6 +1,3 @@
-- Error and loading states (still missing movies and similar and random)
-- Filter buttons (use component)
-
 - Define limits: Amount of genres (min and max), size of query (min and max).
 - Responsividade
 - As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
@@ -10,6 +7,3 @@
 
 TODO: 
     -> Games
-    -> Componentizar (both context, elements and functions inside elements with hooks)
-
-    

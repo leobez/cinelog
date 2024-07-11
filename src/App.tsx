@@ -5,13 +5,16 @@ import Home from './pages/Home'
 import Categories from './components/Categories'
 import Popular from './pages/Popular'
 import Upcoming from './pages/Upcoming'
-import Random from './pages/Random'
 import Movie from './pages/Movie'
 import Sidebar from './components/Sidebar/Sidebar'
 import Search from './pages/Search'
 import ByGenre from './pages/ByGenre'
+import { useContext } from 'react'
+import MovieContext, { MovieContextType } from './context/MovieContext'
 
 function App() {
+
+    const {loadingRandom} = useContext(MovieContext) as MovieContextType
 
     return (
       <div className='h-screen flex flex-col pb-2 gap-2'>
@@ -40,15 +43,24 @@ function App() {
                     <Categories/>
                   </div>
 
-                  <Routes>
-                    <Route path='*' element={<div>404</div>}></Route>
-                    <Route path='/' element={<Home/>}></Route> 
-                    <Route path='/popular' element={<Popular/>}></Route>
-                    <Route path='/upcoming' element={<Upcoming/>}></Route>
-                    <Route path='/search' element={<Search/>}></Route>
-                    <Route path='/bygenre' element={<ByGenre/>}></Route> 
-                    <Route path='/movie/:id' element={<Movie/>}></Route>
-                  </Routes> 
+                  {loadingRandom && 
+                    <div className='h-full w-full flex flex-col justify-center items-center gap-4'>
+                      <span className="loading loading-spinner loading-lg"></span>
+                      <p className='font-bold'>Selecting random movie...</p>
+                    </div>
+                  }
+
+                  {!loadingRandom && 
+                    <Routes>
+                      <Route path='*' element={<div>404</div>}></Route>
+                      <Route path='/' element={<Home/>}></Route> 
+                      <Route path='/popular' element={<Popular/>}></Route>
+                      <Route path='/upcoming' element={<Upcoming/>}></Route>
+                      <Route path='/search' element={<Search/>}></Route>
+                      <Route path='/bygenre' element={<ByGenre/>}></Route> 
+                      <Route path='/movie/:id' element={<Movie/>}></Route>
+                    </Routes> 
+                  }
 
                 </div>
 
