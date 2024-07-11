@@ -3,10 +3,9 @@ import MovieCard from "./MovieCard"
 
 type Props = {
     movieList: any[];
-    updatePage:()=>void;
 }
 
-const MovieList = ({movieList, updatePage}: Props) => { 
+const MovieList = ({movieList}: Props) => { 
 
     const containerRef:any = useRef<HTMLDivElement>()
 
@@ -15,10 +14,6 @@ const MovieList = ({movieList, updatePage}: Props) => {
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode
         window.sessionStorage.setItem('scrollPosition', ScrollNode.scrollTop)
         console.log('saving on session storage: ', ScrollNode.scrollTop)
-    }
-
-    const handleLoadMore = ():void => {
-        updatePage()
     }
 
     // when user returns to this component, put him into the position that was saved on sessionStorage
@@ -51,7 +46,6 @@ const MovieList = ({movieList, updatePage}: Props) => {
                     </div>
                 ))}
             </div>
-            <button className="border-2 border-black p-3 hover:bg-black hover:text-white" onClick={handleLoadMore}>Load More</button>
         </>
     )
 }

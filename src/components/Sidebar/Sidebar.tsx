@@ -1,7 +1,12 @@
 import Searchbar from "./Searchbar"
 import Filter from "./Filter"
+import Information from "./Information"
+import { useContext } from "react"
+import MovieContext, { MovieContextType } from "../../context/MovieContext"
 
 const Sidebar = () => {
+
+    const {loading, error, warning} = useContext(MovieContext) as MovieContextType
 
     return (
         <div className="h-full flex flex-col relative">
@@ -14,9 +19,13 @@ const Sidebar = () => {
                 <Filter/>
             </div>
 
-            <div className="absolute bottom-0 h-16 border-t-2 border-black grid place-items-center p-2">
-                Desenvolvido por Leonardo de Souza Bezerra
-                API: TMDB e ??
+            <div className="w-full p-2">
+                <Information loading={loading} error={error} warning={warning}/>
+            </div>
+
+            <div className="absolute bottom-0 border-t-2 border-black grid place-items-center p-2">
+                <p>Desenvolvido por Leonardo de Souza Bezerra</p>
+                <p>API: TMDB e ??</p>
             </div>
 
         </div>

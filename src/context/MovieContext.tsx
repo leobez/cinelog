@@ -1,16 +1,17 @@
 import { createContext, useState } from "react";
 
 export type MovieContextType = {
-    GET_movies_toprated:(page:number)=>Promise<any[]>;
-    GET_movies_popular:(page:number)=>Promise<any[]>;
-    GET_movies_upcoming:(page:number)=>Promise<any[]>;
-    GET_movies_byquery:(page:number, query:string)=>Promise<any[]>;
-    GET_movies_bygenres:(page:number, genres:number[])=>Promise<any[]>;
-    GET_movies_similar:(id:number)=>Promise<any[]>;
+    GET_movies_toprated:(page:number)=>Promise<any>;
+    GET_movies_popular:(page:number)=>Promise<any>;
+    GET_movies_upcoming:(page:number)=>Promise<any>;
+    GET_movies_byquery:(page:number, query:string)=>Promise<any>;
+    GET_movies_bygenres:(page:number, genres:number[])=>Promise<any>;
+    GET_movies_similar:(id:number)=>Promise<any>;
     GET_movie_byid:(id:number)=>Promise<any>;
     GET_movie_randombygenres:(genres:any[])=>Promise<number>; 
     loading:boolean;
-    error:string|null
+    error:string|null;
+    warning:string|null;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
@@ -28,9 +29,18 @@ export const MovieListContextProvider = ({children}:any) => {
 
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<string|null>(null)
+    const [warning, setWarning] = useState<string|null>(null)
 
-    const GET_movies_toprated = async(page:number):Promise<any[]> => {
+    const resetStates = ():void => {
+        setLoading(false)
+        setError(null)
+        setWarning(null)
+    }
+
+    const GET_movies_toprated = async(page:number):Promise<any> => {
         
+        resetStates()
+
         try {
 
             setLoading(true)
@@ -42,32 +52,35 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                return [];
+                setWarning('No data.')
+                return;
             }
             
             // Filtering only for movies that have a poster to show. Add more filter later on.
             let filteredData:any = []
             for (let movie of DATA.results) {
-                if (movie.poster_path) {
+                if (movie.poster_path && movie.overview) {
                     filteredData.push(movie)
                 }
             }
 
             setLoading(false)
             console.log('filteredData: ', filteredData)
-
             return filteredData
 
         } catch (error) {
             setLoading(false)
+            setError("Something went wrong.")
             console.log(error)
-            return [];
+            return;
         }
 
     }
 
-    const GET_movies_popular = async(page:number):Promise<any[]> => {
-        
+    const GET_movies_popular = async(page:number):Promise<any> => {
+
+        resetStates()
+
         try {
 
             setLoading(true)
@@ -79,7 +92,8 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                return [];
+                setWarning('No data.')
+                return;
             }
             
             // Filtering only for movies that have a poster to show. Add more filter later on.
@@ -98,13 +112,16 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            return [];
+            setError("Something went wrong.")
+            return;
         }
 
     }
 
-    const GET_movies_upcoming = async(page:number):Promise<any[]> => {
-        
+    const GET_movies_upcoming = async(page:number):Promise<any> => {
+
+        resetStates()
+
         try {
 
             setLoading(true)
@@ -116,7 +133,8 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                return [];
+                setWarning('No data.')
+                return;
             }
             
             // Filtering only for movies that have a poster to show. Add more filter later on.
@@ -135,13 +153,16 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            return [];
+            setError("Something went wrong.")
+            return;
         }
 
     }
     
-    const GET_movies_byquery = async(page:number, query:string):Promise<any[]> => {
-        
+    const GET_movies_byquery = async(page:number, query:string):Promise<any> => {
+
+        resetStates()
+
         try {
 
             setLoading(true)
@@ -153,7 +174,8 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                return [];
+                setWarning('No data.')
+                return;
             }
             
             // Filtering only for movies that have a poster to show. Add more filter later on.
@@ -172,12 +194,15 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            return [];
+            setError("Something went wrong.")
+            return;
         }
 
     }
 
-    const GET_movies_bygenres = async(page:number, genres:number[]):Promise<any[]> => {
+    const GET_movies_bygenres = async(page:number, genres:number[]):Promise<any> => {
+
+        resetStates()
 
         try {
 
@@ -190,7 +215,8 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                return [];
+                setWarning('No data.')
+                return;
             }
             
             // Filtering only for movies that have a poster to show. Add more filter later on.
@@ -209,7 +235,49 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            return [];
+            setError("Something went wrong.")
+            return;
+        }
+
+    }
+
+    const GET_movies_similar = async(id:number):Promise<any> => {
+
+        resetStates()
+
+        try {
+
+            setLoading(true)
+            const URL = `${URL_SIMILAR}/${id}/similar?api_key=${API_KEY}`
+            const RESULT = await fetch(URL)
+            const DATA = await RESULT.json()
+            console.log('DATA RECEIVED: ', DATA)
+
+            // Validate data
+            if (DATA.results.length === 0) {
+                setLoading(false)
+                setWarning('No data.')
+                return;
+            }
+            
+            // Filtering only for movies that have a poster to show. Add more filter later on.
+            let filteredData:any = []
+            for (let movie of DATA.results) {
+                if (movie.poster_path) {
+                    filteredData.push(movie)
+                }
+            }
+
+            console.log('filteredData: ', filteredData)
+            setLoading(false)
+
+            return filteredData
+
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+            setError("Something went wrong.")
+            return;
         }
 
     }
@@ -232,43 +300,6 @@ export const MovieListContextProvider = ({children}:any) => {
             setLoading(false)
 
             return DATA
-
-        } catch (error) {
-            setLoading(false)
-            console.log(error)
-            return [];
-        }
-
-    }
-
-    const GET_movies_similar = async(id:number):Promise<any[]> => {
-
-        try {
-
-            setLoading(true)
-            const URL = `${URL_SIMILAR}/${id}/similar?api_key=${API_KEY}`
-            const RESULT = await fetch(URL)
-            const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
-
-            // Validate data
-            if (DATA.results.length === 0) {
-                setLoading(false)
-                return [];
-            }
-            
-            // Filtering only for movies that have a poster to show. Add more filter later on.
-            let filteredData:any = []
-            for (let movie of DATA.results) {
-                if (movie.poster_path) {
-                    filteredData.push(movie)
-                }
-            }
-
-            console.log('filteredData: ', filteredData)
-            setLoading(false)
-
-            return filteredData
 
         } catch (error) {
             setLoading(false)
@@ -334,11 +365,12 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movies_upcoming,
                     GET_movies_byquery,
                     GET_movies_bygenres,
-                    GET_movie_byid,
                     GET_movies_similar,
+                    GET_movie_byid,
                     GET_movie_randombygenres,
                     loading,
-                    error
+                    error,
+                    warning
                 }
             }>
 

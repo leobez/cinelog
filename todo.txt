@@ -1,8 +1,9 @@
 - Error and loading states
-
+- fix ByGenre
+- Add on top of movieList what its about (ex: genres: x, y e z OR query: xxxx)
 - As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
-
 - Responsividade
+
 
 - Only show info that actually exists, if not, show in a box that tells which info isnt available
     - That might require actually creating interfaces for all shit
