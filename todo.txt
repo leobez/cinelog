@@ -1,9 +1,10 @@
-- Define limits: Amount of genres (min and max), size of query (min and max).
 - Responsividade
-- As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
-
 - Only show info that actually exists, if not, show in a box that tells which info isnt available
-    - That might require actually creating interfaces for all shit
+
+--/--
+
+- As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
 
 TODO: 
     -> Games
+    -> Add ordering to filter (by date, popularity etc)

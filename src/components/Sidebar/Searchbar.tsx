@@ -13,6 +13,10 @@ const Searchbar = () => {
 
     return (
         <form className="flex gap-1 justify-center items-center h-1/2 w-full" onSubmit={handleSubmit}>
+            
+            <div>
+                <p>Search:</p>
+            </div>
 
             <div className="flex-grow h-10 items-center justify-center">
                 <input type="text" name="searchQuery" id="searchQuery" className="bg-white border-2 border-black h-10 w-full px-1" onChange={(e:any) => setQuery(e.target.value)}/>

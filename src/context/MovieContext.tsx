@@ -33,7 +33,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const [error, setError] = useState<string|null>(null)
     const [warning, setWarning] = useState<string|null>(null)
 
-    function sleep(ms:number) {
+    const sleep = (ms:number) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
@@ -172,6 +172,14 @@ export const MovieListContextProvider = ({children}:any) => {
         try {
 
             setLoading(true)
+            
+            // Validate query
+            if (!query || query.length === 0 || query.length > 50) {
+                setLoading(false)
+                setWarning('Invalid query.')
+                return;
+            }
+
             const URL = `${URL_BYQUERY}/movie?query=${query}&api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
@@ -213,6 +221,15 @@ export const MovieListContextProvider = ({children}:any) => {
         try {
 
             setLoading(true)
+
+            // Validate query
+            if (!genres || genres.length === 0) {
+                console.log('alo')
+                setLoading(false)
+                setWarning('Invalid genres.')
+                return;
+            }
+
             const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()

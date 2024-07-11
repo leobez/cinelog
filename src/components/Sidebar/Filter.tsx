@@ -89,7 +89,7 @@ const Filter = () => {
                       </>
                     }
 
-                    {loadingRandom &&
+                    {loading &&
                       <>
                         <button type="submit" className="border-2 border-black px-4 py-1 bg-black text-white cursor-pointer disabled"> 
                           Filter 
