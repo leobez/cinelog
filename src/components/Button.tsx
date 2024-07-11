@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import MovieContext, { MovieContextType } from "../context/MovieContext";
+
 type Props = {
     text:string;
     loading:boolean;
@@ -6,10 +9,13 @@ type Props = {
 
 const Button = ({text,loading,func}: Props) => {
 
+    const {warning} = useContext(MovieContext) as MovieContextType
+
     return (
         <>
-            {!loading && <button className="border-2 border-black p-3 hover:bg-black hover:text-white" onClick={func}>{text}</button>}
+            {!loading && !warning && <button className="border-2 border-black p-3 hover:bg-black hover:text-white" onClick={func}>{text}</button>}
             {loading && <button className="border-2 border-black p-3 bg-black text-white">Loading...</button>}
+            {warning === 'No data.' && <button className="border-2 border-black p-3 bg-black text-white">No data.</button>}
         </>
     )
 }

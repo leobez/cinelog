@@ -203,6 +203,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const GET_movies_bygenres = async(page:number, genres:number[]):Promise<any> => {
 
         resetStates()
+        console.log('genres: ', genres)
 
         try {
 

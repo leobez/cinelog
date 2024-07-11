@@ -15,6 +15,7 @@ const Upcoming = () => {
       const ASYNC_GET_movies_upcoming = async() => {
 
         const tempList = await GET_movies_upcoming(page)
+        if (!tempList) return;
 
         // Inserting into list for first time
         if (list.length === 0) {
@@ -35,6 +36,9 @@ const Upcoming = () => {
 
     return (
       <>
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
+          UPCOMING MOVIES
+        </div>
         {list && 
           <>
             {list.length > 0 ? (

@@ -15,6 +15,8 @@ const Home = () => {
       const ASYNC_GET_movies_toprated = async() => {
 
         const tempList = await GET_movies_toprated(page)
+        
+        if (!tempList) return;
 
         // Inserting into list for first time
         if (list.length === 0) {
@@ -35,6 +37,9 @@ const Home = () => {
 
     return (
       <>
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
+          TOP RATED MOVIES
+        </div>
         {list && 
           <>
             {list.length > 0 ? (

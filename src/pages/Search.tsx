@@ -28,6 +28,7 @@ const Search = () => {
             if (!query) return;
 
             const tempList = await GET_movies_byquery(page, query)
+            if (!tempList) return;
 
             // Inserting into list for first time
             if (list.length === 0) {
@@ -47,6 +48,11 @@ const Search = () => {
 
     return (
       <>
+
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
+          {params && <>QUERY: </>}
+        </div>
+
         {list && 
           <>
             {list.length > 0 ? (

@@ -15,6 +15,7 @@ const Popular = () => {
       const ASYNC_GET_movies_popular = async() => {
 
         const tempList = await GET_movies_popular(page)
+        if (!tempList) return;
 
         // Inserting into list for first time
         if (list.length === 0) {
@@ -35,6 +36,9 @@ const Popular = () => {
 
     return (
       <>
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
+          POPULAR MOVIES
+        </div>
         {list && 
           <>
             {list.length > 0 ? (

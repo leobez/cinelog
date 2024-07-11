@@ -27,6 +27,8 @@ const ByGenre = () => {
 
             const tempList = await GET_movies_bygenres(page, genresIds)
 
+            if (!tempList) return;
+            
             // Inserting into list for first time
             if (list.length === 0) {
               setList(tempList)
