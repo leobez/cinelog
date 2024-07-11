@@ -11,7 +11,7 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
-    const {GET_movie_randombygenres, loading, error} = useContext(MovieContext) as MovieContextType
+    const {GET_movie_randombygenres, loading} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
       console.log('selectedGenres: ', selectedGenres)
