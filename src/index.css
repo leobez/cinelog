@@ -44,3 +44,7 @@ body {
     background-color: white;
     color: black;
 }
+
+button, input[type="submit"] {
+    transition: 0.2s;
+}

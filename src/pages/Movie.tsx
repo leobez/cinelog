@@ -39,7 +39,7 @@ const Movie = () => {
 
         } else if (classNames.includes('block')) {
             // Make it invisible
-            prodDetail.current.classList.remove('black')
+            prodDetail.current.classList.remove('block')
             prodDetail.current.classList.add('hidden')
         }
     }

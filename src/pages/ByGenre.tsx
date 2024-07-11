@@ -56,7 +56,7 @@ const ByGenre = () => {
     return (
       <>
         <div className="py-3 text-left text-lg border-b-2 mb-2 border-black text-ellipsis overflow-hidden whitespace-nowrap">
-          {params && genres && <>GENRES: {genres.join(',')}</>}
+          {params && genres && <>Genres: {genres.join(',')}</>}
         </div>
 
         {list && 

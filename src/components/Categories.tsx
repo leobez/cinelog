@@ -9,7 +9,7 @@ const Categories = () => {
                 <NavLink 
                     to='/' 
                     id="top_rated" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md hover:text-color03"}> 
+                    className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md hover:text-color03 md:text-sm"}> 
                     Top rated
                 </NavLink>
 

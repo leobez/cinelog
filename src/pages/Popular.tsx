@@ -37,7 +37,7 @@ const Popular = () => {
     return (
       <>
         <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
-          POPULAR MOVIES
+          Popular Movies
         </div>
         {list && 
           <>

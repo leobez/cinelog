@@ -71,9 +71,9 @@ const Filter = () => {
             <form>
                 <div className="grid grid-cols-3 gap-1">
                     {GENRES.map((genre:any) => (
-                        <div key={genre[0]} className="border-2 border-black text-left p-1 text-sm hover:bg-black hover:text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap" id={genre[0]} onClick={toggleGenre}>
+                        <button key={genre[0]} className="border-2 border-black text-left p-1 text-sm hover:bg-black hover:text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap" id={genre[0]} onClick={toggleGenre}>
                             {genre[1]}
-                        </div>
+                        </button>
                     ))}
                 </div>
                 <div className="h-12 flex w-fit gap-1 mt-3">

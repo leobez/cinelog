@@ -1,10 +1,9 @@
 - Responsividade
-- Only show info that actually exists, if not, show in a box that tells which info isnt available
-
---/--
-
 - As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
+- Change from black to color03 maybe (before going for games)
+
 
 TODO: 
     -> Games
-    -> Add ordering to filter (by date, popularity etc)
+    -> Add ordering to filter (by date, popularity etc) 
+    -> Only show info that actually exists, if not, show in a box that tells which info isnt available

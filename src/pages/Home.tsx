@@ -37,8 +37,8 @@ const Home = () => {
 
     return (
       <>
-        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
-          TOP RATED MOVIES
+        <div className="py-3 sm:text-left text-lg border-b-2 mb-2 border-black text-right">
+          Top Rated Movies
         </div>
         {list && 
           <>
@@ -49,7 +49,9 @@ const Home = () => {
             )}
           </>
         }
-        <Button text={'Load more'} loading={loading} func={updatePage}/>
+        <div className="mt-2">
+          <Button text={'Load more'} loading={loading} func={updatePage}/>
+        </div>
       </>
     )
 }

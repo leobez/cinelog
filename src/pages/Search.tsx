@@ -48,7 +48,7 @@ const Search = () => {
       <>
 
         <div className="py-3 text-left text-lg border-b-2 mb-2 border-black text-ellipsis overflow-hidden whitespace-nowrap">
-          {params && <>QUERY: {params.get('q')}</>}
+          {params && <>Query: {params.get('q')}</>}
         </div>
 
         {list && 
