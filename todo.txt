@@ -1,5 +1,6 @@
-- Add on top of movieList what its about (ex: genres: x, y e z OR query: xxxx)
+- Filter buttons (use component)
 - Error and loading states (still missing movies and similar)
+- Define limits: Amount of genres (min and max), size of query (min and max).
 - Responsividade
 - As vezes, quando faz uma requisição, vai pra página 2 e então faz outra req.  e essa nova req ta na página 2
 

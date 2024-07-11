@@ -20,8 +20,6 @@ const Search = () => {
 
     useEffect(() => {
         
-        if (!list) return;
-
         const ASYNC_GET_movies_byquery = async() => {
 
             const query = params.get('q')
@@ -40,7 +38,7 @@ const Search = () => {
         
         ASYNC_GET_movies_byquery()
 
-    },[page, params, list])
+    },[page, params])
 
     const updatePage = () => {
       setPage(prev => prev+1)
@@ -49,8 +47,8 @@ const Search = () => {
     return (
       <>
 
-        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
-          {params && <>QUERY: </>}
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black text-ellipsis overflow-hidden whitespace-nowrap">
+          {params && <>QUERY: {params.get('q')}</>}
         </div>
 
         {list && 

@@ -3,14 +3,22 @@ import MovieContext, { MovieContextType } from "../context/MovieContext"
 import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
 import Button from "../components/Button"
+import { TMDB_GENRES } from "../data/TMDB_GENRES"
 
 const ByGenre = () => {
 
     const {GET_movies_bygenres, loading} = useContext(MovieContext) as MovieContextType
-
+  
+    const [genres, setGenres] = useState<string[]>([])
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)
     const [params] = useSearchParams()
+
+    useEffect(() => {
+      const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
+      const tempList:any = genresIds?.map((id:any)=>TMDB_GENRES[id])
+      setGenres(tempList)
+    }, [TMDB_GENRES, params])
 
     // When params change, reset list to [] and page to 1
     useEffect(() => {
@@ -47,6 +55,10 @@ const ByGenre = () => {
 
     return (
       <>
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black text-ellipsis overflow-hidden whitespace-nowrap">
+          {params && genres && <>GENRES: {genres.join(',')}</>}
+        </div>
+
         {list && 
           <>
             {list.length > 0 ? (
