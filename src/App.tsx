@@ -11,6 +11,8 @@ import Search from './pages/Search'
 import ByGenre from './pages/ByGenre'
 import { useContext, useRef } from 'react'
 import MovieContext, { MovieContextType } from './context/MovieContext'
+import HiddenSidebar from './components/Sidebar/HiddenSidebar'
+import HiddenMenuButton from './components/HiddenMenuButton'
 
 function App() {
 
@@ -62,23 +64,14 @@ function App() {
 
                 {/* HIDDEN SIDEBAR */}
                 <div className='h-screen border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] lg:hidden block pt-[100px] animate-in' ref={hiddenMenu}>
-
-                  <div className='bg-white'>
-                    <Categories/>
-                  </div>
-
-                  <Sidebar/>
-
+                  <HiddenSidebar/>
                 </div>
               
                 {/* HIDDEN BUTTON  */}
-                <button className='fixed left-2 z-30 bg-white rounded-full p-4 border-2 border-black flex lg:hidden hover:bg-black flex-col items-center justify-center gap-2 hover:bg-gray-200' onClick={toggleHiddenMenu}>
-                  <span className='rounded-md w-8 h-1 bg-black'></span>
-                  <span className='rounded-md w-8 h-1 bg-black'></span>
-                  <span className='rounded-md w-8 h-1 bg-black'></span>
-                </button>
-                
+                <HiddenMenuButton func={toggleHiddenMenu}/>
+
                 {/* OVERLAY */}
+                
                 <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 lg:hidden block' ref={overlay}/>
 
                 {/* CONTENT */}

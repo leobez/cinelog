@@ -37,7 +37,7 @@ body {
 }
 
 .selected {
-    background-color: black;
+    background-color: var(--color03);
     color: white;
 }
 .unselected {

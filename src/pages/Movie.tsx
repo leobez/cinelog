@@ -2,6 +2,9 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import MovieCard from '../components/MovieCard'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
+import ImageSlider from '../components/Imageslider'
+
+const POSTER_URL = import.meta.env.VITE_POSTER_URL
 
 const Movie = () => {
     
@@ -9,6 +12,7 @@ const Movie = () => {
 
     const [movie, setMovie] = useState<any>(null)
     const [similarMovies, setSimilarMovies] = useState<any[]|null>(null)
+    const [similarMoviesPoster, setSimilarMoviesPosters] = useState<any[]|null>(null) //
     const {GET_movie_byid, GET_movies_similar} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
@@ -22,7 +26,14 @@ const Movie = () => {
             const tempList = await GET_movies_similar(Number(id))
             if (!tempList) return;
             setSimilarMovies(tempList)
-            
+
+            const tempPosterList:any[] = []
+
+            tempList.map((movie:any) => {
+                tempPosterList.push(`${POSTER_URL}/${movie.poster_path}`)
+            })
+            setSimilarMoviesPosters(tempPosterList)
+            console.log('tempPosterList: ', tempPosterList)
           }
           
           ASYNC_GET_movie_byid_and_similar()
@@ -193,18 +204,9 @@ const Movie = () => {
                 <div className='w-full h-[1px] bg-color05 my-2'/>
 
                 {/* SIMILAR MOVIES */}
-                {similarMovies && similarMovies.length > 0 && 
-                    <div className='self-start mb-10 w-full'>
-                        <p className='text-left my-2'>Similar movies:</p>
-                        <div className="overflow-x-auto scrollbar-thin w-full h-80 flex gap-1">
-                            {similarMovies.map((similarMovie:any) => (
-                                <div className='h-full' key={`c_${similarMovie.id}`}>
-                                    <MovieCard movie={similarMovie}/>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                }
+                {similarMovies && <ImageSlider movies={similarMovies}/>}
+                <div className='mb-5'/>
+
 
             </div>
         )

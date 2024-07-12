@@ -68,7 +68,9 @@ const ByGenre = () => {
             )}
           </>
         }
-        <Button text={'Load more'} loading={loading} func={updatePage}/>
+        <div className='mt-2'>
+          <Button text={'Load more'} loading={loading} func={updatePage}/>
+        </div>
       </>
     )
 }

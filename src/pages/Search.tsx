@@ -14,8 +14,9 @@ const Search = () => {
 
     // When params change, reset list to [] and page to 1
     useEffect(() => {
-      setList([])
+      console.log('reseting page to 1')
       setPage(1)
+      setList([])
     }, [params])
 
     useEffect(() => {
