@@ -36,7 +36,7 @@ const Upcoming = () => {
 
     return (
       <>
-        <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
+        <div className="py-3 text-left text-lg border-b-2 mb-2 border-color05">
           Upcoming Movies
         </div>
         {list &&

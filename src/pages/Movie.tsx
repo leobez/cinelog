@@ -47,13 +47,13 @@ const Movie = () => {
     if (movie) {
 
         return (
-            <div className='flex justify-center flex-col scrollbar-thin border-black gap-4'>
+            <div className='flex justify-center flex-col scrollbar-thin border-color05 gap-4'>
                 
                 {/* MOVIE */}
                 <div className='flex justify-center gap-4 '>
 
                     {/* POSTER */}
-                    <div className='flex w-3/6 border-black border-2'>
+                    <div className='flex w-3/6 max-h-[700px] border-color05 border-2'>
                         <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover' />
                     </div>
 
@@ -63,7 +63,7 @@ const Movie = () => {
                         {/* TITLE */}
                         <div className='text-left w-full'>
                             <p title='Title'>{movie.title}</p>
-                            <div className='w-full h-[1px] bg-black my-2'></div>
+                            <div className='w-full h-[1px] bg-color05 my-2'></div>
                             <p title='Original title'>{movie.original_title}</p>
                         </div>
 
@@ -123,8 +123,8 @@ const Movie = () => {
                         
                         {/* PRODUCTION DETAILS */}
                         <div>
-                            <button className='border-2 border-black w-full p-2 hover:bg-black hover:text-white animate-in' onClick={toggleProdDetail}>Production details</button>
-                            <div className='hidden border-2 border-black p-2 text-left animate-in z-10' id='prod-detail' ref={prodDetail}>
+                            <button className='border-2 border-color05 w-full p-2 hover:bg-color05 hover:text-white animate-in' onClick={toggleProdDetail}>Production details</button>
+                            <div className='hidden border-2 border-color05 p-2 text-left animate-in z-10' id='prod-detail' ref={prodDetail}>
                                 <table className="table">
                                     <tbody>
                                     {/* row 1 */}
@@ -190,7 +190,7 @@ const Movie = () => {
 
                 </div>
 
-                <div className='w-full h-[1px] bg-black my-2'/>
+                <div className='w-full h-[1px] bg-color05 my-2'/>
 
                 {/* SIMILAR MOVIES */}
                 {similarMovies && similarMovies.length > 0 && 

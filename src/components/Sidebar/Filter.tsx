@@ -71,7 +71,7 @@ const Filter = () => {
             <form>
                 <div className="grid grid-cols-3 gap-1">
                     {GENRES.map((genre:any) => (
-                        <button key={genre[0]} className="border-2 border-black text-left p-1 text-sm hover:bg-black hover:text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap" id={genre[0]} onClick={toggleGenre}>
+                        <button key={genre[0]} className="border-2 border-color05 text-left p-1 text-sm hover:bg-color05 hover:text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap" id={genre[0]} onClick={toggleGenre}>
                             {genre[1]}
                         </button>
                     ))}
@@ -80,10 +80,10 @@ const Filter = () => {
 
                     {!loading && !loadingRandom &&
                       <>
-                        <button type="submit" className="border-2 border-black px-4 py-1 hover:bg-black hover:text-white cursor-pointer" onClick={handleFilter}> 
+                        <button type="submit" className="border-2 border-color05 px-4 py-1 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleFilter}> 
                           Filter 
                         </button>
-                        <button type="submit"  className="border-2 border-black px-4 py-1 hover:bg-black hover:text-white cursor-pointer" onClick={handleRandom}> 
+                        <button type="submit"  className="border-2 border-color05 px-4 py-1 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleRandom}> 
                           Random 
                         </button>
                       </>
@@ -91,10 +91,10 @@ const Filter = () => {
 
                     {loading &&
                       <>
-                        <button type="submit" className="border-2 border-black px-4 py-1 bg-black text-white cursor-pointer disabled"> 
+                        <button type="submit" className="border-2 border-color05 px-4 py-1 bg-color05 text-white cursor-pointer disabled"> 
                           Filter 
                         </button>
-                        <button type="submit"  className="border-2 border-black px-4 py-1 bg-black text-white cursor-pointer disabled"> 
+                        <button type="submit"  className="border-2 border-color05 px-4 py-1 bg-color05 text-white cursor-pointer disabled"> 
                           Random
                         </button>
                       </>

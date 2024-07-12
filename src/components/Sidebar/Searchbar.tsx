@@ -19,11 +19,11 @@ const Searchbar = () => {
             </div>
 
             <div className="flex-grow h-10 items-center justify-center">
-                <input type="text" name="searchQuery" id="searchQuery" className="bg-white border-2 border-black h-10 w-full px-1" onChange={(e:any) => setQuery(e.target.value)}/>
+                <input type="text" name="searchQuery" id="searchQuery" className="bg-white border-2 border-color05 h-10 w-full px-1" onChange={(e:any) => setQuery(e.target.value)}/>
             </div>
 
             <div className="w-10 h-10">
-                <input type="submit" value="P" className="border-2 border-black h-full w-full hover:bg-black hover:text-white cursor-pointer" />
+                <input type="submit" value="P" className="border-2 border-color05 h-full w-full hover:bg-color05 hover:text-white cursor-pointer" />
             </div>
 
         </form>

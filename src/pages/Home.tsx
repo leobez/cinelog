@@ -37,7 +37,7 @@ const Home = () => {
 
     return (
       <>
-        <div className="py-3 sm:text-left text-lg border-b-2 mb-2 border-black text-right">
+        <div className="py-3 sm:text-left text-lg border-b-2 mb-2 border-color05 text-right">
           Top Rated Movies
         </div>
         {list &&
