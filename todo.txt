@@ -1,11 +1,11 @@
--> Add animation to movie/:id (prod details and similar movies)
--> Add tutorial or message boxes to show how to use each functionality
--> Only show info that actually exists, if not, show in a box that tells which info isnt available
+-> Fix loading states (especially on random) and loading button flashing on screen and update information component
+-> When going from movie to movie, show loading screen and only show new info when its actually fully loaded 
 -> Responsividade -> movie/:id
-
+-> Only show info that actually exists, if not, show in a box that tells which info isnt available (put one on top of movie and one on top of prod detail)
 
 
 TODO: 
     -> Games
     -> Add ordering to filter (by date, popularity etc) 
     -> Dark mode
+    -> Add tutorial or message boxes to show how to use each functionality
