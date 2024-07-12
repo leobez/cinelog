@@ -40,7 +40,7 @@ const Home = () => {
         <div className="py-3 sm:text-left text-lg border-b-2 mb-2 border-black text-right">
           Top Rated Movies
         </div>
-        {list && 
+        {list &&
           <>
             {list.length > 0 ? (
               <MovieList movieList={list}/>

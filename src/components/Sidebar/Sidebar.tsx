@@ -23,9 +23,9 @@ const Sidebar = () => {
                 <Information loading={loading} error={error} warning={warning}/>
             </div>
 
-            <div className="absolute bottom-0 border-t-2 border-black grid place-items-center p-2">
-                <p>Desenvolvido por Leonardo de Souza Bezerra</p>
-                <p>API: TMDB e ??</p>
+            <div className="absolute bottom-0 border-t-2 border-black grid place-items-center p-2 w-full">
+                <p>Developed by Leonardo de Souza Bezerra</p>
+                <p>API's used: TMDB e ??</p>
             </div>
 
         </div>

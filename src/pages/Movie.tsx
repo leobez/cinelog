@@ -47,13 +47,13 @@ const Movie = () => {
     if (movie) {
 
         return (
-            <div className='flex justify-center flex-col scrollbar-thin border-black gap-4 '>
+            <div className='flex justify-center flex-col scrollbar-thin border-black gap-4'>
                 
                 {/* MOVIE */}
                 <div className='flex justify-center gap-4 '>
 
                     {/* POSTER */}
-                    <div className='h-[700px] flex w-3/6 border-black border-2'>
+                    <div className='flex w-3/6 border-black border-2'>
                         <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover' />
                     </div>
 
@@ -190,7 +190,7 @@ const Movie = () => {
 
                 </div>
 
-                <div className='w-full h-[1px] bg-black my-2'></div>
+                <div className='w-full h-[1px] bg-black my-2'/>
 
                 {/* SIMILAR MOVIES */}
                 {similarMovies && similarMovies.length > 0 && 
@@ -198,7 +198,7 @@ const Movie = () => {
                         <p className='text-left my-2'>Similar movies:</p>
                         <div className="overflow-x-auto scrollbar-thin w-full h-80 flex gap-1">
                             {similarMovies.map((similarMovie:any) => (
-                                <div className='h-full min-w-56' key={`c_${similarMovie.id}`}>
+                                <div className='h-full' key={`c_${similarMovie.id}`}>
                                     <MovieCard movie={similarMovie}/>
                                 </div>
                             ))}

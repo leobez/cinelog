@@ -39,7 +39,7 @@ const Popular = () => {
         <div className="py-3 text-left text-lg border-b-2 mb-2 border-black">
           Popular Movies
         </div>
-        {list && 
+        {list &&
           <>
             {list.length > 0 ? (
               <MovieList movieList={list}/>
@@ -48,7 +48,9 @@ const Popular = () => {
             )}
           </>
         }
-        <Button text={'Load more'} loading={loading} func={updatePage}/>
+        <div className='mt-2'>
+          <Button text={'Load more'} loading={loading} func={updatePage}/>
+        </div>
       </>
     )
 }

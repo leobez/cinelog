@@ -56,7 +56,7 @@ function App() {
               <BrowserRouter>
 
                 {/* SIDE-BAR */}
-                <div className='w-4/12 top-0 sticky h-screen border-black border-2 hidden lg:block'>
+                <div className='w-4/12 top-0 sticky h-screen border-black border-2 hidden lg:block bg-white'>
                   <Sidebar/>
                 </div>
 

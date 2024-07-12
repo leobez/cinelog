@@ -58,7 +58,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
             
@@ -98,7 +98,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
             
@@ -139,7 +139,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
             
@@ -188,7 +188,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
             
@@ -238,7 +238,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
             
@@ -319,7 +319,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (!DATA) {
                 setLoading(false)
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
 
@@ -373,7 +373,7 @@ export const MovieListContextProvider = ({children}:any) => {
             setLoading(false)
 
             if (moviePool.length === 0) {
-                setWarning('No data.')
+                setWarning('No data')
                 return;
             }
 

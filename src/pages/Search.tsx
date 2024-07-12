@@ -51,7 +51,7 @@ const Search = () => {
           {params && <>Query: {params.get('q')}</>}
         </div>
 
-        {list && 
+        {list &&
           <>
             {list.length > 0 ? (
               <MovieList movieList={list}/>
@@ -60,7 +60,9 @@ const Search = () => {
             )}
           </>
         }
-        <Button text={'Load more'} loading={loading} func={updatePage}/>
+        <div className='mt-2'>
+          <Button text={'Load more'} loading={loading} func={updatePage}/>
+        </div>
       </>
     )
 }
