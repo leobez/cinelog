@@ -7,6 +7,8 @@ import { useInitialLoadingMovie } from '../hooks/useInitialLoadingMovie'
 
 const Movie = () => {
     
+    // TODO: VALIDATE ALL INFO FROM MOVIE -> ONLY SHOW THE ONES THAT ARE REAL. OTHERS JUST PUT SEPARATE IN A BOX
+
     const {id} = useParams()
 
     const [movie, setMovie] = useState<any>(null)
@@ -62,7 +64,7 @@ const Movie = () => {
 
     return (
 
-        <div className='flex justify-center flex-col scrollbar-thin border-color05 gap-4 overflow-hidden'>
+        <div className='flex items-center flex-col scrollbar-thin border-color05 gap-4 overflow-hidden h-full'>
             
             {/* MOVIE */}
             <div className='flex justify-center gap-4 '>
@@ -142,7 +144,7 @@ const Movie = () => {
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-20 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail} >
+                            <div className='h-72 w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail} >
                                 <table className="table">
                                     <tbody>
                                     {/* row 1 */}
@@ -212,8 +214,8 @@ const Movie = () => {
             <div className='w-full h-[1px] bg-color05 my-2'/>
 
             {/* SIMILAR MOVIES */}
-            {similarMovies && 
-                <div>  
+            {similarMovies && similarMovies.length > 0 &&
+                <div className='w-full'>  
                     <div className='text-left mb-2'>Similar movies:</div>  
                     <div className='mb-5'>
                         <ImageSlider movies={similarMovies}/>

@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import MovieContext, { MovieContextType } from '../../context/MovieContext'
 
 const Searchbar = () => {
 
     const [query, setQuery] = useState<string|null>(null)
     const navigate = useNavigate()
 
+    const {updateWarning} = useContext(MovieContext) as MovieContextType
+
     const handleSubmit = (e:any):void => {
         e.preventDefault()
+        if (!query || query.length === 0) {
+            updateWarning('Invalid query')            
+            return;
+        }
         return navigate(`/search?q=${query}`)
     }
 

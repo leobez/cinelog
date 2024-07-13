@@ -11,7 +11,7 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
-    const {loading} = useContext(MovieContext) as MovieContextType
+    const {loading, updateWarning} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
       console.log('selectedGenres: ', selectedGenres)
@@ -28,12 +28,20 @@ const Filter = () => {
     const handleFilter = (e:any):void => {
       e.preventDefault()
       const args = selectedGenres.join(',')
+      if (!args || args.length === 0) {
+        updateWarning('Genre invalid')
+        return;
+      }
       navigate(`/bygenre?genres=${args}`)
     }
 
     const handleRandom = async(e:any):Promise<void> => {
       e.preventDefault()
       const args = selectedGenres.join(',')
+      if (!args || args.length === 0) {
+        updateWarning('Genre invalid')
+        return;
+      }
       navigate(`/random?genres=${args}`)
     }
 

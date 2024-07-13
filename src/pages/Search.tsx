@@ -8,7 +8,7 @@ import { useInitialLoading } from "../hooks/useInitialLoading"
 
 const Search = () => {
 
-    const {GET_movies_byquery, loading} = useContext(MovieContext) as MovieContextType
+    const {GET_movies_byquery, loading, updateWarning} = useContext(MovieContext) as MovieContextType
 
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)

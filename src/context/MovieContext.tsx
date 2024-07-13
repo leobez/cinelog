@@ -12,6 +12,7 @@ export type MovieContextType = {
     loading:boolean;
     error:string|null;
     warning:string|null;
+    updateWarning:(message:string)=>void;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
@@ -27,9 +28,9 @@ export const MovieListContextProvider = ({children}:any) => {
     const URL_BYID = import.meta.env.VITE_FIND_BY_ID
     const API_KEY = import.meta.env.VITE_API_KEY
 
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<string|null>(null)
-    const [warning, setWarning] = useState<string|null>(null)
+    const [loading,     setLoading] = useState<boolean>(false)
+    const [error,       setError] = useState<string|null>(null)
+    const [warning,     setWarning] = useState<string|null>(null)
 
     const sleep = (ms:number) => {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -170,9 +171,10 @@ export const MovieListContextProvider = ({children}:any) => {
         try {
 
             setLoading(true)
-            
+
             // Validate query
-            if (!query || query.length === 0 ) {
+            if (!query || query.length === 0) {
+                console.log('invalid query')
                 setLoading(false)
                 setWarning('Invalid query')
                 return;
@@ -359,7 +361,7 @@ export const MovieListContextProvider = ({children}:any) => {
                     break;
                 }
 
-                // Filtering only for movies that have a poster to show. Later filter more information.
+                // Filtering only for movies that have a poster to show.
                 let filteredData:any = []
                 for (let movie of DATA.results) {
                     if (movie.poster_path) {
@@ -371,6 +373,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     moviePool.push(movie)
                 }
             }
+            
+            console.log('MOVIE POOL: ', moviePool)
 
             if (moviePool.length === 0) {
                 setLoading(false)
@@ -395,6 +399,18 @@ export const MovieListContextProvider = ({children}:any) => {
         }
     }
 
+    const updateLoading = (state:boolean):void => {
+        setLoading(state)
+    }
+
+    const updateError = (message:string):void => {
+        setError(message)
+    }
+
+    const updateWarning = (message:string):void => {
+        setWarning(message)
+    }
+
     return (
         <MovieContext.Provider value={
                 {
@@ -408,7 +424,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movie_randombygenres,
                     loading,
                     error,
-                    warning
+                    warning,
+                    updateWarning
                 }
             }>
 
