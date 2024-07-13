@@ -8,9 +8,8 @@ export type MovieContextType = {
     GET_movies_bygenres:(page:number, genres:number[])=>Promise<any>;
     GET_movies_similar:(id:number)=>Promise<any>;
     GET_movie_byid:(id:number)=>Promise<any>;
-    GET_movie_randombygenres:(genres:any[])=>Promise<number>; 
+    GET_movie_randombygenres:(genres:number[])=>Promise<number>; 
     loading:boolean;
-    loadingRandom:boolean;
     error:string|null;
     warning:string|null;
 }
@@ -62,7 +61,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
             
-            // Filtering only for movies that have a poster to show. Add more filter later on.
+            // Filtering only for movies that have a poster to show. 
             let filteredData:any = []
             for (let movie of DATA.results) {
                 if (movie.poster_path && movie.overview) {
@@ -76,7 +75,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             console.log(error)
             return;
         }
@@ -102,7 +101,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
             
-            // Filtering only for movies that have a poster to show. Add more filter later on.
+            // Filtering only for movies that have a poster to show.
             let filteredData:any = []
             for (let movie of DATA.results) {
                 if (movie.poster_path) {
@@ -118,7 +117,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
 
@@ -143,7 +142,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
             
-            // Filtering only for movies that have a poster to show. Add more filter later on.
+            // Filtering only for movies that have a poster to show.
             let filteredData:any = []
             for (let movie of DATA.results) {
                 if (movie.poster_path) {
@@ -159,7 +158,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
 
@@ -174,9 +173,14 @@ export const MovieListContextProvider = ({children}:any) => {
             setLoading(true)
             
             // Validate query
-            if (!query || query.length === 0 || query.length > 50) {
+            if (!query || query.length === 0 ) {
                 setLoading(false)
-                setWarning('Invalid query.')
+                setWarning('Invalid query')
+                return;
+            }
+            if (query.length > 40) {
+                setLoading(false)
+                setWarning('Max. query length is 40')
                 return;
             }
 
@@ -192,7 +196,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
             
-            // Filtering only for movies that have a poster to show. Add more filter later on.
+            // Filtering only for movies that have a poster to show.
             let filteredData:any = []
             for (let movie of DATA.results) {
                 if (movie.poster_path) {
@@ -208,7 +212,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
 
@@ -223,10 +227,9 @@ export const MovieListContextProvider = ({children}:any) => {
             setLoading(true)
 
             // Validate query
-            if (!genres || genres.length === 0) {
-                console.log('alo')
+            if (!genres || (genres.length === 1 && genres[0]===0)) {
                 setLoading(false)
-                setWarning('Invalid genres.')
+                setWarning('Invalid genres')
                 return;
             }
 
@@ -242,7 +245,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
             
-            // Filtering only for movies that have a poster to show. Add more filter later on.
+            // Filtering only for movies that have a poster to show.
             let filteredData:any = []
             for (let movie of DATA.results) {
                 if (movie.poster_path) {
@@ -258,7 +261,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
 
@@ -282,7 +285,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
             
-            // Filtering only for movies that have a poster to show. Add more filter later on.
+            // Filtering only for movies that have a poster to show.
             let filteredData:any = []
             for (let movie of DATA.results) {
                 if (movie.poster_path) {
@@ -298,7 +301,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
 
@@ -329,7 +332,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
 
@@ -344,12 +347,12 @@ export const MovieListContextProvider = ({children}:any) => {
             let moviePool:any[] = []
 
             setLoading(true)
-            setLoadingRandom(true)
 
             for (let page=1; page<=5; page++) {
 
                 const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
                 const RESULT = await fetch(URL)
+                console.log('RESULT: ', RESULT)
                 const DATA = await RESULT.json()
 
                 // Last page reached
@@ -370,9 +373,8 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
-            setLoading(false)
-
             if (moviePool.length === 0) {
+                setLoading(false)
                 setWarning('No data')
                 return;
             }
@@ -382,14 +384,14 @@ export const MovieListContextProvider = ({children}:any) => {
             const randomNum = Math.floor(Math.random() * (max - min + 1) + min)
             await sleep(2000);
 
-            setLoadingRandom(false)
+            setLoading(false)
 
             return moviePool[randomNum].id
 
         } catch {
             setLoading(false)
             console.log(error)
-            setError("Something went wrong.")
+            setError("Something went wrong")
             return;
         }
     }
@@ -406,7 +408,6 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movie_byid,
                     GET_movie_randombygenres,
                     loading,
-                    loadingRandom,
                     error,
                     warning
                 }

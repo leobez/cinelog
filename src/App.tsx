@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -9,14 +9,12 @@ import Movie from './pages/Movie'
 import Sidebar from './components/Sidebar/Sidebar'
 import Search from './pages/Search'
 import ByGenre from './pages/ByGenre'
-import { useContext, useRef } from 'react'
-import MovieContext, { MovieContextType } from './context/MovieContext'
+import { useRef } from 'react'
 import HiddenSidebar from './components/Sidebar/HiddenSidebar'
 import HiddenMenuButton from './components/HiddenMenuButton'
+import Random from './pages/Random'
 
 function App() {
-
-    const {loadingRandom} = useContext(MovieContext) as MovieContextType
 
     const hiddenMenu:any = useRef()
     const overlay:any = useRef()
@@ -71,7 +69,6 @@ function App() {
                 <HiddenMenuButton func={toggleHiddenMenu}/>
 
                 {/* OVERLAY */}
-                
                 <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 lg:hidden block' ref={overlay}/>
 
                 {/* CONTENT */}
@@ -81,26 +78,18 @@ function App() {
                     <Categories/>
                   </div>
 
-                  {loadingRandom && 
-                    <div className='h-full w-full flex flex-col justify-center items-center gap-4'>
-                      <span className="loading loading-spinner loading-lg"></span>
-                      <p className='font-bold'>Selecting random movie...</p>
-                    </div>
-                  }
-
-                  <div className='w-full'>
-                    {!loadingRandom && 
-                      <Routes>
-                        <Route path='*' element={<div>404</div>}></Route>
-                        <Route path='/' element={<Home/>}></Route> 
-                        <Route path='/popular' element={<Popular/>}></Route>
-                        <Route path='/upcoming' element={<Upcoming/>}></Route>
-                        <Route path='/search' element={<Search/>}></Route>
-                        <Route path='/bygenre' element={<ByGenre/>}></Route> 
-                        <Route path='/movie/:id' element={<Movie/>}></Route>
-                      </Routes> 
-                    }
-                  </div>
+                  <div className='w-full h-full'>
+                    <Routes>
+                      <Route path='*'           element={<div>404</div>}></Route>
+                      <Route path='/'           element={<Home/>}></Route> 
+                      <Route path='/popular'    element={<Popular/>}></Route>
+                      <Route path='/upcoming'   element={<Upcoming/>}></Route>
+                      <Route path='/search'     element={<Search/>}></Route>
+                      <Route path='/bygenre'    element={<ByGenre/>}></Route> 
+                      <Route path='/movie/:id'  element={<Movie/>}></Route>
+                      <Route path='/random'  element={<Random/>}></Route>
+                    </Routes>
+                  </div>  
 
                 </div>
 

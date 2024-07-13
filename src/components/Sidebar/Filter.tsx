@@ -11,7 +11,7 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
-    const {GET_movie_randombygenres, loading, loadingRandom} = useContext(MovieContext) as MovieContextType
+    const {loading} = useContext(MovieContext) as MovieContextType
 
     useEffect(() => {
       console.log('selectedGenres: ', selectedGenres)
@@ -33,9 +33,8 @@ const Filter = () => {
 
     const handleRandom = async(e:any):Promise<void> => {
       e.preventDefault()
-      const randomId = await GET_movie_randombygenres(selectedGenres)
-      console.log('RANDOM ID: ', randomId)
-      navigate(`/movie/${randomId}`)
+      const args = selectedGenres.join(',')
+      navigate(`/random?genres=${args}`)
     }
 
     // ADD LIMIT TO GENRES THAT CAN BE SELECTED
@@ -78,7 +77,7 @@ const Filter = () => {
                 </div>
                 <div className="h-12 flex w-fit gap-1 mt-3">
 
-                    {!loading && !loadingRandom &&
+                    {!loading &&
                       <>
                         <button type="submit" className="border-2 border-color05 px-4 py-1 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleFilter}> 
                           Filter 
@@ -89,7 +88,7 @@ const Filter = () => {
                       </>
                     }
 
-                    {loadingRandom || loading &&
+                    {loading &&
                       <>
                         <button type="submit" className="border-2 border-color05 px-4 py-1 bg-color05 text-white cursor-pointer disabled"> 
                           Filter 

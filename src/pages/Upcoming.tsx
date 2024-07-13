@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
 import MovieList from '../components/MovieList'
 import Button from '../components/Button'
+import Loading from '../components/Loading'
+import { useInitialLoading } from '../hooks/useInitialLoading'
 
 const Upcoming = () => {
 
@@ -9,6 +11,9 @@ const Upcoming = () => {
 
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)
+
+    // Initial loading
+    const {initialLoading} = useInitialLoading(list) 
 
     useEffect(() => {
 
@@ -32,6 +37,12 @@ const Upcoming = () => {
 
     const updatePage = () => {
       setPage(prev => prev+1)
+    }
+
+    if (initialLoading) {
+      return (
+        <Loading message="Initial loading ..."/>
+      )
     }
 
     return (

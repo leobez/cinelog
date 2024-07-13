@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
 import Button from "../components/Button"
 import { TMDB_GENRES } from "../data/TMDB_GENRES"
+import Loading from "../components/Loading"
+import { useInitialLoading } from "../hooks/useInitialLoading"
 
 const ByGenre = () => {
 
@@ -13,6 +15,9 @@ const ByGenre = () => {
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)
     const [params] = useSearchParams()
+
+    // Initial loading
+    const {initialLoading} = useInitialLoading(list) 
 
     useEffect(() => {
       const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
@@ -51,6 +56,12 @@ const ByGenre = () => {
 
     const updatePage = () => {
       setPage(prev => prev+1)
+    }
+
+    if (initialLoading) {
+      return (
+        <Loading message="Initial loading ..."/>
+      )
     }
 
     return (

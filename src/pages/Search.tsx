@@ -3,6 +3,8 @@ import MovieList from "../components/MovieList"
 import { useContext, useEffect, useState } from "react"
 import MovieContext, { MovieContextType } from "../context/MovieContext"
 import Button from "../components/Button"
+import Loading from "../components/Loading"
+import { useInitialLoading } from "../hooks/useInitialLoading"
 
 const Search = () => {
 
@@ -11,6 +13,9 @@ const Search = () => {
     const [list, setList] = useState<any[]>([])
     const [page, setPage] = useState<number>(1)
     const [params] = useSearchParams()
+
+    // Initial loading
+    const {initialLoading} = useInitialLoading(list) 
 
     // When params change, reset list to [] and page to 1
     useEffect(() => {
@@ -43,6 +48,12 @@ const Search = () => {
 
     const updatePage = () => {
       setPage(prev => prev+1)
+    }
+
+    if (initialLoading) {
+      return (
+        <Loading message="Initial loading ..."/>
+      )
     }
 
     return (
