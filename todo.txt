@@ -1,4 +1,3 @@
--> Fix loading states for: random. 
 -> Fix buttons and button component
 
 -> Only show info that actually exists, if not, show in a box that tells which info isnt available (put one on top of movie and one on top of prod detail)
@@ -8,6 +7,7 @@
 -> Responsividade -> movie/:id
 
 TODO: 
+    -> Test random when API back
     -> Games
     -> Add ordering to filter (by date, popularity etc) 
     -> Dark mode

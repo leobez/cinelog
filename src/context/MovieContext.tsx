@@ -28,7 +28,6 @@ export const MovieListContextProvider = ({children}:any) => {
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const [loading, setLoading] = useState<boolean>(false)
-    const [loadingRandom, setLoadingRandom] = useState<boolean>(false)
     const [error, setError] = useState<string|null>(null)
     const [warning, setWarning] = useState<string|null>(null)
 
