@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import MovieContext, { MovieContextType } from "../context/MovieContext"
 import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
@@ -9,53 +9,50 @@ import { useInitialLoading } from "../hooks/useInitialLoading"
 
 const ByGenre = () => {
 
-    const {GET_movies_bygenres, loading} = useContext(MovieContext) as MovieContextType
-  
-    const [genres, setGenres] = useState<string[]>([])
-    const [list, setList] = useState<any[]>([])
-    const [page, setPage] = useState<number>(1)
+    const {updateCategory, GET_movies_bygenres, updatePage:updatePageC, page, loading, list, run} = useContext(MovieContext) as MovieContextType
+
     const [params] = useSearchParams()
+    const isInitialMount = useRef(true);
+    const [genres, setGenres] = useState<string[]>([])
 
-    // Initial loading
-    const {initialLoading} = useInitialLoading(list) 
-
+    // UPDATE CATEGORY -> RESETS LIST AND PAGE.
     useEffect(() => {
+      updateCategory(`bygenre?q=${params.get('genres')}`)
       const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
       const tempList:any = genresIds?.map((id:any)=>TMDB_GENRES[id])
       setGenres(tempList)
-    }, [TMDB_GENRES, params])
-
-    // When params change, reset list to [] and page to 1
-    useEffect(() => {
-      setList([])
-      setPage(1)
     }, [params])
 
+    // Initial loading
+    const {initialLoading} = useInitialLoading(list)
+
     useEffect(() => {
-        
-        const ASYNC_GET_movies_bygenres = async() => {
 
-            const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
-            if (!genresIds) return;
+      // Only run this effect if page has actually changed
+      if (isInitialMount.current) {
+        console.log('blocked: ref')
+        isInitialMount.current = false
+        return;
+      } 
+      if (!page) {
+        console.log('blocked: page')
+        return;
+      } 
 
-            const tempList = await GET_movies_bygenres(page, genresIds)
+      console.log('running ASYNC_GET_movies_bygenres')
+      const ASYNC_GET_movies_bygenres = async() => {
+        const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
+        if (!genresIds) return;
 
-            if (!tempList) return;
-            
-            // Inserting into list for first time
-            if (list.length === 0) {
-              setList(tempList)
-            } else {
-              setList(prev => [...prev, ...tempList])
-            }
-        }
-        
-        ASYNC_GET_movies_bygenres()
+        await GET_movies_bygenres(genresIds)
+      }
 
-    },[page, params])
+      ASYNC_GET_movies_bygenres()
+
+    }, [page, run])
 
     const updatePage = () => {
-      setPage(prev => prev+1)
+      updatePageC()
     }
 
     if (initialLoading) {

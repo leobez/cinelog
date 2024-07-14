@@ -4,9 +4,9 @@ export type MovieContextType = {
     GET_movies_toprated:()=>Promise<any>;
     GET_movies_popular:()=>Promise<any>;
     GET_movies_upcoming:()=>Promise<any>;
-    
     GET_movies_byquery:(query:string)=>Promise<any>;
-    GET_movies_bygenres:(page:number, genres:number[])=>Promise<any>;
+    GET_movies_bygenres:(genres:number[])=>Promise<any>;
+
     GET_movies_similar:(id:number)=>Promise<any>;
     GET_movie_byid:(id:number)=>Promise<any>;
     GET_movie_randombygenres:(genres:number[])=>Promise<number>; 
@@ -263,7 +263,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    const GET_movies_bygenres = async(page:number, genres:number[]):Promise<any> => {
+    const GET_movies_bygenres = async(genres:number[]):Promise<any> => {
 
         resetStates()
 
@@ -298,10 +298,13 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
-            console.log('filteredData: ', filteredData)
             setLoading(false)
-
-            return filteredData
+            // Inserting into list for first time
+            if (list.length === 0) {
+                setList(filteredData)
+            } else {
+                setList(prev => [...prev, ...filteredData])
+            }
 
         } catch (error) {
             setLoading(false)
