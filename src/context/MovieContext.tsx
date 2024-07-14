@@ -1,21 +1,19 @@
 import { createContext, useEffect, useState } from "react";
 
 export type MovieContextType = {
-    GET_movies_toprated:()=>Promise<any>;
-    GET_movies_popular:()=>Promise<any>;
-    GET_movies_upcoming:()=>Promise<any>;
-    GET_movies_byquery:(query:string)=>Promise<any>;
-    GET_movies_bygenres:(genres:number[])=>Promise<any>;
-
-    GET_movies_similar:(id:number)=>Promise<any>;
-    GET_movie_byid:(id:number)=>Promise<any>;
-    GET_movie_randombygenres:(genres:number[])=>Promise<number>; 
+    GET_movies_toprated:()=>Promise<void>;
+    GET_movies_popular:()=>Promise<void>;
+    GET_movies_upcoming:()=>Promise<void>;
+    GET_movies_byquery:(query:string)=>Promise<void>;
+    GET_movies_bygenres:(genres:number[])=>Promise<void>;
+    GET_movies_similar:(id:number)=>Promise<any>; // Returns list of movies                  
+    GET_movie_byid:(id:number)=>Promise<any>; // Returns object of movie                   
+    GET_movie_randombygenres:(genres:number[])=>Promise<number>; // Returns random number id
     updateWarning:(message:string)=>void;
     updateError:(message:string)=>void;
     updateLoading:()=>void;
     updatePage:()=>void;
     updateCategory:(newCategory:string)=>void;
-
     warning:string|null;
     error:string|null;
     loading:boolean;

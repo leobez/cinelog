@@ -1,4 +1,4 @@
--> Save position and list state...
+-> Save and return scroll position
 
 TODO: 
     -> Games
