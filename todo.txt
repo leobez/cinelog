@@ -1,7 +1,5 @@
--> Validate info in Movie.tsx
--> Fix the damn height of cards (query by null to see)
+-> Fix the damn height of cards and movie/:id and respons. (query by null to see)
 -> Responsividade -> movie/:id
-
 
 
 TODO: 

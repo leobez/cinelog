@@ -4,114 +4,14 @@ import MovieContext, { MovieContextType } from '../context/MovieContext'
 import ImageSlider from '../components/Imageslider'
 import Loading from '../components/Loading'
 import { useInitialLoadingMovie } from '../hooks/useInitialLoadingMovie'
+import Table from '../components/Movie/Table'
+import { getMovieMissingInfo } from '../utils/getMovieMissingInfo'
 
 const Movie = () => {
-    
-    /* 
-        RELEVANT INFORMATION FROM MOVIE 
-            movie.budget                : number
-            movie.genres                : any[]
-            movie.id                    : number
-            movie.origin_country        : string[]
-            movie.original_language     : string
-            movie.original_title        : string
-            movie.overview              : string
-            movie.popularity            : number
-		    movie.poster_path           : string
-            movie.production_companies  : any[]
-            movie.production_countries  : any[]
-            movie.release_date          : string
-            movie.revenue               : number
-            movie.runtime               : number
-            movie.spoken_languages      : any[]
-            movie.title                 : string
-            movie.vote_average          : number
-            movie.vote_count            : number
-    */
-
-    const validateInfo = (movie:any):void => {
-
-            let missingInfo = []
-
-            if (!movie.budget) {
-                missingInfo.push('budget')
-            }    
-
-            if (!movie.genres || !movie.genres.length) {
-                missingInfo.push('genres')
-            }   
-
-            if (!movie.id) {
-                missingInfo.push('id')
-            }     
-
-            if (!movie.origin_country || !movie.origin_country.length) {
-                missingInfo.push('origin country')
-            }     
-
-            if (!movie.original_language || !movie.original_language.length) {
-                missingInfo.push('original language')
-            } 
-
-            if (!movie.original_title || !movie.original_title.length) {
-                missingInfo.push('original title')
-            }  
-
-            if (!movie.overview || !movie.overview.length) {
-                missingInfo.push('overview')
-            }  
-
-            if (!movie.popularity) {
-                missingInfo.push('popularity')
-            }  
-             
-            if (!movie.poster_path || !movie.poster_path.length) {
-                missingInfo.push('poster path')
-            }  
-
-            if (!movie.production_companies || !movie.production_companies.length) {
-                missingInfo.push('production companies')
-            }  
-
-            if (!movie.production_countries || !movie.production_countries.length) {
-                missingInfo.push('production countries')
-            }  
-  
-            if (!movie.release_date || !movie.release_date.length) {
-                missingInfo.push('release date')
-            }  
-    
-            if (!movie.revenue) {
-                missingInfo.push('revenue')
-            } 
-
-            if (!movie.runtime) {
-                missingInfo.push('runtime')
-            }     
-
-            if (!movie.spoken_languages || !movie.spoken_languages.length) {
-                missingInfo.push('spoken languages')
-            }      
-
-            if (!movie.title || !movie.title.length) {
-                missingInfo.push('title')
-            }   
-              
-            if (!movie.vote_average) {
-                missingInfo.push('vote average')
-            }           
-
-            if (!movie.vote_count) {
-                missingInfo.push('vote count')
-            }  
-            
-            return missingInfo
-    }
-
-    // TODO: VALIDATE ALL INFO FROM MOVIE -> ONLY SHOW THE ONES THAT ARE REAL. OTHERS JUST PUT SEPARATE IN A BOX
 
     const {id} = useParams()
 
+    const [missingInfo, setMissingInfo] = useState<string[]>([])
     const [movie, setMovie] = useState<any>(null)
     const [similarMovies, setSimilarMovies] = useState<any[]>([])
     const {GET_movie_byid, GET_movies_similar, loading} = useContext(MovieContext) as MovieContextType
@@ -125,10 +25,8 @@ const Movie = () => {
 
             const tempMovie = await GET_movie_byid(Number(id))
             if (!tempMovie) return;
-            // Validate info that isnt in there
-            const missingInfo = validateInfo(tempMovie)
-            console.log('missing info: ', missingInfo)
-            console.log('movie: ', tempMovie)
+            const tempMissingInfo = getMovieMissingInfo(tempMovie)
+            setMissingInfo(tempMissingInfo)
             setMovie(tempMovie)
 
             const tempList = await GET_movies_similar(Number(id))
@@ -155,6 +53,21 @@ const Movie = () => {
         }
     }
 
+    const missingInfoEl:any = useRef<HTMLDivElement>()
+    const toggleMissingInfoEl = () => {
+        const classNames = missingInfoEl.current.className.split(' ')
+        if (classNames.includes('hidden')) {
+            // Make it visible
+            missingInfoEl.current.classList.remove('hidden')
+            missingInfoEl.current.classList.add('block')
+
+        } else if (classNames.includes('block')) {
+            // Make it invisible
+            missingInfoEl.current.classList.remove('block')
+            missingInfoEl.current.classList.add('hidden')
+        }
+    }
+
     if (initialLoadingMovie) {
         return (
           <Loading message="Initial loading ..."/>
@@ -169,8 +82,38 @@ const Movie = () => {
 
     return (
 
-        <div className='flex items-center flex-col scrollbar-thin border-color05 gap-4 overflow-hidden h-full'>
-            
+        <div className='flex items-center flex-col scrollbar-thin border-color05 gap-4 overflow-hidden h-full relative'>
+
+            {/* MISSING INFO */}
+            {missingInfo && missingInfo.length > 0 && 
+                <div className='self-end'>
+                    <div className='w-64 flex flex-col'>
+                        <button 
+                            className='border-2 border-black py-2 px-4 self-end font-bold hover:bg-black hover:text-white' 
+                            onClick={toggleMissingInfoEl}
+                        >
+                            ?
+                        </button>
+                    </div>
+                    <div className='relative text-sm'>
+                        <div 
+                            className='h-fit w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' 
+                            id='prod-detail' 
+                            ref={missingInfoEl}
+                        >   
+                        <p className='font-bold'>The following information are missing in this movie:</p>
+                        <ul className='list-disc pl-4'>
+                            {missingInfo.map((info:string, index:number) => (
+                                <li key={index}>
+                                    {info};
+                                </li>
+                            ))}
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
             {/* MOVIE */}
             <div className='flex justify-center gap-4 '>
 
@@ -201,46 +144,20 @@ const Movie = () => {
                         <p title='Overview'>{movie.overview}</p>
                     </div>
                     
-                    {/* RELEASE DATE, STATUS AND RUNTIME */}
+                    {/* RELEASE DATE AND RUNTIME */}
                     <div className="overflow-x-auto w-full">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                            <tr className='text-center'>
-                                <th>Release date</th>
-                                <th>Runtime</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {/* row 1 */}
-                            <tr className='text-center'>
-                                <td>{movie.release_date}</td>
-                                <td>{movie.runtime} min</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <Table 
+                            head={['Release Date', 'Runtime']} 
+                            rows={[[movie.release_date, movie.runtime]]}
+                        />
                     </div>
 
                     {/* POPULARITY AND VOTE INFO. */}
                     <div className="overflow-x-auto w-full">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                            <tr className='text-center'>
-                                <th>Popularity</th>
-                                <th>Vote average</th>
-                                <th>Vote count</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {/* row 1 */}
-                            <tr className='text-center'>
-                                <td>{movie.popularity}</td>
-                                <td>{movie.vote_average}</td>
-                                <td>{movie.vote_count}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <Table 
+                            head={['Popularity', 'Vote average', 'Vote count']} 
+                            rows={[[movie.popularity, movie.vote_average, movie.vote_count]]}
+                        />
                     </div>
                     
                     {/* PRODUCTION DETAILS */}
@@ -249,65 +166,18 @@ const Movie = () => {
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail} >
-                                <table className="table">
-                                    <tbody>
-                                    {/* row 1 */}
-                                    <tr>
-                                        <td>Budget</td>
-                                        <td className='font-bold'>{movie.budget}</td>
-                                    </tr>
-
-                                    {/* row 2 */}
-                                    <tr>
-                                        <td>Revenue</td>
-                                        <td className='font-bold'>{movie.revenue}</td>
-                                    </tr>
-
-                                    {/* row 3 */}
-                                    <tr>
-                                        <td>Origin country</td>
-                                        <td className='font-bold'>
-                                            {movie.origin_country.map((country:string, index:number) => (
-                                                <span key={index}>{country} </span>
-                                            ))}
-                                        </td>
-                                    </tr>
-
-                                    {/* row 4 */}
-                                    <tr>
-                                        <td>Original Language</td>
-                                        <td className='font-bold'>{movie.original_language}</td>
-                                    </tr>
-
-                                    {/* row 5 */}
-                                    <tr>
-                                        <td>Production companies</td>
-                                        <td className='font-bold'>
-                                            {movie.production_companies.map((compan:any) => (
-                                                <div key={compan.id}>
-                                                    <div>{compan.name} [{compan.origin_country}]</div>
-                                                    {/* <img src={`${import.meta.env.VITE_POSTER_URL}/${compan.logo_path}`} alt={compan.name} className='h-12 w-12 object-contain'/> */}
-                                                </div>
-                                        ))}
-                                        </td>
-                                    </tr>
-
-                                    {/* row 6 */}
-                                    <tr>
-                                        <td>Production countries</td>
-                                        <td className='font-bold'>
-                                            {movie.production_countries.map((country:any, index:number) => (
-                                                <div key={index}>
-                                                    <div>{country.name} [{country.iso_3166_1}]</div>
-                                                </div>
-                                        ))}
-                                        </td>
-                                    </tr>   
-
-                                    </tbody>
-
-                                </table>
+                            <div className='h-72 w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail}>
+                                 <Table
+                                    head={[]}
+                                    rows={[
+                                            ['Budget', movie.budget], 
+                                            ['Revenue', movie.revenue],
+                                            ['Origin Country', movie.origin_country.join(',')],
+                                            ['Original Language', movie.original_language],
+                                            ['Production Companies', movie.production_companies.map((compan:any) => (compan.name)).join(',')],
+                                            ['Production Countries', movie.production_countries.map((country:any) => (country.name)).join(',')]
+                                        ]}
+                                />
                             </div>
                         </div>
                     </div>
@@ -315,8 +185,8 @@ const Movie = () => {
                 </div>
 
             </div>
-
-            <div className='w-full h-[1px] bg-color05 my-2'/>
+            
+            <div className='h-[1px] border-black border w-full mb-2 mt-4'/>
 
             {/* SIMILAR MOVIES */}
             {similarMovies && similarMovies.length > 0 &&
