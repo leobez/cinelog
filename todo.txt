@@ -2,6 +2,7 @@
 
 TODO: 
     -> Games
+    -> Better hidden menu
     -> Dark mode
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results

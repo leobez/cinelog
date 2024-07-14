@@ -61,7 +61,7 @@ function App() {
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-screen border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] lg:hidden block pt-[100px] animate-in' ref={hiddenMenu}>
+                <div className='h-screen border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden pt-[100px] animate-in' ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               
@@ -69,7 +69,7 @@ function App() {
                 <HiddenMenuButton func={toggleHiddenMenu}/>
 
                 {/* OVERLAY */}
-                <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 lg:hidden block' ref={overlay}/>
+                <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 hidden' ref={overlay}/>
 
                 {/* CONTENT */}
                 <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white px-2 shadow-md'>
@@ -87,7 +87,7 @@ function App() {
                       <Route path='/search'     element={<Search/>}></Route>
                       <Route path='/bygenre'    element={<ByGenre/>}></Route> 
                       <Route path='/movie/:id'  element={<Movie/>}></Route>
-                      <Route path='/random'  element={<Random/>}></Route>
+                      <Route path='/random'     element={<Random/>}></Route>
                     </Routes>
                   </div>  
 

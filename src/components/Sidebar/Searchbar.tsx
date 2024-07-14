@@ -30,7 +30,9 @@ const Searchbar = () => {
             </div>
 
             <div className="w-10 h-10">
-                <input type="submit" value="P" className="border-2 border-color05 h-full w-full hover:bg-color05 hover:text-white cursor-pointer" />
+                <button type="submit" className="border-2 border-color05 h-full w-full hover:bg-color05 hover:text-white cursor-pointer">
+                    &#128269;
+                </button>
             </div>
 
         </form>
