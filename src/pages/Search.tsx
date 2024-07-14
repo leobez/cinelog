@@ -72,8 +72,8 @@ const Search = () => {
             )}
           </>
         }
-        <div className='mt-2'>
-          <Button text={'Load more'} loading={loading} func={updatePage}/>
+        <div className="my-4 mr-2 flex justify-end text-sm">
+          <Button text={'Load more +'} loading={loading} func={updatePage}/>
         </div>
       </>
     )

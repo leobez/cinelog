@@ -1,6 +1,4 @@
--> Fix the damn height of cards and movie/:id and respons. (query by null to see)
 -> Responsividade -> movie/:id
-
 
 TODO: 
     -> Games
@@ -8,3 +6,4 @@ TODO:
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
     -> Add ordering to filter (by date, popularity etc) 
+    -> Maybe pagination or infinite scrolling

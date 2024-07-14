@@ -39,10 +39,17 @@ const MovieList = ({movieList}: Props) => {
 
     return (
         <>
-            <div className="grid md:grid-cols-3 grid-cols-2 gap-1 relative place-items-center" >
+            <div className="relative gap-1 flex flex-wrap justify-evenly" >
                 {movieList.length > 0 && movieList.map((movie:any, index:number) => (
-                    <div key={`${movie.id}/${index}`} className="border-2 border-color05 min-w-32 h-fit" onClick={handleClick} ref={containerRef}>
+                    <div 
+                        key={`${movie.id}/${index}`} 
+                        className="border-2 border-color05 min-w-30 min-h-44 w-30 h-44 md:w-42 md:h-56"
+                        onClick={handleClick} 
+                        ref={containerRef}
+                    >
+
                         <MovieCard movie={movie}/>
+
                     </div>
                 ))}
             </div>
