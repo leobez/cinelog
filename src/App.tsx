@@ -41,7 +41,7 @@ function App() {
     }
 
     return (
-      <div className='h-screen flex flex-col pb-2 gap-2'>
+      <div className='h-screen flex flex-col pb-2 gap-2 bg-slate-100'>
         
           <header className='h-16 p-4 flex justify-between align-middle bg-color05 relative'>
             <Header/>

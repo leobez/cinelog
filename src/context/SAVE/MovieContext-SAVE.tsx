@@ -1,27 +1,18 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export type MovieContextType = {
-    GET_movies_toprated:()=>Promise<any>;
-    GET_movies_popular:()=>Promise<any>;
-    GET_movies_upcoming:()=>Promise<any>;
-    
-    GET_movies_byquery:(query:string)=>Promise<any>;
+    GET_movies_toprated:(page:number)=>Promise<any>;
+    GET_movies_popular:(page:number)=>Promise<any>;
+    GET_movies_upcoming:(page:number)=>Promise<any>;
+    GET_movies_byquery:(page:number, query:string)=>Promise<any>;
     GET_movies_bygenres:(page:number, genres:number[])=>Promise<any>;
     GET_movies_similar:(id:number)=>Promise<any>;
     GET_movie_byid:(id:number)=>Promise<any>;
     GET_movie_randombygenres:(genres:number[])=>Promise<number>; 
-    updateWarning:(message:string)=>void;
-    updateError:(message:string)=>void;
-    updateLoading:()=>void;
-    updatePage:()=>void;
-    updateCategory:(newCategory:string)=>void;
-
-    warning:string|null;
-    error:string|null;
     loading:boolean;
-    page:number;
-    list:any[];
-    run:boolean;
+    error:string|null;
+    warning:string|null;
+    updateWarning:(message:string)=>void;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
@@ -37,43 +28,21 @@ export const MovieListContextProvider = ({children}:any) => {
     const URL_BYID = import.meta.env.VITE_FIND_BY_ID
     const API_KEY = import.meta.env.VITE_API_KEY
 
-    const [loading, setLoading]     = useState<boolean>(false)
-    const [error, setError]         = useState<string|null>(null)
-    const [warning, setWarning]     = useState<string|null>(null)
-    const [page, setPage]           = useState<number>(0)
-    const [category, setCategory]   = useState<string>('')
-    const [list, setList]           = useState<any[]>([])
-    const [run, setRun]             = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string|null>(null)
+    const [warning, setWarning] = useState<string|null>(null)
 
-    //useEffect(() => {console.log('mudou page: ', page)}, [page])
-
-    useEffect(() => {
-
-        //console.log('mudou categoria. current: ', category)
-
-        setList([])
-        setPage(1)
-
-        //console.log('em teoria 1')
-
-        // Triggers function that gets data. Always triggers when category is changed, which always means first call
-        setRun((prev:boolean) => !prev) 
-
-    }, [category])
-
-    // Used for when selecting random movie
     const sleep = (ms:number) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    // Always used when making API calls
     const resetStates = ():void => {
         setLoading(false)
         setError(null)
         setWarning(null)
     }
 
-    const GET_movies_toprated = async():Promise<any> => {
+    const GET_movies_toprated = async(page:number):Promise<any> => {
         
         resetStates()
 
@@ -81,7 +50,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
             setLoading(true)
             const URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}`
-            const RESULT = await fetch(URL)
+            const RESULT = await fetch(URL, {cache: "force-cache"})
             const DATA = await RESULT.json()
             console.log('DATA RECEIVED: ', DATA)
 
@@ -101,12 +70,8 @@ export const MovieListContextProvider = ({children}:any) => {
             }
 
             setLoading(false)
-            // Inserting into list for first time
-            if (list.length === 0) {
-                setList(filteredData)
-            } else {
-                setList(prev => [...prev, ...filteredData])
-            }
+            console.log('filteredData: ', filteredData)
+            return filteredData
 
         } catch (error) {
             setLoading(false)
@@ -117,7 +82,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    const GET_movies_popular = async():Promise<any> => {
+    const GET_movies_popular = async(page:number):Promise<any> => {
 
         resetStates()
 
@@ -145,12 +110,9 @@ export const MovieListContextProvider = ({children}:any) => {
             }
 
             setLoading(false)
-            // Inserting into list for first time
-            if (list.length === 0) {
-                setList(filteredData)
-            } else {
-                setList(prev => [...prev, ...filteredData])
-            }
+            console.log('filteredData: ', filteredData)
+
+            return filteredData
 
         } catch (error) {
             setLoading(false)
@@ -161,7 +123,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    const GET_movies_upcoming = async():Promise<any> => {
+    const GET_movies_upcoming = async(page:number):Promise<any> => {
 
         resetStates()
 
@@ -189,12 +151,9 @@ export const MovieListContextProvider = ({children}:any) => {
             }
 
             setLoading(false)
-            // Inserting into list for first time
-            if (list.length === 0) {
-                setList(filteredData)
-            } else {
-                setList(prev => [...prev, ...filteredData])
-            }
+            console.log('filteredData: ', filteredData)
+
+            return filteredData
 
         } catch (error) {
             setLoading(false)
@@ -204,8 +163,8 @@ export const MovieListContextProvider = ({children}:any) => {
         }
 
     }
-
-    const GET_movies_byquery = async(query:string):Promise<any> => {
+    
+    const GET_movies_byquery = async(page:number, query:string):Promise<any> => {
 
         resetStates()
 
@@ -247,12 +206,9 @@ export const MovieListContextProvider = ({children}:any) => {
             }
 
             setLoading(false)
-            // Inserting into list for first time
-            if (list.length === 0) {
-                setList(filteredData)
-            } else {
-                setList(prev => [...prev, ...filteredData])
-            }
+            console.log('filteredData: ', filteredData)
+
+            return filteredData
 
         } catch (error) {
             setLoading(false)
@@ -443,25 +399,16 @@ export const MovieListContextProvider = ({children}:any) => {
         }
     }
 
-    const updateWarning = (message:string):void => {
-        setWarning(message)
+/*  const updateLoading = (state:boolean):void => {
+        setLoading(state)
     }
 
     const updateError = (message:string):void => {
         setError(message)
-    }
-    
-    const updateLoading = ():void => {
-        setLoading((prev:boolean)=>!prev)
-    }
+    } */
 
-    const updatePage = ():void=>{
-        setPage((prev)=>prev+1)
-        setRun((prev:boolean) => !prev)
-    }
-
-    const updateCategory = (newCategory:string):void=>{
-        setCategory(newCategory)
+    const updateWarning = (message:string):void => {
+        setWarning(message)
     }
 
     return (
@@ -475,18 +422,10 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movies_similar,
                     GET_movie_byid,
                     GET_movie_randombygenres,
-                    updateWarning,
-                    updateError,
-                    updateLoading,
-                    updatePage,
-                    updateCategory,
-                
-                    warning,
-                    error,
                     loading,
-                    page,
-                    list,
-                    run
+                    error,
+                    warning,
+                    updateWarning
                 }
             }>
 

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
 import MovieList from '../components/MovieList'
 import Button from '../components/Button'
@@ -7,58 +7,61 @@ import { useInitialLoading } from '../hooks/useInitialLoading'
 
 const Upcoming = () => {
 
-    const {GET_movies_upcoming, loading} = useContext(MovieContext) as MovieContextType
+  const {updateCategory, GET_movies_upcoming, updatePage:updatePageC, page, loading, list, run} = useContext(MovieContext) as MovieContextType
+    
+  const isInitialMount = useRef(true);
 
-    const [list, setList] = useState<any[]>([])
-    const [page, setPage] = useState<number>(1)
+  // UPDATE CATEGORY -> RESETS LIST AND PAGE.
+  useEffect(() => {
+    updateCategory('upcoming')
+  }, [])
 
-    // Initial loading
-    const {initialLoading} = useInitialLoading(list) 
+  // Initial loading
+  const {initialLoading} = useInitialLoading(list)
 
-    useEffect(() => {
+  useEffect(() => {
+    console.log('ativou effect')
 
-      const ASYNC_GET_movies_upcoming = async() => {
+    // Only run this effect if page has actually changed
+    if (isInitialMount.current) {
+      console.log('blocked: ref')
+      isInitialMount.current = false
+      return;
+    } 
+    if (!page) {
+      console.log('blocked: page')
+      return;
+    } 
 
-        const tempList = await GET_movies_upcoming(page)
-        if (!tempList) return;
-
-        // Inserting into list for first time
-        if (list.length === 0) {
-          setList(tempList)
-        } else {
-          setList(prev => [...prev, ...tempList])
-        }
-
-      }
-      
-      ASYNC_GET_movies_upcoming()
-
-    },[page])
-
-    const updatePage = () => {
-      setPage(prev => prev+1)
+    console.log('running ASYNC_GET_movies_upcoming')
+    const ASYNC_GET_movies_upcoming = async() => {
+      await GET_movies_upcoming()
     }
 
-    if (initialLoading) {
-      return (
-        <Loading message="Initial loading ..."/>
-      )
-    }
+    ASYNC_GET_movies_upcoming()
+
+  }, [run])
+
+  const updatePage = () => {
+    updatePageC()
+  }
+
+  if (initialLoading) {
+    return (
+      <Loading message="Initial loading ..."/>
+    )
+  } 
 
     return (
       <>
-        <div className="py-3 text-left text-lg border-b-2 mb-2 border-color05">
+        <div className="py-3 text-lg mt-14 lg:mt-0 border-b-2 mb-2 border-color05 text-left">
           Upcoming Movies
         </div>
-        {list &&
-          <>
-            {list.length > 0 ? (
-              <MovieList movieList={list}/>
-            ) : (
-              <p>No elements found.</p>
-            )}
-          </>
-        }
+
+        {list && list.length > 0 && <MovieList movieList={list}/>}
+
+        {loading && <Loading message="Loading ..."/>}
+
         <div className="my-4 mr-2 flex justify-end text-sm">
           <Button text={'Load more +'} loading={loading} func={updatePage}/>
         </div>

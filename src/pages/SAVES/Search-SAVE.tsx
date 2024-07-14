@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useState } from "react"
 import MovieContext, { MovieContextType } from "../context/MovieContext"
 import Button from "../components/Button"
 import Loading from "../components/Loading"
@@ -8,46 +8,46 @@ import { useInitialLoading } from "../hooks/useInitialLoading"
 
 const Search = () => {
 
-    const {updateCategory, GET_movies_byquery, updatePage:updatePageC, page, loading, list, run} = useContext(MovieContext) as MovieContextType
+    const {GET_movies_byquery, loading} = useContext(MovieContext) as MovieContextType
 
+    const [list, setList] = useState<any[]>([])
+    const [page, setPage] = useState<number>(1)
     const [params] = useSearchParams()
-    const isInitialMount = useRef(true);
-
-    // UPDATE CATEGORY -> RESETS LIST AND PAGE.
-    useEffect(() => {
-      updateCategory(`byquery?q=${params.get('q')}`)
-    }, [params])
 
     // Initial loading
-    const {initialLoading} = useInitialLoading(list)
+    const {initialLoading} = useInitialLoading(list) 
+
+    // When params change, reset list to [] and page to 1
+    useEffect(() => {
+      console.log('reseting page to 1')
+      setPage(1)
+      setList([])
+    }, [params])
 
     useEffect(() => {
+        
+        const ASYNC_GET_movies_byquery = async() => {
 
-      // Only run this effect if page has actually changed
-      if (isInitialMount.current) {
-        console.log('blocked: ref')
-        isInitialMount.current = false
-        return;
-      } 
-      if (!page) {
-        console.log('blocked: page')
-        return;
-      } 
+            const query = params.get('q')
+            if (!query) return;
 
-      console.log('running ASYNC_GET_movies_byquery')
-      const ASYNC_GET_movies_byquery = async() => {
-        const query = params.get('q')
-        if (!query) return;
+            const tempList = await GET_movies_byquery(page, query)
+            if (!tempList) return;
 
-        await GET_movies_byquery(query)
-      }
-  
-      ASYNC_GET_movies_byquery()
+            // Inserting into list for first time
+            if (list.length === 0) {
+              setList(tempList)
+            } else {
+              setList(prev => [...prev, ...tempList])
+            }
+        }
+        
+        ASYNC_GET_movies_byquery()
 
-    }, [page, run])
+    },[page, params])
 
     const updatePage = () => {
-      updatePageC()
+      setPage(prev => prev+1)
     }
 
     if (initialLoading) {

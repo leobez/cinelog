@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import MovieContext, { MovieContextType } from "../context/MovieContext";
 import MovieList from "../components/MovieList";
 import Button from "../components/Button";
@@ -7,45 +7,51 @@ import { useInitialLoading } from "../hooks/useInitialLoading";
 
 const Home = () => {
 
-    const {GET_movies_toprated, loading} = useContext(MovieContext) as MovieContextType
+    const {updateCategory, GET_movies_toprated, updatePage:updatePageC, page, loading, list, run} = useContext(MovieContext) as MovieContextType
+    
+    const isInitialMount = useRef(true);
 
-    const [list, setList] = useState<any[]>([])
-    const [page, setPage] = useState<number>(1)
+    // UPDATE CATEGORY -> RESETS LIST AND PAGE.
+    useEffect(() => {
+      updateCategory('top_rated')
+    }, [])
 
     // Initial loading
-    const {initialLoading} = useInitialLoading(list) 
+    const {initialLoading} = useInitialLoading(list)
 
     useEffect(() => {
+      console.log('ativou effect')
 
+      // Only run this effect if page has actually changed
+      if (isInitialMount.current) {
+        console.log('blocked: ref')
+        isInitialMount.current = false
+        return;
+      } 
+      if (!page) {
+        console.log('blocked: page')
+        return;
+      } 
+
+      console.log('running ASYNC_GET_movies_toprated')
       const ASYNC_GET_movies_toprated = async() => {
-
-        const tempList = await GET_movies_toprated(page)
-
-        if (!tempList) return;
-
-        // Inserting into list for first time
-        if (list.length === 0) {
-          setList(tempList)
-        } else {
-          setList(prev => [...prev, ...tempList])
-        }
-
-
+        await GET_movies_toprated()
       }
-      
+  
       ASYNC_GET_movies_toprated()
 
-    },[page])
+    }, [run])
 
     const updatePage = () => {
-      setPage(prev => prev+1)
+      updatePageC()
     }
 
     if (initialLoading) {
-        return (
-          <Loading message="Initial loading ..."/>
-        )
-    }
+      console.log('initial loading...')
+      return (
+        <Loading message="Initial loading ..."/>
+      )
+    } 
 
     return (
       <>
@@ -53,15 +59,7 @@ const Home = () => {
           Top Rated Movies
         </div>
 
-        {list &&
-          <>
-            {list.length > 0 ? (
-              <MovieList movieList={list}/>
-            ) : (
-              <div>No elements found</div>
-            )}
-          </>
-        }
+        {list && list.length > 0 && <MovieList movieList={list}/>}
 
         {loading && <Loading message="Loading ..."/>}
 
