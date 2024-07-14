@@ -43,7 +43,7 @@ const MovieList = ({movieList}: Props) => {
                 {movieList.length > 0 && movieList.map((movie:any, index:number) => (
                     <div 
                         key={`${movie.id}/${index}`} 
-                        className="border-2 border-color05 min-w-30 min-h-44 w-30 h-44 md:w-42 md:h-56"
+                        className="border-2 border-color05 min-w-32 min-h-44 w-30 h-44 md:w-42 md:h-56"
                         onClick={handleClick} 
                         ref={containerRef}
                     >

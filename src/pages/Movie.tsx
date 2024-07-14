@@ -115,15 +115,15 @@ const Movie = () => {
             }
 
             {/* MOVIE */}
-            <div className='flex justify-center gap-4 '>
+            <div className='flex justify-center gap-4 sm:flex-row flex-col'>
 
                 {/* POSTER */}
-                <div className='flex w-3/6 min-h-full border-color05 border-2'>
-                    <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover' />
+                <div className='flex sm:w-3/6 w-full sm:min-h-full h-[500px] border-color05 border-2'>
+                    <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover object-top' />
                 </div>
 
                 {/* INFORMATION */}
-                <div className='flex flex-col gap-4 w-3/6'>
+                <div className='flex flex-col gap-4 sm:w-3/6 w-full'>
                     
                     {/* TITLE */}
                     <div className='text-left w-full'>

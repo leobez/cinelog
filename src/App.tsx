@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -50,7 +50,7 @@ function App() {
           <main className='flex justify-center h-full overflow-y-auto'>
             
             {/* WRAPPER */}
-            <div className='w-[1000px] flex gap-2 h-fit justify-center'>
+            <div className='w-full lg:w-[1000px] flex gap-2 h-fit justify-center'>
 
               {/* ROUTES CONTENT */}
               <BrowserRouter>
@@ -61,7 +61,7 @@ function App() {
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-screen border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden pt-[100px] animate-in' ref={hiddenMenu}>
+                <div className='h-screen w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden pt-[100px] animate-in' ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               

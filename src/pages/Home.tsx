@@ -49,7 +49,7 @@ const Home = () => {
 
     return (
       <>
-        <div className="py-3 sm:text-left text-lg border-b-2 mb-2 border-color05 text-right">
+        <div className="py-3 text-lg mt-14 lg:mt-0 border-b-2 mb-2 border-color05 text-left">
           Top Rated Movies
         </div>
 
