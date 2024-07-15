@@ -23,8 +23,8 @@ const Home = () => {
     
     const isInitialMount = useRef(true);
 
-    const [order, setOrder] = useState<string|null>(null)
-    const [ascdesc, setAscdesc] = useState<string|null>(null)
+    const [order, setOrder] = useState<string>('')
+    const [ascdesc, setAscdesc] = useState<string>('')
 
     // UPDATE CATEGORY -> RESETS LIST AND PAGE.
     useEffect(() => {
@@ -50,7 +50,7 @@ const Home = () => {
 
       console.log('running ASYNC_GET_movies_toprated')
       const ASYNC_GET_movies_toprated = async() => {
-        await GET_movies_toprated()
+        await GET_movies_toprated([order, ascdesc])
       }
   
       ASYNC_GET_movies_toprated()

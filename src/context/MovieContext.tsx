@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
 export type MovieContextType = {
-    GET_movies_toprated:()=>Promise<void>;
+    GET_movies_toprated:(order:string[])=>Promise<void>;
     GET_movies_popular:()=>Promise<void>;
     GET_movies_upcoming:()=>Promise<void>;
     GET_movies_byquery:(query:string)=>Promise<void>;
@@ -64,6 +64,7 @@ export const MovieListContextProvider = ({children}:any) => {
     useEffect(() => {
         setList([])
         setPage(1)
+        setRun((prev:boolean) => !prev) 
     }, [order])
 
     // Used for when selecting random movie
@@ -79,14 +80,27 @@ export const MovieListContextProvider = ({children}:any) => {
     }
 
     // -- API CALLS -- //
-    const GET_movies_toprated = async():Promise<any> => {
+    const GET_movies_toprated = async(order:string[]):Promise<any> => {
         
         resetStates()
+        
+        let sort = ''
+        if (order[0] && order[0].length && order[1] && order[1].length) {
+            sort = `&sort_by=${order[0]}.${order[1]}`
+        }
+        
+        let URL = ''
+        if (!sort.length) {
+            URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}`
+        } else {
+            URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}${sort}`
+        }
+        
+        console.log('URL: ', URL)
 
         try {
 
             setLoading(true)
-            const URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
             console.log('DATA RECEIVED: ', DATA)

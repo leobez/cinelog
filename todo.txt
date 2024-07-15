@@ -1,10 +1,9 @@
--> Add ordering to filter
+-> Add ordering to filter (only works on search by genre (/discover), see more )
 -> Save and return scroll position
 -> Delete console.logs()
+-> Create hooks for fetching data...
 -> Better side menu (filter/random buttons, layout both block and hidden)
 -> Dark/White mode
-
-
 
 TODO: 
     -> Games
