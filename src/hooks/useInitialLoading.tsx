@@ -13,7 +13,6 @@ export const useInitialLoading = (list:any[]) => {
         
         // If list hasnt loaded yet, do nothing, because its only gonna change when list has actually loaded
         if (list.length === 0) {
-            console.log('initial loading: list size 0')
             return;
         } 
 

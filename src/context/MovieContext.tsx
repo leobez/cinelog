@@ -14,6 +14,8 @@ export type MovieContextType = {
     updateLoading:()=>void;
     updatePage:()=>void;
     updateCategory:(newCategory:string)=>void;
+    updateOrder:(order:string, ascdesc:string)=>void;
+    resetStates:()=>void;
     warning:string|null;
     error:string|null;
     loading:boolean;
@@ -42,8 +44,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const [category, setCategory]   = useState<string>('')
     const [list, setList]           = useState<any[]>([])
     const [run, setRun]             = useState<boolean>(false)
-
-    //useEffect(() => {console.log('mudou page: ', page)}, [page])
+    const [order, setOrder]         = useState<string[]>([])
 
     useEffect(() => {
 
@@ -59,6 +60,12 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }, [category])
 
+    // At this point, i know the order chosen and ascdesc. Now create a new fetch url...
+    useEffect(() => {
+        setList([])
+        setPage(1)
+    }, [order])
+
     // Used for when selecting random movie
     const sleep = (ms:number) => {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -71,6 +78,7 @@ export const MovieListContextProvider = ({children}:any) => {
         setWarning(null)
     }
 
+    // -- API CALLS -- //
     const GET_movies_toprated = async():Promise<any> => {
         
         resetStates()
@@ -313,6 +321,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
+    // These do not will not be orderable
     const GET_movies_similar = async(id:number):Promise<any> => {
 
         resetStates()
@@ -465,6 +474,10 @@ export const MovieListContextProvider = ({children}:any) => {
         setCategory(newCategory)
     }
 
+    const updateOrder = (order:string, ascdesc:string):void => {
+        setOrder([order, ascdesc])
+    }
+
     return (
         <MovieContext.Provider value={
                 {
@@ -481,7 +494,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     updateLoading,
                     updatePage,
                     updateCategory,
-                
+                    updateOrder,
+                    resetStates,
                     warning,
                     error,
                     loading,

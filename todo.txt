@@ -1,10 +1,13 @@
+-> Add ordering to filter
 -> Save and return scroll position
+-> Delete console.logs()
+-> Better side menu (filter/random buttons, layout both block and hidden)
+-> Dark/White mode
+
+
 
 TODO: 
     -> Games
-    -> Better hidden menu
-    -> Dark mode
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
-    -> Add ordering to filter (by date, popularity etc) 
     -> Maybe pagination or infinite scrolling

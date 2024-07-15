@@ -25,7 +25,7 @@ const Sidebar = () => {
 
             <div className="absolute bottom-0 border-t-2 border-color05 grid place-items-center p-2 w-full">
                 <p>Developed by Leonardo de Souza Bezerra</p>
-                <p>API's used: TMDB e ??</p>
+                <p>API's used: TMDB</p>
             </div>
 
         </div>
