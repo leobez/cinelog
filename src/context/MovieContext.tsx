@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 
 export type MovieContextType = {
-    GET_movies_toprated:(order:string[])=>Promise<void>;
+    GET_movies_toprated:()=>Promise<void>;
     GET_movies_popular:()=>Promise<void>;
     GET_movies_upcoming:()=>Promise<void>;
     GET_movies_byquery:(query:string)=>Promise<void>;
-    GET_movies_bygenres:(genres:number[])=>Promise<void>;
+    GET_movies_bygenres:(genres:number[], sort:string[])=>Promise<void>;
     GET_movies_similar:(id:number)=>Promise<any>; // Returns list of movies                  
     GET_movie_byid:(id:number)=>Promise<any>; // Returns object of movie                   
     GET_movie_randombygenres:(genres:number[])=>Promise<number>; // Returns random number id
@@ -14,7 +14,7 @@ export type MovieContextType = {
     updateLoading:()=>void;
     updatePage:()=>void;
     updateCategory:(newCategory:string)=>void;
-    updateOrder:(order:string, ascdesc:string)=>void;
+    updateSort:(sort:string, order:string)=>void;
     resetStates:()=>void;
     warning:string|null;
     error:string|null;
@@ -44,7 +44,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const [category, setCategory]   = useState<string>('')
     const [list, setList]           = useState<any[]>([])
     const [run, setRun]             = useState<boolean>(false)
-    const [order, setOrder]         = useState<string[]>([])
+    const [sort, setSort]           = useState<string[]>([])
 
     useEffect(() => {
 
@@ -65,7 +65,7 @@ export const MovieListContextProvider = ({children}:any) => {
         setList([])
         setPage(1)
         setRun((prev:boolean) => !prev) 
-    }, [order])
+    }, [sort])
 
     // Used for when selecting random movie
     const sleep = (ms:number) => {
@@ -80,27 +80,14 @@ export const MovieListContextProvider = ({children}:any) => {
     }
 
     // -- API CALLS -- //
-    const GET_movies_toprated = async(order:string[]):Promise<any> => {
+    const GET_movies_toprated = async():Promise<any> => {
         
         resetStates()
-        
-        let sort = ''
-        if (order[0] && order[0].length && order[1] && order[1].length) {
-            sort = `&sort_by=${order[0]}.${order[1]}`
-        }
-        
-        let URL = ''
-        if (!sort.length) {
-            URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}`
-        } else {
-            URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}${sort}`
-        }
-        
-        console.log('URL: ', URL)
 
         try {
 
             setLoading(true)
+            const URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
             console.log('DATA RECEIVED: ', DATA)
@@ -283,9 +270,20 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    const GET_movies_bygenres = async(genres:number[]):Promise<any> => {
+    // This one is sortable
+    const GET_movies_bygenres = async(genres:number[], sort:string[]):Promise<any> => {
 
         resetStates()
+
+        let URL = ''
+
+        if (sort[0] && sort[1] && sort[0].length && sort[1].length) {
+            URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}&sort_by=${sort[0]}.${sort[1]}`
+        } else {
+            URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
+        }
+
+        console.log('URL: ', URL)
 
         try {
 
@@ -298,7 +296,6 @@ export const MovieListContextProvider = ({children}:any) => {
                 return;
             }
 
-            const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
             console.log('DATA RECEIVED: ', DATA)
@@ -335,7 +332,6 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    // These do not will not be orderable
     const GET_movies_similar = async(id:number):Promise<any> => {
 
         resetStates()
@@ -488,8 +484,8 @@ export const MovieListContextProvider = ({children}:any) => {
         setCategory(newCategory)
     }
 
-    const updateOrder = (order:string, ascdesc:string):void => {
-        setOrder([order, ascdesc])
+    const updateSort = (sort:string, order:string):void => {
+        setSort([sort, order])
     }
 
     return (
@@ -508,7 +504,7 @@ export const MovieListContextProvider = ({children}:any) => {
                     updateLoading,
                     updatePage,
                     updateCategory,
-                    updateOrder,
+                    updateSort,
                     resetStates,
                     warning,
                     error,

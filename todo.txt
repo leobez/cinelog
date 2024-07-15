@@ -1,4 +1,9 @@
--> Add ordering to filter (only works on search by genre (/discover), see more )
+-> Add ordering to filter
+    -> Fix layout
+    -> Fix which element can be used to sort
+    -> Load more breaks sort
+
+
 -> Save and return scroll position
 -> Delete console.logs()
 -> Create hooks for fetching data...

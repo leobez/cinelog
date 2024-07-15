@@ -4,7 +4,7 @@ type Props = {
     func3:(e:any)=>void;
 }
 
-const Order = ({func, func2, func3}: Props) => {
+const Sort = ({func, func2, func3}: Props) => {
 
   return (
     <>
@@ -127,4 +127,4 @@ const Order = ({func, func2, func3}: Props) => {
   )
 }
 
-export default Order
+export default Sort
