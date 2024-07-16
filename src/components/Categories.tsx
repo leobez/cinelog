@@ -9,21 +9,21 @@ const Categories = () => {
                 <NavLink 
                     to='/' 
                     id="top_rated" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md hover:text-color03 md:text-sm"}> 
+                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0" : "tab hover:text-color03"}> 
                     Top rated
                 </NavLink>
 
                 <NavLink 
                     to='/popular' 
                     id="popular" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md hover:text-color03"}> 
+                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0" : "tab hover:text-color03"}> 
                     Popular
                 </NavLink>
 
                 <NavLink 
                     to='/upcoming' 
                     id="upcoming" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-md" : isActive ? "tab text-md font-bold text-color03" : "tab text-md hover:text-color03"}> 
+                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0" : "tab hover:text-color03"}> 
                     Upcoming
                 </NavLink>
 

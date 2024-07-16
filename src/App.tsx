@@ -43,7 +43,9 @@ function App() {
     return (
       <div className='h-screen flex flex-col pb-2 gap-2 bg-slate-100'>
         
-          <header className='h-16 p-4 flex justify-between align-middle bg-color05 relative'>
+          <header className='h-24 p-4 flex align-middle bg-color05 relative gap-5'>
+            {/* HIDDEN BUTTON  */}
+            <HiddenMenuButton func={toggleHiddenMenu}/>
             <Header/>
           </header>
 
@@ -61,12 +63,10 @@ function App() {
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-screen w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden pt-[100px] animate-in' ref={hiddenMenu}>
+                <div className='h-screen w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden overflow-y-auto animate-in slide-in-from-left-full duration-200' ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               
-                {/* HIDDEN BUTTON  */}
-                <HiddenMenuButton func={toggleHiddenMenu}/>
 
                 {/* OVERLAY */}
                 <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 hidden' ref={overlay}/>
@@ -74,7 +74,7 @@ function App() {
                 {/* CONTENT */}
                 <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
 
-                  <div className='shadow-md sticky top-0 bg-white z-10 w-full hidden lg:block'>
+                  <div className='shadow-md sticky top-0 bg-white z-10 w-full'>
                     <Categories/>
                   </div>
 

@@ -26,8 +26,8 @@ const Sidebar = () => {
             </div>
 
             <div className="grid place-items-center p-2 w-full border-black border-t-2">
-                <p>Developed by Leonardo de Souza Bezerra</p>
-                <p>API's used: TMDB</p>
+                <p>Developed by <a href="https://github.com/leobez" target="_blank"  className="text-purple-900">Leonardo de Souza Bezerra</a></p>
+                <p>Data by <a href="https://www.themoviedb.org/?language=pt-BR" target="_blank" className="text-purple-900">TMDB</a></p>
             </div>
 
         </div>
