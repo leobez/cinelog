@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState} from "react"
-import ModeContext, { ModeContextType } from "../context/ModeContext"
 
 const Header = () => {
 
-    const {mode, toggleMode} = useContext(ModeContext) as ModeContextType
     const [allowed, setAllowed] = useState<boolean>(true)
 
     // Set initial mode theme 
@@ -17,7 +15,7 @@ const Header = () => {
 
         return () => setAllowed(false)
 
-    }, [mode])
+    }, [])
 
     const createAnimationElement = (text:string):HTMLElement => {
         const ANIMATION = document.createElement('div')

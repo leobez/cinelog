@@ -47,14 +47,8 @@ export const MovieListContextProvider = ({children}:any) => {
     const [sort, setSort]           = useState<string[]>([])
 
     useEffect(() => {
-
-        //console.log('mudou categoria. current: ', category)
-
         setList([])
         setPage(1)
-
-        //console.log('em teoria 1')
-
         // Triggers function that gets data. Always triggers when category is changed, which always means first call
         setRun((prev:boolean) => !prev) 
 

@@ -63,7 +63,7 @@ function App() {
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-screen w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden overflow-y-auto animate-in slide-in-from-left-full duration-200' ref={hiddenMenu}>
+                <div className='h-screen w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden animate-in slide-in-from-left-full duration-200' ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               

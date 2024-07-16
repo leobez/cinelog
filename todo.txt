@@ -1,18 +1,16 @@
--> Hidden menu y overflow scroll
 -> Create hooks for fetching data...
 -> Save and return scroll position
--> Delete console.logs()
-
-
 -> Add cool loading animation for loading random
--> Color Scheme
+-> Color Scheme + header stuff
 -> Dark/White mode
 
 
-
 TODO: 
+    -> Test on phone first then, if necessary -> Hidden menu y overflow scroll
     -> While poster img not loaded, show ghost card
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
     -> Maybe pagination or infinite scrolling
     -> ... Games
+    -> Delete console.logs()
+
