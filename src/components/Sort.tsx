@@ -1,28 +1,37 @@
 type Props = {
-    func:(e:any)=>void;
-    func2:(e:any)=>void;
-    func3:(e:any)=>void;
+    SubmitFunc:(e:any)=>void;
+    setSort:(e:any)=>void;
+    setOrder:(e:any)=>void;
 }
 
-const Sort = ({func, func2, func3}: Props) => {
+const Sort = ({SubmitFunc, setSort, setOrder}: Props) => {
 
   return (
     <>
-        {/* Choose option to sort by (only one - radio) */}
-        {/* Choose if it will be asc or desc */}
-        {/* Click button */}
-        <form onSubmit={func}>
+
+        <form onSubmit={SubmitFunc}>
             <div>
 
                 <div className="flex gap-1">
                     <input 
                         type="radio" 
-                        id="budget" 
+                        id="original_title" 
                         name="order" 
-                        value="budget" 
-                        onChange={() => func2('budget')}
+                        value="original_title" 
+                        onChange={() => setSort('original_title')}
                     />
-                    <label htmlFor="budget">Budget</label>
+                    <label htmlFor="original_title">Original Title</label>
+                </div>
+
+                <div className="flex gap-1">
+                    <input 
+                        type="radio" 
+                        id="title" 
+                        name="order" 
+                        value="title" 
+                        onChange={() => setSort('title')}
+                    />
+                    <label htmlFor="title">Title</label>
                 </div>
 
                 <div className="flex gap-1">
@@ -31,20 +40,9 @@ const Sort = ({func, func2, func3}: Props) => {
                         id="popularity" 
                         name="order" 
                         value="popularity" 
-                        onChange={() => func2('popularity')}
+                        onChange={() => setSort('popularity')}
                     />
                     <label htmlFor="popularity">Popularity</label>
-                </div>
-
-                <div className="flex gap-1">
-                    <input 
-                        type="radio" 
-                        id="release_date" 
-                        name="order" 
-                        value="release_date" 
-                        onChange={() => func2('release_date')}
-                    />
-                    <label htmlFor="release_date">Release date</label>
                 </div>
 
                 <div className="flex gap-1">
@@ -53,7 +51,7 @@ const Sort = ({func, func2, func3}: Props) => {
                         id="revenue" 
                         name="order" 
                         value="revenue" 
-                        onChange={() => func2('revenue')}
+                        onChange={() => setSort('revenue')}
                     />
                     <label htmlFor="revenue">Revenue</label>
                 </div>
@@ -61,12 +59,23 @@ const Sort = ({func, func2, func3}: Props) => {
                 <div className="flex gap-1">
                     <input 
                         type="radio" 
-                        id="runtime" 
+                        id="primary_release_date" 
                         name="order" 
-                        value="runtime" 
-                        onChange={() => func2('runtime')}
+                        value="primary_release_date" 
+                        onChange={() => setSort('primary_release_date')}
                     />
-                    <label htmlFor="runtime">Runtime</label>
+                    <label htmlFor="primary_release_date">Release date</label>
+                </div>
+
+                <div className="flex gap-1">
+                    <input 
+                        type="radio" 
+                        id="budget" 
+                        name="order" 
+                        value="budget" 
+                        onChange={() => setSort('budget')}
+                    />
+                    <label htmlFor="budget">Budget</label>
                 </div>
 
                 <div className="flex gap-1">
@@ -75,7 +84,7 @@ const Sort = ({func, func2, func3}: Props) => {
                         id="vote_average" 
                         name="order" 
                         value="vote_average"
-                        onChange={() => func2('vote_average')}
+                        onChange={() => setSort('vote_average')}
                     />
                     <label htmlFor="vote_average">Vote average</label>
                 </div>
@@ -86,7 +95,7 @@ const Sort = ({func, func2, func3}: Props) => {
                         id="vote_count" 
                         name="order" 
                         value="vote_count" 
-                        onChange={() => func2('vote_count')}
+                        onChange={() => setSort('vote_count')}
                     />
                     <label htmlFor="vote_count">Vote count</label>
                 </div>
@@ -95,7 +104,7 @@ const Sort = ({func, func2, func3}: Props) => {
 
             <hr />
 
-            {/* ASC OR DESC */}
+            {/* ascending or descending */}
             <div>
                 <div className="flex gap-1">
                     <input 
@@ -103,9 +112,9 @@ const Sort = ({func, func2, func3}: Props) => {
                         id="asc" 
                         name="ascdesc" 
                         value="asc" 
-                        onChange={() => func3('asc')}
+                        onChange={() => setOrder('asc')}
                     />
-                    <label htmlFor="asc">ASC</label>
+                    <label htmlFor="asc">Ascendente</label>
                 </div>
                 <div className="flex gap-1">
                     <input 
@@ -113,9 +122,9 @@ const Sort = ({func, func2, func3}: Props) => {
                         id="desc" 
                         name="ascdesc" 
                         value="desc" 
-                        onChange={() => func3('desc')}
+                        onChange={() => setOrder('desc')}
                     />
-                    <label htmlFor="desc">DESC</label>
+                    <label htmlFor="desc">Descendente</label>
                 </div>
             </div>
 

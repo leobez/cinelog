@@ -116,7 +116,7 @@ const ByGenre = () => {
             </button>
             <div className="relative">
               <div ref={sortByRef} className="h-fit w-44 mt-[0.5px] right-0 block top-0 border-2 border-color05 p-2 text-left animate-in slide-in-from-top-5 duration-400 absolute z-40 bg-white overflow-y-auto scrollbar-thin">
-                <Sort func={handleSort} func2={setSort} func3={setOrder}/>
+                <Sort SubmitFunc={handleSort} setSort={setSort} setOrder={setOrder}/>
               </div> 
             </div>
           </div>

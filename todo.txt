@@ -1,14 +1,15 @@
 -> Add ordering to filter
     -> Fix layout
-    -> Fix which element can be used to sort
-    -> Load more breaks sort
-
-
+    -> Better code at ByGenre.tsx
+    -> 'Load more' breaks sort
 -> Save and return scroll position
 -> Delete console.logs()
+
 -> Create hooks for fetching data...
 -> Better side menu (filter/random buttons, layout both block and hidden)
 -> Dark/White mode
+
+
 
 TODO: 
     -> Games
