@@ -2,11 +2,12 @@ import { useContext, useEffect, useRef, useState } from "react"
 import MovieContext, { MovieContextType } from "../context/MovieContext"
 import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
-import Button from "../components/Button"
 import { TMDB_GENRES } from "../data/TMDB_GENRES"
 import Loading from "../components/Loading"
 import { useInitialLoading } from "../hooks/useInitialLoading"
-import Sort from "../components/Sort"
+import Sort from "../components/MovieListPages/Sort"
+import Title from "../components/MovieListPages/Title"
+import LoadMoreButton from "../components/MovieListPages/LoadMoreButton"
 
 const ByGenre = () => {
 
@@ -111,42 +112,23 @@ const ByGenre = () => {
 
     return (
       <>
-        <div className="py-3 text-left text-lg border-b-2 mb-2 border-color05 text-ellipsis overflow-hidden whitespace-nowrap">
-        </div>
-
-        <div className="flex justify-between w-full py-3 px-2 mt-14 lg:mt-0">
-
-          {/* TITLE */}
-          <div className="text-lg text-left">
-            {params && genres && <>Genres: {genres.join(',')}</>}
-          </div>
-
-          {/* SORT */}
-          <div className="w-fit">
-            <button onClick={toggleSortBy} className="border-black border-2 h-full w-28 py-2 hover:bg-black hover:text-white">
-              Sort by
-            </button>
-            <div className="relative">
-              <div ref={sortByRef} className="h-fit w-44 mt-[0.5px] right-0 hidden top-0 border-2 border-color05 p-2 text-left animate-in slide-in-from-top-5 duration-400 absolute z-40 bg-white overflow-y-auto scrollbar-thin">
-                <Sort SubmitFunc={handleSort} setSort={setSort} setOrder={setOrder}/>
-              </div> 
-            </div>
-          </div>
-
-        </div>
-
-        {list && 
-          <>
-            {list.length > 0 ? (
-              <MovieList movieList={list}/>
-            ) : (
-              <p>No elements found.</p>
-            )}
-          </>
+        {params && genres && 
+          <Title title={`Genres: ${genres.join(',')}`}/>
         }
-        <div className="my-4 mr-2 flex justify-end text-sm">
-          <Button text={'Load more +'} loading={loading} func={updatePage}/>
-        </div>
+        
+        <Sort 
+          SubmitFunc={handleSort} 
+          toggleSortFunc={toggleSortBy}
+          setSort={setSort} 
+          setOrder={setOrder}
+          sortByRef={sortByRef}
+        />
+
+        {list && list.length > 0 && 
+          <MovieList movieList={list}/>
+        }
+
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
     )
 }

@@ -2,9 +2,10 @@ import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
 import { useContext, useEffect, useRef } from "react"
 import MovieContext, { MovieContextType } from "../context/MovieContext"
-import Button from "../components/Button"
 import Loading from "../components/Loading"
 import { useInitialLoading } from "../hooks/useInitialLoading"
+import Title from "../components/MovieListPages/Title"
+import LoadMoreButton from "../components/MovieListPages/LoadMoreButton"
 
 const Search = () => {
 
@@ -58,23 +59,15 @@ const Search = () => {
 
     return (
       <>
-
-        <div className="py-3 text-left text-lg border-b-2 mb-2 border-color05 text-ellipsis overflow-hidden whitespace-nowrap">
-          {params && <>Query: {params.get('q')}</>}
-        </div>
-
-        {list &&
-          <>
-            {list.length > 0 ? (
-              <MovieList movieList={list}/>
-            ) : (
-              <p>No elements found.</p>
-            )}
-          </>
+        {params && 
+          <Title title={`Query: ${params.get('q')}`}/>
         }
-        <div className="my-4 mr-2 flex justify-end text-sm">
-          <Button text={'Load more +'} loading={loading} func={updatePage}/>
-        </div>
+
+        {list && list.length > 0 && 
+          <MovieList movieList={list}/>
+        }
+
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
     )
 }
