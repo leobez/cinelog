@@ -11,7 +11,7 @@ const Sort = ({SubmitFunc, setSort, setOrder}: Props) => {
 
         <form onSubmit={SubmitFunc}>
             <div>
-
+                <div className="font-bold">Sort By</div>
                 <div className="flex gap-1">
                     <input 
                         type="radio" 
@@ -102,10 +102,12 @@ const Sort = ({SubmitFunc, setSort, setOrder}: Props) => {
 
             </div>
 
-            <hr />
+            <div className="h-[1px] bg-black w-full my-2"/>
 
             {/* ascending or descending */}
             <div>
+                <div className="font-bold">Order By</div>
+
                 <div className="flex gap-1">
                     <input 
                         type="radio" 

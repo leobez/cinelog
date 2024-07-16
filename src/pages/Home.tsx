@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef } from "react";
 import MovieContext, { MovieContextType } from "../context/MovieContext";
 import MovieList from "../components/MovieList";
-import Button from "../components/Button";
 import Loading from "../components/Loading";
 import { useInitialLoading } from "../hooks/useInitialLoading";
+import Title from "../components/MovieListPages/Title";
+import LoadMoreButton from "../components/MovieListPages/LoadMoreButton";
 
 const Home = () => {
 
@@ -64,21 +65,17 @@ const Home = () => {
 
     return (
       <>
-        <div className="my-4 flex justify-center">
-          <div className="text-lg w-11/12 flex justify-start border-b-2 border-color05 pb-2">
-            Top Rated Movies
-          </div>
-        </div>
+        <Title title="Top Rated Movies"/>
 
-        {list && list.length > 0 && <MovieList movieList={list}/>}
+        {list && list.length > 0 && 
+          <MovieList movieList={list}/>
+        }
 
-        {loading && <Loading message="Loading ..."/>}
+        {loading && 
+          <Loading message="Loading ..."/>
+        }
 
-        <div className="my-4 flex justify-center">
-          <div className="w-11/12 flex justify-end text-sm">
-            <Button text={'Load more +'} loading={loading} func={updatePage}/>
-          </div>
-        </div>
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
     )
 }

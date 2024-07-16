@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef } from 'react'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
 import MovieList from '../components/MovieList'
-import Button from '../components/Button'
 import Loading from '../components/Loading'
 import { useInitialLoading } from '../hooks/useInitialLoading'
+import Title from '../components/MovieListPages/Title'
+import LoadMoreButton from '../components/MovieListPages/LoadMoreButton'
 
 const Popular = () => {
     
@@ -54,18 +55,19 @@ const Popular = () => {
 
     return (
       <>
-        <div className="py-3 text-lg mt-14 lg:mt-0 border-b-2 mb-2 border-color05 text-left">
-          Popular Movies
-        </div>
+        <Title title="Popular Movies"/>
 
-        {list && list.length > 0 && <MovieList movieList={list}/>}
+        {list && list.length > 0 && 
+          <MovieList movieList={list}/>
+        }
 
-        {loading && <Loading message="Loading ..."/>}
+        {loading && 
+          <Loading message="Loading ..."/>
+        }
 
-        <div className="my-4 mr-2 flex justify-end text-sm">
-          <Button text={'Load more +'} loading={loading} func={updatePage}/>
-        </div>
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
+
     )
 }
 

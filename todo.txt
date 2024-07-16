@@ -1,16 +1,18 @@
--> Fix layout of sort by
 -> Criar componentes para botões, titulos etc das páginas (toprated, popular etc)
+-> Better leayout for sidebar filter/random buttons
 -> Create hooks for fetching data...
 
+
 -> Save and return scroll position
--> Better side menu (filter/random buttons, layout both block and hidden)
+-> Better layout for side menu hidden/block
 -> Dark/White mode
 -> Delete console.logs()
 
 
 
 TODO: 
-    -> Games
-    -> Add tutorial or message boxes to show how to use each functionality
+    -> While poster img not loaded, show ghost card
+        -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
     -> Maybe pagination or infinite scrolling
+    -> ... Games
