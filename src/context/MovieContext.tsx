@@ -5,7 +5,7 @@ export type MovieContextType = {
     GET_movies_popular:()=>Promise<void>;
     GET_movies_upcoming:()=>Promise<void>;
     GET_movies_byquery:(query:string)=>Promise<void>;
-    GET_movies_bygenres:(genres:number[], sort:string[])=>Promise<void>;
+    GET_movies_bygenres:(genres:number[])=>Promise<void>;
     GET_movies_similar:(id:number)=>Promise<any>; // Returns list of movies                  
     GET_movie_byid:(id:number)=>Promise<any>; // Returns object of movie                   
     GET_movie_randombygenres:(genres:number[])=>Promise<number>; // Returns random number id
@@ -271,7 +271,7 @@ export const MovieListContextProvider = ({children}:any) => {
     }
 
     // This one is sortable
-    const GET_movies_bygenres = async(genres:number[], sort:string[]):Promise<any> => {
+    const GET_movies_bygenres = async(genres:number[]):Promise<any> => {
 
         resetStates()
 

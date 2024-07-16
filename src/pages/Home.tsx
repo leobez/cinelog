@@ -64,22 +64,20 @@ const Home = () => {
 
     return (
       <>
-        <div className="flex justify-between w-full py-3 px-2 mt-14 lg:mt-0">
-
-          {/* TITLE */}
-          <div className="text-lg text-left">
+        <div className="my-4 flex justify-center">
+          <div className="text-lg w-11/12 flex justify-start border-b-2 border-color05 pb-2">
             Top Rated Movies
           </div>
         </div>
-
-        <div className='h-[1px] border-black border w-full mb-5'/>
 
         {list && list.length > 0 && <MovieList movieList={list}/>}
 
         {loading && <Loading message="Loading ..."/>}
 
-        <div className="my-4 mr-2 flex justify-end text-sm">
-          <Button text={'Load more +'} loading={loading} func={updatePage}/>
+        <div className="my-4 flex justify-center">
+          <div className="w-11/12 flex justify-end text-sm">
+            <Button text={'Load more +'} loading={loading} func={updatePage}/>
+          </div>
         </div>
       </>
     )

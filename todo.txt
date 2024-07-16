@@ -1,13 +1,11 @@
--> Add ordering to filter
-    -> Fix layout
-    -> Better code at ByGenre.tsx
-    -> 'Load more' breaks sort
--> Save and return scroll position
--> Delete console.logs()
-
+-> Fix layout of sort by
+-> Criar componentes para botões, titulos etc das páginas (toprated, popular etc)
 -> Create hooks for fetching data...
+
+-> Save and return scroll position
 -> Better side menu (filter/random buttons, layout both block and hidden)
 -> Dark/White mode
+-> Delete console.logs()
 
 
 

@@ -10,10 +10,22 @@ import Sort from "../components/Sort"
 
 const ByGenre = () => {
 
-    const {updateCategory, GET_movies_bygenres, updatePage:updatePageC, page, loading, list, run, resetStates, updateWarning, updateSort} = useContext(MovieContext) as MovieContextType
+    const {
+      updateCategory, 
+      GET_movies_bygenres, 
+      updatePage:updatePageC, 
+      page, 
+      loading, 
+      list, 
+      run, 
+      resetStates, 
+      updateWarning, 
+      updateSort
+    } = useContext(MovieContext) as MovieContextType
 
-    const [params] = useSearchParams()
     const isInitialMount = useRef(true);
+    const [params] = useSearchParams()
+
     const [genres, setGenres] = useState<string[]>([])
     const [sort, setSort] = useState<string>('')
     const [order, setOrder] = useState<string>('')
@@ -46,8 +58,8 @@ const ByGenre = () => {
       const ASYNC_GET_movies_bygenres = async() => {
         const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
         if (!genresIds) return;
-        console.log('sort and order: ', sort, order)
-        await GET_movies_bygenres(genresIds, [sort, order])
+        console.log('sort and order: ', sort, order) //
+        await GET_movies_bygenres(genresIds)
       }
 
       ASYNC_GET_movies_bygenres()
@@ -79,15 +91,15 @@ const ByGenre = () => {
       resetStates()
 
       if (!sort || !sort.length) {
-        updateWarning('Order invalid')
+        updateWarning('Sort invalid')
         return;
       }
       if (!order || !order.length) {
-        updateWarning('Ascdesc invalid')
+        updateWarning('Order invalid')
         return;
       }
 
-      console.log('order and ascdesc: ', sort, order)
+      //console.log('order and ascdesc: ', sort, order)
       updateSort(sort, order)
     }
 
@@ -109,17 +121,18 @@ const ByGenre = () => {
             {params && genres && <>Genres: {genres.join(',')}</>}
           </div>
 
-          {/* ORDER */}
+          {/* SORT */}
           <div className="w-fit">
             <button onClick={toggleSortBy} className="border-black border-2 h-full w-28 py-2 hover:bg-black hover:text-white">
-              Order by
+              Sort by
             </button>
             <div className="relative">
-              <div ref={sortByRef} className="h-fit w-44 mt-[0.5px] right-0 block top-0 border-2 border-color05 p-2 text-left animate-in slide-in-from-top-5 duration-400 absolute z-40 bg-white overflow-y-auto scrollbar-thin">
+              <div ref={sortByRef} className="h-fit w-44 mt-[0.5px] right-0 hidden top-0 border-2 border-color05 p-2 text-left animate-in slide-in-from-top-5 duration-400 absolute z-40 bg-white overflow-y-auto scrollbar-thin">
                 <Sort SubmitFunc={handleSort} setSort={setSort} setOrder={setOrder}/>
               </div> 
             </div>
           </div>
+
         </div>
 
         {list && 

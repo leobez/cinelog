@@ -114,7 +114,7 @@ const Sort = ({SubmitFunc, setSort, setOrder}: Props) => {
                         value="asc" 
                         onChange={() => setOrder('asc')}
                     />
-                    <label htmlFor="asc">Ascendente</label>
+                    <label htmlFor="asc">Ascending</label>
                 </div>
                 <div className="flex gap-1">
                     <input 
@@ -124,7 +124,7 @@ const Sort = ({SubmitFunc, setSort, setOrder}: Props) => {
                         value="desc" 
                         onChange={() => setOrder('desc')}
                     />
-                    <label htmlFor="desc">Descendente</label>
+                    <label htmlFor="desc">Descending</label>
                 </div>
             </div>
 
