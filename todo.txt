@@ -1,18 +1,17 @@
--> Criar componentes para botões, titulos etc das páginas (toprated, popular etc)
--> Better leayout for sidebar filter/random buttons
+-> Better layout for side menu hidden
 -> Create hooks for fetching data...
-
-
 -> Save and return scroll position
--> Better layout for side menu hidden/block
--> Dark/White mode
+
 -> Delete console.logs()
+-> Color Scheme
+-> Dark/White mode
 
 
 
 TODO: 
     -> While poster img not loaded, show ghost card
-        -> Add tutorial or message boxes to show how to use each functionality
+    -> Add tutorial or message boxes to show how to use each functionality
+    -> Add cool loading animation for loading random
     -> Query shows possible results
     -> Maybe pagination or infinite scrolling
     -> ... Games

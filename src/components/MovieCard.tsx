@@ -12,7 +12,7 @@ const MovieCard = ({movie}: Props) => {
         
         <>
             <Link to={`/movie/${movie.id}`}>
-                <div className='cursor-pointer flex flex-col relative hover:opacity-50 w-full h-full'> 
+                <div className='cursor-pointer flex flex-col relative hover:opacity-50 duration-150 w-full h-full'> 
                     <figure className='h-full'>
                         <img src={`${POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='object-cover h-full w-full' loading="lazy"/>
                     </figure>

@@ -92,11 +92,11 @@ const ByGenre = () => {
       resetStates()
 
       if (!sort || !sort.length) {
-        updateWarning('Sort invalid')
+        updateWarning('Select one sort to filter')
         return;
       }
       if (!order || !order.length) {
-        updateWarning('Order invalid')
+        updateWarning('Select one order to filter')
         return;
       }
 

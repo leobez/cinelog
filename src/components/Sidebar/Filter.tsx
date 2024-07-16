@@ -29,7 +29,7 @@ const Filter = () => {
       e.preventDefault()
       const args = selectedGenres.join(',')
       if (!args || args.length === 0) {
-        updateWarning('Genre invalid')
+        updateWarning('Select at least on genre to filter')
         return;
       }
       navigate(`/bygenre?genres=${args}`)
@@ -39,7 +39,7 @@ const Filter = () => {
       e.preventDefault()
       const args = selectedGenres.join(',')
       if (!args || args.length === 0) {
-        updateWarning('Genre invalid')
+        updateWarning('Select at least on genre to randomize')
         return;
       }
       navigate(`/random?genres=${args}`)
@@ -73,7 +73,7 @@ const Filter = () => {
 
     return (
       <>
-        <div className="text-left mb-2">Filter by genres</div>
+        <div className="text-left mb-2">Filter randomize a movie based on genres:</div>
         {GENRES && 
             <form>
                 <div className="grid grid-cols-3 gap-1">
@@ -83,14 +83,14 @@ const Filter = () => {
                         </button>
                     ))}
                 </div>
-                <div className="h-12 flex w-fit gap-1 mt-3">
+                <div className="h-12 flex w-full gap-1 mt-3">
 
                     {!loading &&
                       <>
-                        <button type="submit" className="border-2 border-color05 px-4 py-1 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleFilter}> 
+                        <button type="submit" className="w-1/2 border-2 border-color05 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleFilter}> 
                           Filter 
                         </button>
-                        <button type="submit"  className="border-2 border-color05 px-4 py-1 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleRandom}> 
+                        <button type="submit"  className="w-1/2 border-2 border-color05 hover:bg-color05 hover:text-white cursor-pointer" onClick={handleRandom}> 
                           Random 
                         </button>
                       </>
@@ -98,10 +98,10 @@ const Filter = () => {
 
                     {loading &&
                       <>
-                        <button type="submit" className="border-2 border-color05 px-4 py-1 bg-color05 text-white cursor-pointer disabled"> 
+                        <button type="submit" className="w-1/2 border-2 border-color05 bg-color05 text-white cursor-pointer disabled"> 
                           Filter 
                         </button>
-                        <button type="submit"  className="border-2 border-color05 px-4 py-1 bg-color05 text-white cursor-pointer disabled"> 
+                        <button type="submit"  className="w-1/2 border-2 border-color05 bg-color05 text-white cursor-pointer disabled"> 
                           Random
                         </button>
                       </>

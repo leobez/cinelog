@@ -97,7 +97,7 @@ const Movie = () => {
                     </div>
                     <div className='relative text-sm'>
                         <div 
-                            className='h-fit w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' 
+                            className='h-fit w-full mt-[0.5px] hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' 
                             id='prod-detail' 
                             ref={missingInfoEl}
                         >   
@@ -166,7 +166,7 @@ const Movie = () => {
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail}>
+                            <div className='h-72 mt-[0.5px] w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail}>
                                  <Table
                                     head={[]}
                                     rows={[

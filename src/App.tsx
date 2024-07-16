@@ -56,7 +56,7 @@ function App() {
               <BrowserRouter>
 
                 {/* SIDE-BAR */}
-                <div className='w-4/12 top-0 sticky h-screen border-black border-2 hidden lg:block bg-white'>
+                <div className='w-4/12 top-0 sticky h-screen shadow-md p-3 hidden lg:block bg-white'>
                   <Sidebar/>
                 </div>
 
@@ -72,9 +72,9 @@ function App() {
                 <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 hidden' ref={overlay}/>
 
                 {/* CONTENT */}
-                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white px-2 shadow-md'>
+                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
 
-                  <div className='border-2 border-black sticky top-0 bg-white z-10 w-full hidden lg:block'>
+                  <div className='shadow-md sticky top-0 bg-white z-10 w-full hidden lg:block'>
                     <Categories/>
                   </div>
 
