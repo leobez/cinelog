@@ -6,23 +6,15 @@ import Loading from "../components/Loading"
 import { useInitialLoading } from "../hooks/useInitialLoading"
 import Title from "../components/MovieListPages/Title"
 import LoadMoreButton from "../components/MovieListPages/LoadMoreButton"
-import { useGetByQueryMovies } from "../hooks/FetchData/useGetByQueryMovies"
 
 const Search = () => {
 
-      const {
-        updateCategory, 
-        updatePage, 
-        page, 
-        loading, 
-        list, 
-        run, 
-    } = useContext(MovieContext) as MovieContextType
+    const {updateCategory, GET_movies_byquery, updatePage:updatePageC, page, loading, list, run} = useContext(MovieContext) as MovieContextType
 
-    // Get genres in params
     const [params] = useSearchParams()
+    const isInitialMount = useRef(true);
 
-    // Update category state to 'byquery'
+    // UPDATE CATEGORY -> RESETS LIST AND PAGE.
     useEffect(() => {
       updateCategory(`byquery?q=${params.get('q')}`)
     }, [params])
@@ -30,10 +22,33 @@ const Search = () => {
     // Initial loading
     const {initialLoading} = useInitialLoading(list)
 
-    useGetByQueryMovies(run, page, params)
+    useEffect(() => {
 
-    const handleUpdatePage = () => {
-      updatePage()
+      // Only run this effect if page has actually changed
+      if (isInitialMount.current) {
+        console.log('blocked: ref')
+        isInitialMount.current = false
+        return;
+      } 
+      if (!page) {
+        console.log('blocked: page')
+        return;
+      } 
+
+      console.log('running ASYNC_GET_movies_byquery')
+      const ASYNC_GET_movies_byquery = async() => {
+        const query = params.get('q')
+        if (!query) return;
+
+        await GET_movies_byquery(query)
+      }
+  
+      ASYNC_GET_movies_byquery()
+
+    }, [page, run])
+
+    const updatePage = () => {
+      updatePageC()
     }
 
     if (initialLoading) {
@@ -52,7 +67,7 @@ const Search = () => {
           <MovieList movieList={list}/>
         }
 
-        <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
     )
 }

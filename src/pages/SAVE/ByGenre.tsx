@@ -8,50 +8,69 @@ import { useInitialLoading } from "../hooks/useInitialLoading"
 import Sort from "../components/MovieListPages/Sort"
 import Title from "../components/MovieListPages/Title"
 import LoadMoreButton from "../components/MovieListPages/LoadMoreButton"
-import { useGetByGenreMovies } from "../hooks/FetchData/useGetByGenresMovies"
 
 const ByGenre = () => {
 
-      const {
-        updateCategory, 
-        updatePage, 
-        page, 
-        loading, 
-        list, 
-        run, 
-        resetStates,
-        updateWarning,
-        updateSort
+    const {
+      updateCategory, 
+      GET_movies_bygenres, 
+      updatePage:updatePageC, 
+      page, 
+      loading, 
+      list, 
+      run, 
+      resetStates, 
+      updateWarning, 
+      updateSort
     } = useContext(MovieContext) as MovieContextType
 
-    // Get genres in params
+    const isInitialMount = useRef(true);
     const [params] = useSearchParams()
 
-    // Genres in name format to show to user on UI
     const [genres, setGenres] = useState<string[]>([])
+    const [sort, setSort] = useState<string>('')
+    const [order, setOrder] = useState<string>('')
 
-    // Update category state to 'bygenre'
+    // UPDATE CATEGORY -> RESETS LIST AND PAGE.
     useEffect(() => {
       updateCategory(`bygenre?q=${params.get('genres')}`)
       const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
-      // Get genres names
       const tempList:any = genresIds?.map((id:any)=>TMDB_GENRES[id])
       setGenres(tempList)
     }, [params])
 
-    const [sort, setSort] = useState<string>('')
-    const [order, setOrder] = useState<string>('')
-
     // Initial loading
     const {initialLoading} = useInitialLoading(list)
 
-    useGetByGenreMovies(run, page, sort, order, params)
+    useEffect(() => {
 
-    const handleUpdatePage = () => {
-      updatePage()
+      // Only run this effect if page has actually changed
+      if (isInitialMount.current) {
+        console.log('blocked: ref')
+        isInitialMount.current = false
+        return;
+      } 
+      if (!page) {
+        console.log('blocked: page')
+        return;
+      } 
+
+      console.log('running ASYNC_GET_movies_bygenres')
+      const ASYNC_GET_movies_bygenres = async() => {
+        const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
+        if (!genresIds) return;
+        console.log('sort and order: ', sort, order) //
+        await GET_movies_bygenres(genresIds)
+      }
+
+      ASYNC_GET_movies_bygenres()
+
+    }, [page, run])
+
+    const updatePage = () => {
+      updatePageC()
     }
 
-    // -- Create func for this -- //
     const sortByRef:any = useRef<HTMLDivElement>()
     const toggleSortBy = () => {
         const classNames = sortByRef.current.className.split(' ')
@@ -109,7 +128,7 @@ const ByGenre = () => {
           <MovieList movieList={list}/>
         }
 
-        <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
     )
 }
