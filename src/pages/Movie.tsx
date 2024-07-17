@@ -6,15 +6,21 @@ import Loading from '../components/Loading'
 import { useInitialLoadingMovie } from '../hooks/useInitialLoadingMovie'
 import Table from '../components/Movie/Table'
 import { getMovieMissingInfo } from '../utils/getMovieMissingInfo'
+import { toggleComponent } from '../utils/toggleComponent'
 
 const Movie = () => {
+
+    const {
+        GET_movie_byid, 
+        GET_movies_similar, 
+        loading
+    } = useContext(MovieContext) as MovieContextType
 
     const {id} = useParams()
 
     const [missingInfo, setMissingInfo] = useState<string[]>([])
     const [movie, setMovie] = useState<any>(null)
     const [similarMovies, setSimilarMovies] = useState<any[]>([])
-    const {GET_movie_byid, GET_movies_similar, loading} = useContext(MovieContext) as MovieContextType
 
     // Initial loading
     const {initialLoading:initialLoadingMovie} = useInitialLoadingMovie(movie) 
@@ -38,35 +44,8 @@ const Movie = () => {
      
     }, [id])
 
-    const prodDetail:any = useRef<HTMLDivElement>()
-    const toggleProdDetail = () => {
-        const classNames = prodDetail.current.className.split(' ')
-        if (classNames.includes('hidden')) {
-            // Make it visible
-            prodDetail.current.classList.remove('hidden')
-            prodDetail.current.classList.add('block')
-
-        } else if (classNames.includes('block')) {
-            // Make it invisible
-            prodDetail.current.classList.remove('block')
-            prodDetail.current.classList.add('hidden')
-        }
-    }
-
-    const missingInfoEl:any = useRef<HTMLDivElement>()
-    const toggleMissingInfoEl = () => {
-        const classNames = missingInfoEl.current.className.split(' ')
-        if (classNames.includes('hidden')) {
-            // Make it visible
-            missingInfoEl.current.classList.remove('hidden')
-            missingInfoEl.current.classList.add('block')
-
-        } else if (classNames.includes('block')) {
-            // Make it invisible
-            missingInfoEl.current.classList.remove('block')
-            missingInfoEl.current.classList.add('hidden')
-        }
-    }
+    const prodDetailRef:any = useRef<HTMLDivElement>()
+    const missingInfoRef:any = useRef<HTMLDivElement>()
 
     if (initialLoadingMovie) {
         return (
@@ -90,7 +69,7 @@ const Movie = () => {
                     <div className='w-64 flex flex-col'>
                         <button 
                             className='border-2 border-black py-2 px-4 self-end font-bold hover:bg-black hover:text-white' 
-                            onClick={toggleMissingInfoEl}
+                            onClick={missingInfoRef}
                         >
                             ?
                         </button>
@@ -99,7 +78,7 @@ const Movie = () => {
                         <div 
                             className='h-fit w-full mt-[0.5px] hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' 
                             id='prod-detail' 
-                            ref={missingInfoEl}
+                            ref={missingInfoRef}
                         >   
                         <p className='font-bold'>The following information are missing in this movie:</p>
                         <ul className='list-disc pl-4'>
@@ -162,11 +141,11 @@ const Movie = () => {
                     
                     {/* PRODUCTION DETAILS */}
                     <div>
-                        <button className='border-2 border-color05 w-full p-2 hover:bg-color05 hover:text-white' onClick={toggleProdDetail}>
+                        <button className='border-2 border-color05 w-full p-2 hover:bg-color05 hover:text-white' onClick={() => toggleComponent(prodDetailRef)}>
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 mt-[0.5px] w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetail}>
+                            <div className='h-72 mt-[0.5px] w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetailRef}>
                                  <Table
                                     head={[]}
                                     rows={[

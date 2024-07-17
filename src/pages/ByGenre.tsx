@@ -9,6 +9,7 @@ import Sort from "../components/MovieListPages/Sort"
 import Title from "../components/MovieListPages/Title"
 import LoadMoreButton from "../components/MovieListPages/LoadMoreButton"
 import { useGetByGenreMovies } from "../hooks/FetchData/useGetByGenresMovies"
+import { toggleComponent } from "../utils/toggleComponent"
 
 const ByGenre = () => {
 
@@ -51,21 +52,8 @@ const ByGenre = () => {
       updatePage()
     }
 
-    // -- Create func for this -- //
+    // Ref to toggle component
     const sortByRef:any = useRef<HTMLDivElement>()
-    const toggleSortBy = () => {
-        const classNames = sortByRef.current.className.split(' ')
-        if (classNames.includes('hidden')) {
-            // Make it visible
-            sortByRef.current.classList.remove('hidden')
-            sortByRef.current.classList.add('block')
-
-        } else if (classNames.includes('block')) {
-            // Make it invisible
-            sortByRef.current.classList.remove('block')
-            sortByRef.current.classList.add('hidden')
-        }
-    }
 
     const handleSort = (e:any) => {
       e.preventDefault()
@@ -81,7 +69,6 @@ const ByGenre = () => {
         return;
       }
 
-      //console.log('order and ascdesc: ', sort, order)
       updateSort(sort, order)
     }
 
@@ -99,7 +86,6 @@ const ByGenre = () => {
         
         <Sort 
           SubmitFunc={handleSort} 
-          toggleSortFunc={toggleSortBy}
           setSort={setSort} 
           setOrder={setOrder}
           sortByRef={sortByRef}

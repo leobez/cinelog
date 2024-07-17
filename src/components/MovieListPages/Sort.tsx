@@ -1,18 +1,19 @@
+import { toggleComponent } from "../../utils/toggleComponent";
+
 type Props = {
     SubmitFunc:(e:any)=>void;
-    toggleSortFunc:(e:any)=>void;
     setSort:(e:any)=>void;
     setOrder:(e:any)=>void;
     sortByRef:any
 }
 
-const Sort = ({SubmitFunc, toggleSortFunc, setSort, setOrder, sortByRef}: Props) => {
+const Sort = ({SubmitFunc, setSort, setOrder, sortByRef}: Props) => {
 
   return (
     <>
         <div className="w-full flex justify-center">
             <div className="w-11/12 flex justify-end pb-2 flex-col">
-                <button onClick={toggleSortFunc} className="border-black border-2 self-end h-full w-28 py-2 hover:bg-black hover:text-white">
+                <button onClick={() => toggleComponent(sortByRef)} className="border-black border-2 self-end h-full w-28 py-2 hover:bg-black hover:text-white">
                     Sort by
                 </button>
 

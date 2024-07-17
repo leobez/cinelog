@@ -45,7 +45,6 @@ const Filter = () => {
       navigate(`/random?genres=${args}`)
     }
 
-    // ADD LIMIT TO GENRES THAT CAN BE SELECTED
     const toggleGenre = (e:any):void => {
       e.preventDefault()
       
@@ -67,8 +66,6 @@ const Filter = () => {
         removeGenre(id)
 
       }
-
-      console.log(classList)
     }
 
     return (
