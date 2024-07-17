@@ -11,7 +11,8 @@ const MovieList = ({movieList}: Props) => {
 
     const handleClick = ():void => {
         // Save container current position, so it can be used to move user back to where they were before clicking.
-        const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode
+        const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+        console.log('scrollnode: ', ScrollNode)
         window.sessionStorage.setItem('scrollPosition', ScrollNode.scrollTop)
         console.log('saving on session storage: ', ScrollNode.scrollTop)
     }
@@ -22,7 +23,7 @@ const MovieList = ({movieList}: Props) => {
         // containerRef not loaded yet
         if (!containerRef.current) return;
 
-        const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode
+        const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
         const scrollPos = window.sessionStorage.getItem('scrollPosition')
         console.log('scrolling from session storage: ', scrollPos)
 

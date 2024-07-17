@@ -6,6 +6,7 @@ import { useInitialLoading } from "../hooks/useInitialLoading";
 import Title from "../components/MovieListPages/Title";
 import LoadMoreButton from "../components/MovieListPages/LoadMoreButton";
 import { useGetTopRatedMovies } from "../hooks/FetchData/useGetTopRatedMovies";
+import { useHadleScrollbarPosition } from "../hooks/useHadleScrollbarPosition";
 
 const Home = () => {
 
@@ -22,6 +23,9 @@ const Home = () => {
     useEffect(() => {
       updateCategory('top_rated')
     }, [])
+
+    // Handles scrollbar position when more than 1 page loaded
+    useHadleScrollbarPosition(page)
 
     // Handles the call to fetching data function
     useGetTopRatedMovies(run, page)

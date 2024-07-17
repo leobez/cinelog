@@ -13,31 +13,17 @@ import { useRef } from 'react'
 import HiddenSidebar from './components/Sidebar/HiddenSidebar'
 import HiddenMenuButton from './components/HiddenMenuButton'
 import Random from './pages/Random'
+import { toggleComponent } from './utils/toggleComponent'
 
 function App() {
 
     const hiddenMenu:any = useRef()
     const overlay:any = useRef()
+    const contentRef:any = useRef()
 
-    const toggleHiddenMenu = (e:any):void => {
-      e.preventDefault()
-      console.log(hiddenMenu)
-      const classNames = hiddenMenu.current.className.split(' ')
-
-      if (classNames.includes('hidden')) {
-          // Make it visible
-          hiddenMenu.current.classList.remove('hidden')
-          hiddenMenu.current.classList.add('block')
-          overlay.current.classList.remove('hidden')
-          overlay.current.classList.add('block')
-
-      } else if (classNames.includes('block')) {
-          // Make it invisible
-          hiddenMenu.current.classList.remove('block')
-          hiddenMenu.current.classList.add('hidden')
-          overlay.current.classList.remove('block')
-          overlay.current.classList.add('hidden')
-      }
+    // Save scroll position position
+    const handleScroll = (e:any) => {
+      console.log(e.target.scrollTop)     
     }
 
     return (
@@ -45,7 +31,7 @@ function App() {
         
           <header className='h-24 p-4 flex align-middle bg-color05 relative gap-5'>
             {/* HIDDEN BUTTON  */}
-            <HiddenMenuButton func={toggleHiddenMenu}/>
+            <HiddenMenuButton func={() => toggleComponent(hiddenMenu)}/>
             <Header/>
           </header>
 
@@ -67,12 +53,11 @@ function App() {
                   <HiddenSidebar/>
                 </div>
               
-
                 {/* OVERLAY */}
                 <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 hidden' ref={overlay}/>
 
                 {/* CONTENT */}
-                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
+                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md' ref={contentRef} onScroll={handleScroll}>
 
                   <div className='shadow-md sticky top-0 bg-white z-10 w-full'>
                     <Categories/>

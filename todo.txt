@@ -1,7 +1,9 @@
--> Save and return scroll position
--> Add cool loading animation for loading random
+-> on movieList, reset scrollPosition when changing pages (or reseting list?)
+
+-> click on 'Impossible Things' movie and fix error
 -> Color Scheme + header stuff
 -> Dark/White mode
+-> Add cool loading animation for loading random
 
 
 TODO: 
