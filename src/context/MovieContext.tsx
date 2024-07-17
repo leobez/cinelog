@@ -15,7 +15,9 @@ export type MovieContextType = {
     updatePage:()=>void;
     updateCategory:(newCategory:string)=>void;
     updateSort:(sort:string, order:string)=>void;
+    updateScrollPos:(scrollPos:number)=>void;
     resetStates:()=>void;
+    scrollPos:number;
     warning:string|null;
     error:string|null;
     loading:boolean;
@@ -45,20 +47,20 @@ export const MovieListContextProvider = ({children}:any) => {
     const [list, setList]           = useState<any[]>([])
     const [run, setRun]             = useState<boolean>(false)
     const [sort, setSort]           = useState<string[]>([])//Only used on GET_movies_bygenres
+    //
+    const [scrollPos, setScrollPos] = useState<number>(0)
+
 
     useEffect(() => {
-        //sessionStorage.removeItem('scrollPosition') 
-        ////console.log('removing scroll pos from session storage')
+        setScrollPos(0)
         setList([])
         setPage(1)
-        // test this
         // Triggers function that gets data. Always triggers when category is changed, which always means first call
         setRun((prev:boolean) => !prev) 
-
     }, [category])
 
-    // At this point, i know the order chosen and ascdesc. Now create a new fetch url...
     useEffect(() => {
+        setScrollPos(0)
         setList([])
         setPage(1)
         setRun((prev:boolean) => !prev) 
@@ -485,6 +487,10 @@ export const MovieListContextProvider = ({children}:any) => {
         setSort([sort, order])
     }
 
+    const updateScrollPos = (scrollPos:number):void => {
+        setScrollPos(scrollPos)
+    }
+
     return (
         <MovieContext.Provider value={
                 {
@@ -502,7 +508,9 @@ export const MovieListContextProvider = ({children}:any) => {
                     updatePage,
                     updateCategory,
                     updateSort,
+                    updateScrollPos,
                     resetStates,
+                    scrollPos,
                     warning,
                     error,
                     loading,

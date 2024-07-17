@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react"
+import { useContext, useEffect, useRef } from "react"
 import MovieCard from "./MovieCard"
+import MovieContext, { MovieContextType } from "../context/MovieContext";
 
 type Props = {
     movieList: any[];
@@ -9,32 +10,27 @@ const MovieList = ({movieList}: Props) => {
 
     const containerRef:any = useRef<HTMLDivElement>()
 
+    const {
+        scrollPos,
+        updateScrollPos,
+    } = useContext(MovieContext) as MovieContextType
+
     const handleClick = ():void => {
         // Save container current position, so it can be used to move user back to where they were before clicking.
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode // lmao
-        //console.log('scrollnode: ', ScrollNode)
-        window.sessionStorage.setItem('scrollPosition', ScrollNode.scrollTop)
-        //console.log('saving on session storage: ', ScrollNode.scrollTop)
-    }
+        updateScrollPos(Number(ScrollNode.scrollTop))
+    }   
 
     // when user returns to this component, put him into the position that was saved on sessionStorage
     useEffect(() => {
 
         // containerRef not loaded yet
         if (!containerRef.current) return;
-
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
-        const scrollPos = window.sessionStorage.getItem('scrollPosition')
-        //console.log('scrolling from session storage: ', scrollPos)
-
-        // There is no scrollPos in sessionStorage
-        if (!scrollPos) return;
-  
-        // Scroll that should be is not possible because there is not enough height in the element to suport it
-        if (scrollPos > ScrollNode.scrollHeight) return;
         
         // It is possible to move scrollBar
-        if (scrollPos) ScrollNode.scrollTop = scrollPos
+        console.log('moving scroll to: ', scrollPos)
+        ScrollNode.scrollTop = scrollPos
         
     }, [containerRef])
 

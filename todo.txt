@@ -1,6 +1,4 @@
--> Scroll position with context maybe?
--> click on 'Impossible Things' movie and fix error
--> Test on phone first then, if necessary -> Hidden menu y overflow scroll
+-> y scroll overflow on sidebar
 
 
 TODO: 

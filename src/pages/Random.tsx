@@ -31,7 +31,7 @@ const Random = () => {
             if (!tempId) return;
 
             setLoadingRandom(false)
-            // navigate(`/movie/${tempId}`) //
+            navigate(`/movie/${tempId}`) //
         }
 
         ASYNC_GET_movie_randombygenres()

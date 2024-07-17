@@ -69,7 +69,7 @@ const Movie = () => {
                     <div className='w-64 flex flex-col'>
                         <button 
                             className='border-2 border-black py-2 px-4 self-end font-bold hover:bg-black hover:text-white' 
-                            onClick={missingInfoRef}
+                            onClick={() => toggleComponent(missingInfoRef)}
                         >
                             ?
                         </button>
