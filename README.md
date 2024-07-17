@@ -1,32 +1,39 @@
 # Media collection
 
-(Still in development)
+Website that uses public a API to show movies with some filtering capabilities. 
 
-This is a website that shows games and movies with some filtering capabilities.
+Movie API: [TMDB](https://www.themoviedb.org/?language=pt-BR)
 
-<hr>
-
-Movie API: TMDB
-
-Games API: (still testing some)
+Currently hosted on Vercel: LINK
 
 <hr>
 
-Also using this one to learn some frontend technologies, such as:
+Website functions:
+
+- Filter movies by top rated
+> screenshot
+
+- Filter movies by most popular
+> screenshot 
+
+- Filter movies by upcoming
+> screenshot 
+
+- Filter movies by genres
+> screenshot
+
+- Get a random movie based on selected genres
+> screenshot
+
+- Search by a movie using queries
+> screenshot
+
+<hr>
+
+Tech Stack used: 
+- React.js
 - Tailwind CSS
     - Tailwind animated
     - Tailwind scrollbars
 - DaisyUI
 - Context API
-
-<hr>
-
-TODO (MOVIE MODE): 
-- Horizontal/complete modal when clicking movie
-- Pagination
-- Filter by genre
-- Search bar
-- Loading, error states
-- Issues with too many requests being made
-- Proper typing
-- Random movie
