@@ -1,57 +1,44 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect} from 'react'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
 import MovieList from '../components/MovieList'
 import Loading from '../components/Loading'
 import { useInitialLoading } from '../hooks/useInitialLoading'
 import Title from '../components/MovieListPages/Title'
 import LoadMoreButton from '../components/MovieListPages/LoadMoreButton'
+import { useGetUpcomingMovies } from '../hooks/FetchData/useGetUpcomingMovies'
 
 const Upcoming = () => {
 
-  const {updateCategory, GET_movies_upcoming, updatePage:updatePageC, page, loading, list, run} = useContext(MovieContext) as MovieContextType
-    
-  const isInitialMount = useRef(true);
+    const {
+        updateCategory, 
+        updatePage, 
+        page, 
+        loading, 
+        list, 
+        run, 
+    } = useContext(MovieContext) as MovieContextType
 
-  // UPDATE CATEGORY -> RESETS LIST AND PAGE.
-  useEffect(() => {
-    updateCategory('upcoming')
-  }, [])
+    // Update category state to 'top_rated'
+    useEffect(() => {
+      updateCategory('upcoming')
+    }, [])
 
-  // Initial loading
-  const {initialLoading} = useInitialLoading(list)
+    // Handles the call to fetching data function
+    useGetUpcomingMovies(run, page)
 
-  useEffect(() => {
-    console.log('ativou effect')
+    // Initial loading
+    const {initialLoading} = useInitialLoading(list)
 
-    // Only run this effect if page has actually changed
-    if (isInitialMount.current) {
-      console.log('blocked: ref')
-      isInitialMount.current = false
-      return;
-    } 
-    if (!page) {
-      console.log('blocked: page')
-      return;
-    } 
-
-    console.log('running ASYNC_GET_movies_upcoming')
-    const ASYNC_GET_movies_upcoming = async() => {
-      await GET_movies_upcoming()
+    // Function to update page
+    const handleUpdatePage = () => {
+      updatePage()
     }
 
-    ASYNC_GET_movies_upcoming()
-
-  }, [run])
-
-  const updatePage = () => {
-    updatePageC()
-  }
-
-  if (initialLoading) {
-    return (
-      <Loading message="Initial loading ..."/>
-    )
-  } 
+    if (initialLoading) {
+      return (
+        <Loading message="Initial loading ..."/>
+      )
+    } 
 
     return (
       <>
@@ -65,7 +52,7 @@ const Upcoming = () => {
           <Loading message="Loading ..."/>
         }
 
-        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
+        <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
       </>
     )
 }
