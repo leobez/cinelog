@@ -6,7 +6,6 @@ import { useInitialLoading } from "../hooks/useInitialLoading";
 import Title from "../components/MovieListPages/Title";
 import LoadMoreButton from "../components/MovieListPages/LoadMoreButton";
 import { useGetTopRatedMovies } from "../hooks/FetchData/useGetTopRatedMovies";
-import { useHadleScrollbarPosition } from "../hooks/useHadleScrollbarPosition";
 
 const Home = () => {
 
@@ -24,9 +23,6 @@ const Home = () => {
       updateCategory('top_rated')
     }, [])
 
-    // Handles scrollbar position when more than 1 page loaded
-    useHadleScrollbarPosition(page)
-
     // Handles the call to fetching data function
     useGetTopRatedMovies(run, page)
 
@@ -40,7 +36,7 @@ const Home = () => {
 
     // Shows loading message if its on intial load
     if (initialLoading) {
-      console.log('initial loading...')
+      //console.log('initial loading...')
       return (
         <Loading message="Initial loading ..."/>
       )

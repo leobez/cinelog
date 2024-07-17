@@ -10,21 +10,21 @@ export const useGetByGenreMovies = (run:boolean, page:number, sort:string, order
 
         // Only run this effect if page has actually changed
         if (isInitialMount.current) {
-          console.log('blocked: ref')//
+          //console.log('blocked: ref')//
           isInitialMount.current = false
           return;
         } 
 
         if (!page) {
-          console.log('blocked: page')//
+          //console.log('blocked: page')//
           return;
         } 
   
-        console.log('running ASYNC_GET_movies_bygenres')
+        //console.log('running ASYNC_GET_movies_bygenres')
         const ASYNC_GET_movies_bygenres = async() => {
           const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
           if (!genresIds) return;
-          console.log('sort and order: ', sort, order) //
+          //console.log('sort and order: ', sort, order) //
           await GET_movies_bygenres(genresIds)
         }
   

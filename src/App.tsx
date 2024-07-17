@@ -19,12 +19,6 @@ function App() {
 
     const hiddenMenu:any = useRef()
     const overlay:any = useRef()
-    const contentRef:any = useRef()
-
-    // Save scroll position position
-    const handleScroll = (e:any) => {
-      console.log(e.target.scrollTop)     
-    }
 
     return (
       <div className='h-screen flex flex-col pb-2 gap-2 bg-slate-100'>
@@ -57,7 +51,7 @@ function App() {
                 <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 hidden' ref={overlay}/>
 
                 {/* CONTENT */}
-                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md' ref={contentRef} onScroll={handleScroll}>
+                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
 
                   <div className='shadow-md sticky top-0 bg-white z-10 w-full'>
                     <Categories/>

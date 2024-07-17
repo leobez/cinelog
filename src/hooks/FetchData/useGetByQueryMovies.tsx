@@ -10,17 +10,17 @@ export const useGetByQueryMovies = (run:boolean, page:number, params:any) => {
 
         // Only run this effect if page has actually changed
         if (isInitialMount.current) {
-          console.log('blocked: ref')//
+          //console.log('blocked: ref')//
           isInitialMount.current = false
           return;
         } 
 
         if (!page) {
-          console.log('blocked: page')//
+          //console.log('blocked: page')//
           return;
         } 
 
-        console.log('running ASYNC_GET_movies_byquery')//
+        //console.log('running ASYNC_GET_movies_byquery')//
         const ASYNC_GET_movies_byquery = async() => {
           const query = params.get('q')
           if (!query) return;

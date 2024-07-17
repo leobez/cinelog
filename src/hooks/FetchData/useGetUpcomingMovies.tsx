@@ -10,17 +10,17 @@ export const useGetUpcomingMovies = (run:boolean, page:number) => {
 
         // Only run this effect if page has actually changed
         if (isInitialMount.current) {
-          console.log('blocked: ref')//
+          //console.log('blocked: ref')//
           isInitialMount.current = false
           return;
         } 
 
         if (!page) {
-          console.log('blocked: page')//
+          //console.log('blocked: page')//
           return;
         } 
   
-        console.log('running ASYNC_GET_movies_upcoming')//
+        //console.log('running ASYNC_GET_movies_upcoming')//
         const ASYNC_GET_movies_upcoming = async() => {
             await GET_movies_upcoming()
         }

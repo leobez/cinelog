@@ -47,8 +47,11 @@ export const MovieListContextProvider = ({children}:any) => {
     const [sort, setSort]           = useState<string[]>([])//Only used on GET_movies_bygenres
 
     useEffect(() => {
+        //sessionStorage.removeItem('scrollPosition') 
+        ////console.log('removing scroll pos from session storage')
         setList([])
         setPage(1)
+        // test this
         // Triggers function that gets data. Always triggers when category is changed, which always means first call
         setRun((prev:boolean) => !prev) 
 
@@ -84,7 +87,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${URL_TOPRATED}?api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -112,7 +115,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             setError("Something went wrong")
-            console.log(error)
+            //console.log(error)
             return;
         }
 
@@ -128,7 +131,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${URL_POPULAR}?api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -155,7 +158,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }
@@ -172,7 +175,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${URL_UPCOMING}?api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -199,7 +202,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }
@@ -216,7 +219,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
             // Validate query
             if (!query || query.length === 0) {
-                console.log('invalid query')
+                //console.log('invalid query')
                 setLoading(false)
                 setWarning('Invalid query')
                 return;
@@ -230,7 +233,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${URL_BYQUERY}/movie?query=${query}&api_key=${API_KEY}&page=${page}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -257,7 +260,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }
@@ -277,7 +280,7 @@ export const MovieListContextProvider = ({children}:any) => {
             URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
         }
 
-        console.log('URL: ', URL)
+        //console.log('URL: ', URL)
 
         try {
 
@@ -292,7 +295,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -319,7 +322,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }
@@ -336,7 +339,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${URL_SIMILAR}/${id}/similar?api_key=${API_KEY}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -352,14 +355,14 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
 
-            console.log('filteredData: ', filteredData)
+            //console.log('filteredData: ', filteredData)
             setLoading(false)
 
             return filteredData
 
         } catch (error) {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }
@@ -376,7 +379,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${URL_BYID}/${id}?api_key=${API_KEY}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validate data
             if (!DATA) {
@@ -390,7 +393,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }
@@ -411,7 +414,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
                 const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
                 const RESULT = await fetch(URL)
-                console.log('RESULT: ', RESULT)
+                //console.log('RESULT: ', RESULT)
                 const DATA = await RESULT.json()
 
                 // Last page reached
@@ -432,7 +435,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 }
             }
             
-            console.log('MOVIE POOL: ', moviePool)
+            //console.log('MOVIE POOL: ', moviePool)
 
             if (moviePool.length === 0) {
                 setLoading(false)
@@ -451,7 +454,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch {
             setLoading(false)
-            console.log(error)
+            //console.log(error)
             setError("Something went wrong")
             return;
         }

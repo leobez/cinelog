@@ -13,10 +13,6 @@ const Filter = () => {
 
     const {loading, updateWarning} = useContext(MovieContext) as MovieContextType
 
-    useEffect(() => {
-      console.log('selectedGenres: ', selectedGenres)
-    }, [selectedGenres])
-
     const addGenre = (id:number) => {
       setSelectedGenres((prev:any)=>[...prev, id])
     } 
@@ -51,18 +47,18 @@ const Filter = () => {
       const classList:any[] = Object.values(e.target.classList)
       const id = Number(e.target.id)
 
-      console.log(classList)
+      //console.log(classList)
 
       if (classList.includes('unselected')) {
         e.target.classList.remove('unselected')
         e.target.classList.add('selected')
-        console.log('SELECTING: ', id)
+        //console.log('SELECTING: ', id)
         addGenre(id)
 
       } else if (classList.includes('selected')) {
         e.target.classList.remove('selected')
         e.target.classList.add('unselected')
-        console.log('UNSELECTING: ', id)
+        //console.log('UNSELECTING: ', id)
         removeGenre(id)
 
       }

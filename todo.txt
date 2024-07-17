@@ -1,16 +1,13 @@
--> on movieList, reset scrollPosition when changing pages (or reseting list?)
-
+-> Scroll position with context maybe?
 -> click on 'Impossible Things' movie and fix error
--> Color Scheme + header stuff
--> Dark/White mode
--> Add cool loading animation for loading random
+-> Test on phone first then, if necessary -> Hidden menu y overflow scroll
 
 
 TODO: 
-    -> Test on phone first then, if necessary -> Hidden menu y overflow scroll
+    -> Color Scheme + header stuff
+    -> Dark/White mode
+    -> Add cool loading animation for loading random
     -> While poster img not loaded, show ghost card
-    -> Delete console.logs()
-
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
     -> Maybe pagination or infinite scrolling
