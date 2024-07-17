@@ -1,5 +1,4 @@
--> y scroll overflow on sidebar
--> hidden side bar remains active when back to normal screen size
+-> Host -> TEST -> CREATE A WAY TO NOT USE THE API KEY
 
 
 TODO: 
