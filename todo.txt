@@ -1,4 +1,5 @@
 -> y scroll overflow on sidebar
+-> hidden side bar remains active when back to normal screen size
 
 
 TODO: 

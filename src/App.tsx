@@ -18,7 +18,6 @@ import { toggleComponent } from './utils/toggleComponent'
 function App() {
 
     const hiddenMenu:any = useRef()
-    const overlay:any = useRef()
 
     return (
       <div className='h-screen flex flex-col pb-2 gap-2 bg-slate-100'>
@@ -38,18 +37,15 @@ function App() {
               <BrowserRouter>
 
                 {/* SIDE-BAR */}
-                <div className='w-4/12 top-0 sticky h-screen shadow-md p-3 hidden lg:block bg-white'>
+                <div className='h-fit w-4/12 top-0 sticky shadow-md p-3 hidden lg:block bg-white'>
                   <Sidebar/>
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-screen w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden animate-in slide-in-from-left-full duration-200' ref={hiddenMenu}>
+                <div className='h-fit w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto' ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               
-                {/* OVERLAY */}
-                <div className='h-screen w-screen absolute bg-gray-400 opacity-50 z-20 top-0 right-0 hidden' ref={overlay}/>
-
                 {/* CONTENT */}
                 <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
 
