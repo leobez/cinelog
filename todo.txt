@@ -8,9 +8,10 @@
 TODO: 
     -> Test on phone first then, if necessary -> Hidden menu y overflow scroll
     -> While poster img not loaded, show ghost card
+    -> Delete console.logs()
+
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
     -> Maybe pagination or infinite scrolling
     -> ... Games
-    -> Delete console.logs()
 

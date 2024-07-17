@@ -44,7 +44,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const [category, setCategory]   = useState<string>('')
     const [list, setList]           = useState<any[]>([])
     const [run, setRun]             = useState<boolean>(false)
-    const [sort, setSort]           = useState<string[]>([])
+    const [sort, setSort]           = useState<string[]>([])//Only used on GET_movies_bygenres
 
     useEffect(() => {
         setList([])

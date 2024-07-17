@@ -1,4 +1,4 @@
-import { useContext, useEffect} from "react";
+import { useContext, useEffect, useRef } from "react";
 import MovieContext, { MovieContextType } from "../context/MovieContext";
 import MovieList from "../components/MovieList";
 import Loading from "../components/Loading";
@@ -11,30 +11,53 @@ const Home = () => {
 
     const {
         updateCategory, 
-        updatePage, 
+        GET_movies_toprated, 
+        updatePage:updatePageC, 
         page, 
         loading, 
         list, 
         run, 
     } = useContext(MovieContext) as MovieContextType
     
-    // Update category state to 'top_rated'
+    //const isInitialMount = useRef(true);
+
+    // UPDATE CATEGORY -> RESETS LIST AND PAGE.
     useEffect(() => {
       updateCategory('top_rated')
     }, [])
 
-    // Handles the call to fetching data function
-    useGetTopRatedMovies(run, page)
+    const {} = useGetTopRatedMovies(run, page)
 
     // Initial loading
     const {initialLoading} = useInitialLoading(list)
 
-    // Function to update page
-    const handleUpdatePage = () => {
-      updatePage()
+   /* useEffect(() => {
+      console.log('ativou effect')
+
+      // Only run this effect if page has actually changed
+      if (isInitialMount.current) {
+        console.log('blocked: ref')
+        isInitialMount.current = false
+        return;
+      } 
+      if (!page) {
+        console.log('blocked: page')
+        return;
+      } 
+
+      console.log('running ASYNC_GET_movies_toprated')
+      const ASYNC_GET_movies_toprated = async() => {
+        await GET_movies_toprated()
+      }
+  
+      ASYNC_GET_movies_toprated()
+
+    }, [run]) */
+
+    const updatePage = () => {
+      updatePageC()
     }
 
-    // Shows loading message if its on intial load
     if (initialLoading) {
       console.log('initial loading...')
       return (
@@ -54,7 +77,7 @@ const Home = () => {
           <Loading message="Loading ..."/>
         }
 
-        <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
+        <LoadMoreButton LoadMoreFunc={updatePage} loadingState={loading}/>
       </>
     )
 }
