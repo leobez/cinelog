@@ -11,7 +11,7 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
-    const {loading, updateWarning} = useContext(MovieContext) as MovieContextType
+    const {loading, updateMessage} = useContext(MovieContext) as MovieContextType
 
     const addGenre = (id:number) => {
       setSelectedGenres((prev:any)=>[...prev, id])
@@ -25,7 +25,7 @@ const Filter = () => {
       e.preventDefault()
       const args = selectedGenres.join(',')
       if (!args || args.length === 0) {
-        updateWarning('Select at least on genre to filter')
+        updateMessage('Select at least on genre to filter', 'orange')
         return;
       }
       navigate(`/bygenre?genres=${args}`)
@@ -35,7 +35,7 @@ const Filter = () => {
       e.preventDefault()
       const args = selectedGenres.join(',')
       if (!args || args.length === 0) {
-        updateWarning('Select at least on genre to randomize')
+        updateMessage('Select at least on genre to randomize', 'orange')
         return;
       }
       navigate(`/random?genres=${args}`)

@@ -7,12 +7,12 @@ const Searchbar = () => {
     const [query, setQuery] = useState<string|null>(null)
     const navigate = useNavigate()
 
-    const {updateWarning} = useContext(MovieContext) as MovieContextType
+    const {updateMessage} = useContext(MovieContext) as MovieContextType
 
     const handleSubmit = (e:any):void => {
         e.preventDefault()
         if (!query || query.length === 0) {
-            updateWarning('Invalid query')            
+            updateMessage('Invalid query', 'orange')            
             return;
         }
         return navigate(`/search?q=${query}`)

@@ -1,17 +1,31 @@
 type Props = {
     loading:boolean;
-    error:string|null;
-    warning:string|null
+    message:any; // .message and .color
 }
 
-const Information = ({loading, error, warning}: Props) => {
+const Information = ({loading, message}: Props) => {
+
+    console.log(message)
+
     return (
         <>
             <p className="text-left">States of application: </p>
-            {!loading && !error && !warning && <div className="border-2 border-color05 p-3"/>}
-            {loading && <div className="border-2 border-blue-500 p-3 text-blue-500 font-bold animate-pulse">Loading...</div>}
-            {error &&   <div className="border-2 border-red-500 p-3 text-red-500 font-bold animate-pulse ">Error: {error}</div>}
-            {warning && <div className="border-2 border-orange-500 p-3 text-orange-500 font-bold animate-pulse ">Warning: {warning}</div>}
+
+            <div>
+                
+            </div>
+
+            {loading && 
+                <div className={`border-2 border-blue-700 text-blue-700 font-bold animate-pulse p-3`}>
+                    Loading...
+                </div>
+            }
+
+            {message !== null &&
+                <div className={`border-2 border-${message.color}-700 text-${message.color}-700 font-bold animate-pulse p-3`}>
+                    {message.message}
+                </div>
+            }
         </>
 
     )

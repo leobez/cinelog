@@ -21,7 +21,7 @@ const ByGenre = () => {
         list, 
         run, 
         resetStates,
-        updateWarning,
+        updateMessage,
         updateSort
     } = useContext(MovieContext) as MovieContextType
 
@@ -46,7 +46,7 @@ const ByGenre = () => {
     // Initial loading
     const {initialLoading} = useInitialLoading(list)
 
-    useGetByGenreMovies(run, page, sort, order, params)
+    useGetByGenreMovies(run, page, params)
 
     const handleUpdatePage = () => {
       updatePage()
@@ -61,11 +61,11 @@ const ByGenre = () => {
       resetStates()
 
       if (!sort || !sort.length) {
-        updateWarning('Select one sort to filter')
+        updateMessage('Select one sort to filter', 'orange')
         return;
       }
       if (!order || !order.length) {
-        updateWarning('Select one order to filter')
+        updateMessage('Select one order to filter', 'orange')
         return;
       }
 

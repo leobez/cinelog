@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom"
 import MovieList from "../components/MovieList"
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect} from "react"
 import MovieContext, { MovieContextType } from "../context/MovieContext"
 import Loading from "../components/Loading"
 import { useInitialLoading } from "../hooks/useInitialLoading"

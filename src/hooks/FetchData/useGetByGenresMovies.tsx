@@ -1,7 +1,7 @@
 import {useEffect, useRef, useContext} from 'react'
 import MovieContext, { MovieContextType } from '../../context/MovieContext';
 
-export const useGetByGenreMovies = (run:boolean, page:number, sort:string, order:string, params:any) => {
+export const useGetByGenreMovies = (run:boolean, page:number, params:any) => {
 
     const isInitialMount = useRef(true);
     const {GET_movies_bygenres} = useContext(MovieContext) as MovieContextType

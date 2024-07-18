@@ -5,12 +5,12 @@ const Api = () => {
 
     const [apiKey, setApiKey] = useState<string>('')
 
-    const {updateApiKey, updateWarning} = useContext(MovieContext) as MovieContextType 
+    const {updateApiKey, updateMessage} = useContext(MovieContext) as MovieContextType 
 
     const handleSave = (e:any):void => {
         e.preventDefault()
         if (!apiKey.length) {
-            updateWarning("No API key added")
+            updateMessage("No API key added", 'orange')
             return;
         }
         updateApiKey(apiKey)
@@ -20,7 +20,7 @@ const Api = () => {
         e.preventDefault()
         updateApiKey('')
         localStorage.removeItem('tmdbApiKey')
-        updateWarning('Api key was removed from local storage')
+        updateMessage('Api key was removed from local storage', 'green')
     }
 
     return (

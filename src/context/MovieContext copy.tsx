@@ -9,7 +9,8 @@ export type MovieContextType = {
     GET_movies_similar:(id:number)=>Promise<any>; // Returns list of movies                  
     GET_movie_byid:(id:number)=>Promise<any>; // Returns object of movie                   
     GET_movie_randombygenres:(genres:number[])=>Promise<number>; // Returns random number id
-    updateMessage:(message:string, color:string)=>void;
+    updateWarning:(message:string)=>void;
+    updateError:(message:string)=>void;
     updateLoading:()=>void;
     updatePage:()=>void;
     updateCategory:(newCategory:string)=>void;
@@ -18,7 +19,8 @@ export type MovieContextType = {
     updateApiKey:(apiKey:string)=>void;
     resetStates:()=>void;
     scrollPos:number;
-    message:any;
+    warning:string|null;
+    error:string|null;
     loading:boolean;
     page:number;
     list:any[];
@@ -41,7 +43,8 @@ export const MovieListContextProvider = ({children}:any) => {
     const URL_BYID = import.meta.env.VITE_FIND_BY_ID
 
     const [loading, setLoading]     = useState<boolean>(false)
-    const [message, setMessage]     = useState<any>(null)
+    const [error, setError]         = useState<string|null>(null)
+    const [warning, setWarning]     = useState<string|null>(null)
     const [page, setPage]           = useState<number>(0)
     const [category, setCategory]   = useState<string>('')
     const [list, setList]           = useState<any[]>([])
@@ -63,13 +66,14 @@ export const MovieListContextProvider = ({children}:any) => {
                 const DATA = await RESULT.json()
                 console.log(DATA)
                 if (DATA.status_code === 7) {
+                    console.log('failed: ', DATA.status_code)
                     // failed
-                    updateMessage('Api Key invalid', 'red')
+                    updateError('Api Key invalid')
                     setApiKey('')
                     return;
                 } else {
                     localStorage.setItem('tmdbApiKey', `${apiKey}`)
-                    updateMessage('API key added successfully', 'green')
+                    updateWarning('API key added successfully.')
                     return;
                 }
             } catch (error) {
@@ -104,7 +108,8 @@ export const MovieListContextProvider = ({children}:any) => {
     // Always used when making API calls
     const resetStates = ():void => {
         setLoading(false)
-        setMessage(null)
+        setError(null)
+        setWarning(null)
     }
 
     // -- API CALLS -- //
@@ -115,7 +120,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Add it on /api')
             return;
         }
 
@@ -130,7 +135,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
             
@@ -152,7 +157,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
         } catch (error) {
             setLoading(false)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             //console.log(error)
             return;
         }
@@ -166,7 +171,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Access /api page and add it.')
             return;
         }
 
@@ -181,7 +186,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
             
@@ -204,7 +209,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
 
@@ -217,7 +222,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Access /api page and add it.')
             return;
         }
 
@@ -232,7 +237,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
             
@@ -255,7 +260,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
 
@@ -268,7 +273,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Add it on /api')
             return;
         }
 
@@ -280,12 +285,12 @@ export const MovieListContextProvider = ({children}:any) => {
             if (!query || query.length === 0) {
                 //console.log('invalid query')
                 setLoading(false)
-                updateMessage('Invalid query', 'orange')
+                setWarning('Invalid query')
                 return;
             }
             if (query.length > 40) {
                 setLoading(false)
-                updateMessage('Max. query length is 40', 'orange')
+                setWarning('Max. query length is 40')
                 return;
             }
 
@@ -297,7 +302,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
             
@@ -320,7 +325,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
 
@@ -334,7 +339,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Add it on /api')
             return;
         }
 
@@ -355,7 +360,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate query
             if (!genres || (genres.length === 1 && genres[0]===0)) {
                 setLoading(false)
-                updateMessage('Invalid genres', 'orange')
+                setWarning('Invalid genres')
                 return;
             }
 
@@ -366,7 +371,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (DATA.results.length === 0) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
             
@@ -389,7 +394,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
 
@@ -402,7 +407,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Add it on /api')
             return;
         }
 
@@ -436,7 +441,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
 
@@ -449,7 +454,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Add it on /api')
             return;
         }
 
@@ -464,7 +469,7 @@ export const MovieListContextProvider = ({children}:any) => {
             // Validate data
             if (!DATA) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
 
@@ -474,7 +479,7 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch (error) {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
 
@@ -487,7 +492,7 @@ export const MovieListContextProvider = ({children}:any) => {
         const API_KEY = localStorage.getItem('tmdbApiKey')
 
         if (!API_KEY) {
-            updateMessage('No api Key', 'red')
+            updateWarning('No api Key. Add it on /api')
             return;
         }
 
@@ -526,7 +531,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
             if (moviePool.length === 0) {
                 setLoading(false)
-                updateMessage('No data', 'orange')
+                setWarning('No data')
                 return;
             }
 
@@ -542,14 +547,18 @@ export const MovieListContextProvider = ({children}:any) => {
         } catch {
             setLoading(false)
             //console.log(error)
-            updateMessage("Something went wrong", 'red')
+            setError("Something went wrong")
             return;
         }
     }
 
     // UTILS
-    const updateMessage = (message:string, color:string):void => {
-        setMessage({message, color})
+    const updateWarning = (message:string):void => {
+        setWarning(message)
+    }
+
+    const updateError = (message:string):void => {
+        setError(message)
     }
     
     const updateLoading = ():void => {
@@ -588,7 +597,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     GET_movies_similar,
                     GET_movie_byid,
                     GET_movie_randombygenres,
-                    updateMessage,
+                    updateWarning,
+                    updateError,
                     updateLoading,
                     updatePage,
                     updateCategory,
@@ -597,7 +607,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     updateApiKey,
                     resetStates,
                     scrollPos,
-                    message,
+                    warning,
+                    error,
                     loading,
                     page,
                     list,

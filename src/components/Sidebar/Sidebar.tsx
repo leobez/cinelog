@@ -6,7 +6,7 @@ import MovieContext, { MovieContextType } from "../../context/MovieContext"
 
 const Sidebar = () => {
 
-    const {loading, error, warning} = useContext(MovieContext) as MovieContextType
+    const {loading, message} = useContext(MovieContext) as MovieContextType
 
     return (
         <div className="flex flex-col relative justify-between h-full gap-8">
@@ -21,7 +21,7 @@ const Sidebar = () => {
                 </div>
 
                 <div className="w-full p-2">
-                    <Information loading={loading} error={error} warning={warning}/>
+                    <Information loading={loading} message={message}/>
                 </div>
             </div>
 

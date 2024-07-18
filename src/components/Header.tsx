@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState} from "react"
+import { useEffect, useState} from "react"
 
 const Header = () => {
 
@@ -113,7 +113,7 @@ const Header = () => {
             ROOT?.classList.add('game-mode')
         }
 
-    }
+    } 
 
     return (
     <>
