@@ -16,6 +16,7 @@ export type MovieContextType = {
     updateCategory:(newCategory:string)=>void;
     updateSort:(sort:string, order:string)=>void;
     updateScrollPos:(scrollPos:number)=>void;
+    updateApiKey:(apiKey:string)=>void;
     resetStates:()=>void;
     scrollPos:number;
     warning:string|null;
@@ -24,6 +25,7 @@ export type MovieContextType = {
     page:number;
     list:any[];
     run:boolean;
+    apiKey:string;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
@@ -37,7 +39,6 @@ export const MovieListContextProvider = ({children}:any) => {
     const URL_SIMILAR = import.meta.env.VITE_SIMILAR
     const URL_BY_GENRES = import.meta.env.VITE_DISCOVER
     const URL_BYID = import.meta.env.VITE_FIND_BY_ID
-    const API_KEY = import.meta.env.VITE_API_KEY
 
     const [loading, setLoading]     = useState<boolean>(false)
     const [error, setError]         = useState<string|null>(null)
@@ -47,9 +48,47 @@ export const MovieListContextProvider = ({children}:any) => {
     const [list, setList]           = useState<any[]>([])
     const [run, setRun]             = useState<boolean>(false)
     const [sort, setSort]           = useState<string[]>([])//Only used on GET_movies_bygenres
-    //
     const [scrollPos, setScrollPos] = useState<number>(0)
 
+    // API KEY
+    const [apiKey, setApiKey] = useState<string>('')
+    //const API_KEY = import.meta.env.VITE_API_KEY
+    const API_KEY = ''
+
+    useEffect(() => {
+
+        if (!apiKey.length) return;
+
+        resetStates()
+
+        const testApiKey = async() => {
+            try {
+                // Test if api key works
+                const URL = `${URL_TOPRATED}?api_key=${apiKey}&page=1`
+                const RESULT = await fetch(URL)
+                const DATA = await RESULT.json()
+                console.log(DATA)
+                if (DATA.status_code === 7) {
+                    console.log('failed: ', DATA.status_code)
+                    // failed
+                    updateError('Api Key invalid')
+                    setApiKey('')
+                    return;
+                } else {
+                    localStorage.setItem('tmdbApiKey', `${apiKey}`)
+                    updateWarning('API key added successfully.')
+                    return;
+                }
+            } catch (error) {
+                return false
+            }
+        }
+
+        testApiKey()
+
+    }, [apiKey])
+    
+    // --- / --- / ---
 
     useEffect(() => {
         setScrollPos(0)
@@ -82,6 +121,13 @@ export const MovieListContextProvider = ({children}:any) => {
     const GET_movies_toprated = async():Promise<any> => {
         
         resetStates()
+
+        const API_KEY = localStorage.getItem('tmdbApiKey')
+
+        if (!API_KEY) {
+            updateWarning('No api Key. Add it on /api')
+            return;
+        }
 
         try {
 
@@ -127,6 +173,13 @@ export const MovieListContextProvider = ({children}:any) => {
 
         resetStates()
 
+        const API_KEY = localStorage.getItem('tmdbApiKey')
+
+        if (!API_KEY) {
+            updateWarning('No api Key. Access /api page and add it.')
+            return;
+        }
+
         try {
 
             setLoading(true)
@@ -170,6 +223,13 @@ export const MovieListContextProvider = ({children}:any) => {
     const GET_movies_upcoming = async():Promise<any> => {
 
         resetStates()
+
+        const API_KEY = localStorage.getItem('tmdbApiKey')
+
+        if (!API_KEY) {
+            updateWarning('No api Key. Access /api page and add it.')
+            return;
+        }
 
         try {
 
@@ -491,6 +551,10 @@ export const MovieListContextProvider = ({children}:any) => {
         setScrollPos(scrollPos)
     }
 
+    const updateApiKey = (apiKey:string):void => {
+        setApiKey(apiKey)
+    }
+
     return (
         <MovieContext.Provider value={
                 {
@@ -509,6 +573,7 @@ export const MovieListContextProvider = ({children}:any) => {
                     updateCategory,
                     updateSort,
                     updateScrollPos,
+                    updateApiKey,
                     resetStates,
                     scrollPos,
                     warning,
@@ -516,7 +581,8 @@ export const MovieListContextProvider = ({children}:any) => {
                     loading,
                     page,
                     list,
-                    run
+                    run,
+                    apiKey,
                 }
             }>
 

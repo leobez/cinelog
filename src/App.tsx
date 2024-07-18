@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -9,15 +9,19 @@ import Movie from './pages/Movie'
 import Sidebar from './components/Sidebar/Sidebar'
 import Search from './pages/Search'
 import ByGenre from './pages/ByGenre'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import HiddenSidebar from './components/Sidebar/HiddenSidebar'
 import HiddenMenuButton from './components/HiddenMenuButton'
 import Random from './pages/Random'
 import { toggleComponent } from './utils/toggleComponent'
+import Api from './pages/Api'
+import MovieContext, { MovieContextType } from './context/MovieContext'
 
 function App() {
 
     const hiddenMenu:any = useRef()
+
+    const {apiKey} = useContext(MovieContext) as MovieContextType 
 
     return (
       <div className='h-screen flex flex-col pb-2 gap-2 bg-slate-100'>
@@ -37,7 +41,7 @@ function App() {
               <BrowserRouter>
 
                 {/* SIDE-BAR */}
-                <div className='h-fit w-4/12 top-0 sticky shadow-md p-3 hidden lg:block bg-white'>
+                <div className='h-fit min-h-screen w-4/12 top-0 sticky shadow-md p-3 hidden lg:block bg-white'>
                   <Sidebar/>
                 </div>
 
@@ -47,7 +51,7 @@ function App() {
                 </div>
               
                 {/* CONTENT */}
-                <div className='lg:w-8/12 w-11/12 flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
+                <div className='lg:w-8/12 w-11/12 min-h-screen flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
 
                   <div className='shadow-md sticky top-0 bg-white z-10 w-full'>
                     <Categories/>
@@ -56,13 +60,14 @@ function App() {
                   <div className='w-full h-full'>
                     <Routes>
                       <Route path='*'           element={<div>404</div>}></Route>
-                      <Route path='/'           element={<Home/>}></Route> 
-                      <Route path='/popular'    element={<Popular/>}></Route>
-                      <Route path='/upcoming'   element={<Upcoming/>}></Route>
-                      <Route path='/search'     element={<Search/>}></Route>
-                      <Route path='/bygenre'    element={<ByGenre/>}></Route> 
-                      <Route path='/movie/:id'  element={<Movie/>}></Route>
-                      <Route path='/random'     element={<Random/>}></Route>
+                      <Route path='/'           element={apiKey.length ? <Home/>:<Navigate to='/api'/>}></Route> 
+                      <Route path='/api'        element={<Api/>}></Route> 
+                      <Route path='/popular'    element={apiKey.length ? <Popular/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/upcoming'   element={apiKey.length ? <Upcoming/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/search'     element={apiKey.length ? <Search/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/bygenre'    element={apiKey.length ? <ByGenre/>:<Navigate to='/api'/>}></Route> 
+                      <Route path='/movie/:id'  element={apiKey.length ? <Movie/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/random'     element={apiKey.length ? <Random/>:<Navigate to='/api'/>}></Route>
                     </Routes>
                   </div>  
 
