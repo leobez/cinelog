@@ -61,7 +61,7 @@ export const MovieListContextProvider = ({children}:any) => {
                 const URL = `${URL_TOPRATED}?api_key=${apiKey}&page=1`
                 const RESULT = await fetch(URL)
                 const DATA = await RESULT.json()
-                console.log(DATA)
+                //console.log(DATA)
                 if (DATA.status_code === 7) {
                     // failed
                     updateMessage('Api Key invalid', 'red')

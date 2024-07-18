@@ -7,7 +7,7 @@ const Information = ({loading, message}: Props) => {
 
     return (
         <>
-            <p className="text-left">States of application: </p>
+            <p className="text-left">Feedback from application: </p>
 
             <div className='border-2 border-black min-h-32 p-2 w-full grid place-items-center'>
                 {loading && 

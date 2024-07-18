@@ -25,7 +25,7 @@ const Filter = () => {
       e.preventDefault()
       const args = selectedGenres.join(',')
       if (!args || args.length === 0) {
-        updateMessage('Select at least on genre to filter', 'orange')
+        updateMessage('Select at least one genre to filter', 'orange')
         return;
       }
       navigate(`/bygenre?genres=${args}`)
@@ -35,7 +35,7 @@ const Filter = () => {
       e.preventDefault()
       const args = selectedGenres.join(',')
       if (!args || args.length === 0) {
-        updateMessage('Select at least on genre to randomize', 'orange')
+        updateMessage('Select at least one genre to randomize', 'orange')
         return;
       }
       navigate(`/random?genres=${args}`)

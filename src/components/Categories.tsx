@@ -4,33 +4,33 @@ const Categories = () => {
 
     return (
         <>
-            <div role="tablist" className="tabs tabs-bordered p-2">
+            <div className='md:h-12 md:flex md:justify-center grid grid-cols-2 grid-rows-2 h-fit'>
 
                 <NavLink 
                     to='/' 
                     id="top_rated" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0 h-fit" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0 h-fit" : "tab hover:text-color03 h-fit"}> 
+                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
                     Top rated
                 </NavLink>
 
                 <NavLink 
                     to='/popular' 
                     id="popular" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0 h-fit" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0 h-fit" : "tab hover:text-color03 h-fit"}> 
+                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
                     Popular
                 </NavLink>
 
                 <NavLink 
                     to='/upcoming' 
                     id="upcoming" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0 h-fit" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0 h-fit" : "tab hover:text-color03 h-fit"}> 
+                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
                     Upcoming
                 </NavLink>
 
                 <NavLink 
                     to='/api' 
                     id="API" 
-                    className={({ isActive, isPending }) => isPending ? "tab text-xs md:text-lg p-0 h-fit" : isActive ? "tab font-bold text-color03 text-md md:text-lg p-0 h-fit" : "tab hover:text-color03 h-fit"}> 
+                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
                     API
                 </NavLink>
 

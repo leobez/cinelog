@@ -29,7 +29,7 @@ const MovieList = ({movieList}: Props) => {
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
         
         // It is possible to move scrollBar
-        console.log('moving scroll to: ', scrollPos)
+        //console.log('moving scroll to: ', scrollPos)
         ScrollNode.scrollTop = scrollPos
         
     }, [containerRef])
