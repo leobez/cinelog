@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { TMDB_GENRES } from "../../data/TMDB_GENRES"
 import { useNavigate } from "react-router-dom"
 import MovieContext, { MovieContextType } from "../../context/MovieContext"

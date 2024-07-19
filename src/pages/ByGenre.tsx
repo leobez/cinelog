@@ -9,7 +9,6 @@ import Sort from "../components/MovieListPages/Sort"
 import Title from "../components/MovieListPages/Title"
 import LoadMoreButton from "../components/MovieListPages/LoadMoreButton"
 import { useGetByGenreMovies } from "../hooks/FetchData/useGetByGenresMovies"
-import { toggleComponent } from "../utils/toggleComponent"
 
 const ByGenre = () => {
 
