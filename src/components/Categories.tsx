@@ -30,7 +30,7 @@ const Categories = () => {
                 <NavLink 
                     to='/api' 
                     id="API" 
-                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
+                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color06 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color06 hover:text-white duration-200 text-sm"}> 
                     API
                 </NavLink>
 
