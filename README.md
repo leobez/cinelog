@@ -4,7 +4,7 @@ Website that uses public a API to show movies with some filtering capabilities.
 
 Movie API: [TMDB](https://www.themoviedb.org/?language=pt-BR)
 
-Currently hosted on Vercel: LINK
+Currently hosted on Vercel: https://media-collection.vercel.app/
 
 <hr>
 
@@ -36,9 +36,15 @@ Website features:
 
 <hr>
 
-To use you need an API key from TMDB. How to get and apply it:
+To use the features it is necessary to have an Api Key from TMDB.
 
-> HOWTO
+To get one, access https://developer.themoviedb.org/v4/reference/intro/getting-started, create an account and generate a Key.
+
+Once generated, you can put it on the /api page of the application and click "Save it" to save it on the browsers Local Storage. 
+
+> screenshot
+
+Once done, the app will be usable and every requisition will use this key. 
 
 <hr>
 
