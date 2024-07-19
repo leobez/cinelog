@@ -11,28 +11,35 @@ Currently hosted on Vercel: https://media-collection.vercel.app/
 Website features:
 
 - Filter movies by top rated
-> screenshot
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/toprated.png" height='500px'/>
+
 
 - Filter movies by most popular
-> screenshot 
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/popular.png" height='500px'/>
+
 
 - Filter movies by upcoming
-> screenshot 
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/upcoming.png" height='500px'/>
+
 
 - Filter movies by genres
-> screenshot
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre.png" height='500px'/>
+
 
 - Sort movies by various metrics
-> screenshot
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre-sort.png" height='500px'/>
+
 
 - Get a random movie based on selected genres
-> screenshot
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/random.png" height='500px'/>
+
 
 - Search by a movie using queries
-> screenshot
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/byquery.png" height='500px'/>
 
-- Fully responsive UI
-> screenshot
+
+- Responsive UI
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/responsiv.png" height='500px'/>
 
 <hr>
 
@@ -42,7 +49,7 @@ To get one, access https://developer.themoviedb.org/v4/reference/intro/getting-s
 
 Once generated, you can put it on the /api page of the application and click "Save it" to save it on the browsers Local Storage. 
 
-> screenshot
+<img src="https://github.com/leobez/media-collection/blob/main/screenshots/api.png" height='500px'/>
 
 Once done, the app will be usable and every requisition will use this key. 
 
