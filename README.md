@@ -8,7 +8,7 @@ Currently hosted on Vercel: LINK
 
 <hr>
 
-Website functions:
+Website features:
 
 - Filter movies by top rated
 > screenshot
@@ -22,11 +22,23 @@ Website functions:
 - Filter movies by genres
 > screenshot
 
+- Sort movies by various metrics
+> screenshot
+
 - Get a random movie based on selected genres
 > screenshot
 
 - Search by a movie using queries
 > screenshot
+
+- Fully responsive UI
+> screenshot
+
+<hr>
+
+To use you need an API key from TMDB. How to get and apply it:
+
+> HOWTO
 
 <hr>
 
