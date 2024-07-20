@@ -41,7 +41,7 @@ const Upcoming = () => {
     } 
 
     return (
-      <>
+      <div className="flex flex-col gap-2">
         <Title title="Upcoming Movies"/>
 
         {list && list.length > 0 && 
@@ -53,7 +53,7 @@ const Upcoming = () => {
         }
 
         <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
-      </>
+      </div>
     )
 }
 

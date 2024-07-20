@@ -4,8 +4,8 @@ type Props = {
 
 const Title = ({title}: Props) => {
     return (
-        <div className="my-4 flex justify-center">
-            <div className="text-lg w-11/12 flex justify-start border-b-2 border-color05 pb-2">
+        <div className="flex justify-center bg-rose-700 p-5 rounded-lg shadow-lg">
+            <div className="text-lg w-11/12 flex justify-start text-white">
                 {title}
             </div>
         </div>

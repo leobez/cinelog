@@ -76,7 +76,7 @@ const Filter = () => {
                         </button>
                     ))}
                 </div>
-                <div className="h-12 flex w-full gap-1 mt-3">
+                <div className="h-12 flex w-full gap-2 mt-3">
 
                     {!loading &&
                       <>

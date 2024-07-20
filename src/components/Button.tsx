@@ -11,7 +11,7 @@ const Button = ({text,loading,func}: Props) => {
             {!loading && 
                 <button 
                     type="submit" 
-                    className="text-sm border-2 border-color05 p-3 hover:bg-color05 hover:text-white" 
+                    className="text-sm rounded-lg shadow-lg bg-rose-900 p-4 text-white hover:bg-rose-950" 
                     onClick={func}
                     >
                     {text}
@@ -21,7 +21,7 @@ const Button = ({text,loading,func}: Props) => {
             {loading && 
                 <button 
                     type="submit" 
-                    className="text-sm border-2 border-color05 p-3 bg-color05 text-white disabled"
+                    className="text-sm rounded-lg shadow-lg bg-rose-900 p-4 text-white disabled hover:bg-rose-950"
                     >
                     Loading...
                 </button>}

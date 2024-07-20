@@ -78,7 +78,7 @@ const ByGenre = () => {
     }
 
     return (
-      <>
+      <div className="flex flex-col gap-2">
         {params && genres && 
           <Title title={`Genres: ${genres.join(',')}`}/>
         }
@@ -95,7 +95,7 @@ const ByGenre = () => {
         }
 
         <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
-      </>
+      </div>
     )
 }
 

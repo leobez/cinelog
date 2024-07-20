@@ -41,7 +41,7 @@ const Popular = () => {
     }
 
     return (
-      <>
+      <div className="flex flex-col gap-2">
         <Title title="Popular Movies"/>
 
         {list && list.length > 0 && 
@@ -53,7 +53,7 @@ const Popular = () => {
         }
 
         <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
-      </>
+      </div>
 
     )
 }

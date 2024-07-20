@@ -1,6 +1,10 @@
+-> COLOR SCHEME (CHANGE ALL COLORS BASED ON CHOSEN ONE)
+-> ICONS FOR EVERYTHING
+-> BETTER LAYOUT FOR FILTERING ON SIDEBAR (BUTTONS MAYBE)
+-> BETTER RADIO BUTTONS
+
+
 TODO: 
-    -> Color Scheme + header stuff
-    -> Dark/White mode
     -> Add cool loading animation for loading random
     -> While poster img not loaded, show ghost card
     -> Add tutorial or message boxes to show how to use each functionality

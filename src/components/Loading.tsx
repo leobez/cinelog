@@ -4,9 +4,11 @@ type Props = {
 
 const Loading = ({message}: Props) => {
     return (
-        <div className='h-full w-full flex flex-col justify-center items-center gap-4'>
-            <span className="loading loading-spinner loading-lg"></span>
-            <p className='font-bold'>{message}</p>
+        <div className='h-full w-full grid place-items-center gap-4 rounded-lg shadow-lg bg-rose-700 p-5'>
+            <div className="flex flex-col items-center justify-center gap-3">
+                <span className="loading loading-spinner loading-lg text-white"/>
+                <p className='font-bold text-white text-sm'>{message}</p>
+            </div>
         </div>
     )
 }

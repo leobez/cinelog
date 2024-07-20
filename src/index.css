@@ -37,14 +37,14 @@ body {
     --transitioncolor: #75413B;
 }
 
-/* .selected {
-    background-color: var(--color03);
+.selected {
+    background-color: #4c0519;
     color: white;
 }
 .unselected {
-    background-color: white;
-    color: black;
-} */
+    background-color: #881337;
+    color: white;
+} 
 
 button, input[type="submit"] {
     transition: 0.2s;

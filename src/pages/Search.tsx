@@ -43,7 +43,7 @@ const Search = () => {
     }
 
     return (
-      <>
+      <div className="flex flex-col gap-2">
         {params && 
           <Title title={`Query: ${params.get('q')}`}/>
         }
@@ -53,7 +53,7 @@ const Search = () => {
         }
 
         <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
-      </>
+      </div>
     )
 }
 

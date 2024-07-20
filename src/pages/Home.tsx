@@ -1,4 +1,4 @@
-import { useContext, useEffect} from "react";
+import { useContext, useEffect, useState} from "react";
 import MovieContext, { MovieContextType } from "../context/MovieContext";
 import MovieList from "../components/MovieList";
 import Loading from "../components/Loading";
@@ -17,7 +17,7 @@ const Home = () => {
         list, 
         run, 
     } = useContext(MovieContext) as MovieContextType
-    
+
     // Update category state to 'top_rated'
     useEffect(() => {
       updateCategory('top_rated')
@@ -43,7 +43,7 @@ const Home = () => {
     } 
 
     return (
-      <>
+      <div className="flex flex-col gap-2">
         <Title title="Top Rated Movies"/>
 
         {list && list.length > 0 && 
@@ -55,7 +55,7 @@ const Home = () => {
         }
 
         <LoadMoreButton LoadMoreFunc={handleUpdatePage} loadingState={loading}/>
-      </>
+      </div>
     )
 }
 

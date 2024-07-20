@@ -4,33 +4,49 @@ const Categories = () => {
 
     return (
         <>
-            <div className='md:h-12 md:flex md:justify-center grid grid-cols-2 grid-rows-2 h-fit'>
+            <div className='md:flex md:justify-center grid grid-cols-2 grid-rows-2 gap-2 p-5'>
 
                 <NavLink 
                     to='/' 
                     id="top_rated" 
-                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
+                    className={({ isActive}) => 
+                        isActive ? "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 bg-rose-950 text-white grid place-items-center text-sm" 
+                        : 
+                        "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 grid place-items-center hover:bg-rose-950 bg-rose-900 text-white duration-200 text-sm"
+                    }> 
                     Top rated
                 </NavLink>
 
                 <NavLink 
                     to='/popular' 
                     id="popular" 
-                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
+                    className={({ isActive}) => 
+                        isActive ? "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 bg-rose-950 text-white grid place-items-center text-sm" 
+                        : 
+                        "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 grid place-items-center hover:bg-rose-950 bg-rose-900 text-white duration-200 text-sm"
+                    }> 
                     Popular
                 </NavLink>
 
                 <NavLink 
                     to='/upcoming' 
                     id="upcoming" 
-                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color03 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color03 hover:text-white duration-200 text-sm"}> 
+                    className={({ isActive}) => 
+                        isActive ? "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 bg-rose-950 text-white grid place-items-center text-sm" 
+                        : 
+                        "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 grid place-items-center hover:bg-rose-950 bg-rose-900 text-white duration-200 text-sm"
+                    }> 
                     Upcoming
                 </NavLink>
 
                 <NavLink 
                     to='/api' 
                     id="API" 
-                    className={({ isActive}) => isActive ? "h-12 md:h-full w-full md:w-1/4 bg-color06 text-white px-3 py-1 grid place-items-center text-sm" : "h-12 md:h-full w-full md:w-1/4 px-3 py-1 grid place-items-center hover:bg-color06 hover:text-white duration-200 text-sm"}> 
+                    className={({ isActive}) => 
+                        isActive ? "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 bg-rose-950 text-white grid place-items-center text-sm" 
+                        : 
+                        "p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 grid place-items-center hover:bg-rose-950 bg-rose-900 text-white duration-200 text-sm"
+                    }> 
                     API
                 </NavLink>
 

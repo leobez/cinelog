@@ -46,14 +46,14 @@ function App() {
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-[600px] pb-2 w-[310px] border-black border-2 z-30 fixed left-0 bg-white mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto' ref={hiddenMenu}>
+                <div className='h-2/3 p-3 w-[310px] rounded-lg shadow-lg z-30 fixed left-0 bg-rose-900 mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto' ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               
                 {/* CONTENT */}
                 <div className='lg:w-8/12 w-11/12 min-h-screen flex flex-col gap-2 items-center bg-rose-900 p-3 shadow-lg rounded-lg'>
 
-                  <div className='shadow-md sticky top-0 bg-white z-10 w-full'>
+                  <div className='sticky top-0 z-10 w-full rounded-lg shadow-lg bg-rose-700'>
                     <Categories/>
                   </div>
 
