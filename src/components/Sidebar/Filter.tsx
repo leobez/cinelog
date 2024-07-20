@@ -97,11 +97,7 @@ const Filter = () => {
                 <div className="grid grid-cols-2 gap-1 h-64 overflow-y-auto scrollbar-thin pr-2">
                     {GENRES.map((genre:any) => {
 
-                      console.log(icons[genre[0]])
-
                       const IconComponent = icons[genre[0]]
-
-                      console.log(IconComponent)
 
                       return (
                         <button key={genre[0]} className="h-10 rounded-lg text-center py-1 px-2 text-xs bg-rose-900 hover:bg-rose-950 text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap flex justify-between items-center" id={genre[0]} onClick={toggleGenre} title={genre[1]}>
@@ -115,11 +111,11 @@ const Filter = () => {
 
                     {!loading &&
                       <>
-                        <button title="Get a random movie" type="submit" className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2" onClick={handleFilter}> 
+                        <button title="Filter based on genres" type="submit" className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2" onClick={handleFilter}> 
                           <IoFilterSharp size={30} fill="white"/>
                         </button>
 
-                        <button title="Filter based on genres" type="submit"  className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2" onClick={handleRandom}> 
+                        <button title="Get a random movie" type="submit"  className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2" onClick={handleRandom}> 
                           <FaDice size={30} fill="white"/>
                         </button>
                       </>
