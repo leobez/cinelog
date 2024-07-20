@@ -34,14 +34,14 @@ const Api = () => {
                     The Api Key will be saved on local storage.
                 </div>
                 <div className='text-white text-sm'>
-                    Link to get one: 
+                    Link to get an Api Key: 
                     <a href="https://developer.themoviedb.org/v4/reference/intro/getting-started" target='_blank' className="text-rose-300 hover:text-rose-500 duration-200">
                         TMDB Get an API Key.
                     </a>
                 </div>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="api_key" className='text-left text-white text-sm'>Enter the key here to use this app: </label>
-                    <input type="text" name="api_key" id="api_key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className='bg-white border-2 border-black px-2 py-2'/>
+                    <input type="text" name="api_key" id="api_key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className='bg-white outline-none shadow-lg rounded-lg px-2 py-2'/>
                 </div>
                 <div className='flex gap-2 justify-center w-1/2'>
                     <button onClick={handleSave} className="p-3 text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg">Save it</button>

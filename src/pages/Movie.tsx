@@ -131,6 +131,7 @@ const Movie = () => {
                         <Table 
                             head={['Release Date', 'Runtime']} 
                             rows={[[movie.release_date, movie.runtime]]}
+                            position='text-center'
                         />
                     </div>
 
@@ -139,6 +140,7 @@ const Movie = () => {
                         <Table 
                             head={['Popularity', 'Vote average', 'Vote count']} 
                             rows={[[movie.popularity, movie.vote_average, movie.vote_count]]}
+                            position='text-center'
                         />
                     </div>
                     
@@ -148,8 +150,9 @@ const Movie = () => {
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 mt-1 w-full hidden top-0 shadow-lg rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-rose-900 overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetailRef}>
-                                 <Table
+                            <div className='h-72 mt-1 w-full hidden top-0 shadow-lg rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-rose-900 overflow-y-auto scrollbar-thin text-white' id='prod-detail' ref={prodDetailRef}>
+                                <div className='max-w-72 overflow-hidden'>
+                                <Table
                                     head={[]}
                                     rows={[
                                             ['Budget', movie.budget], 
@@ -159,7 +162,9 @@ const Movie = () => {
                                             ['Production Companies', movie.production_companies.map((compan:any) => (compan.name)).join(',')],
                                             ['Production Countries', movie.production_countries.map((country:any) => (country.name)).join(',')]
                                         ]}
-                                />
+                                    position='text-left'
+                                /> 
+                                </div>
                             </div>
                         </div>
                     </div>

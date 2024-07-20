@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MovieContext, { MovieContextType } from '../../context/MovieContext'
+import { FaSearch } from 'react-icons/fa';
 
 const Searchbar = () => {
 
@@ -22,8 +23,8 @@ const Searchbar = () => {
         <form className="flex justify-center items-center h-1/2 w-full" onSubmit={handleSubmit}>
 
             <div className="w-10 h-10">
-                <button type="submit" className="h-full w-full cursor-pointer bg-white rounded-l-lg outline-none border-rose-950 border-y-2 border-l-2">
-                    &#128269;
+                <button type="submit" className="h-full w-full cursor-pointer bg-white rounded-l-lg outline-none border-rose-950 border-y-2 border-l-2 grid place-items-center">
+                    <FaSearch size={20} fill="black"/>
                 </button>
             </div>
 

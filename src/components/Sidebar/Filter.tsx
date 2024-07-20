@@ -2,7 +2,32 @@ import { useContext, useState } from "react"
 import { TMDB_GENRES } from "../../data/TMDB_GENRES"
 import { useNavigate } from "react-router-dom"
 import MovieContext, { MovieContextType } from "../../context/MovieContext"
+import { IoFilterSharp } from "react-icons/io5";
+import { FaDice } from "react-icons/fa";
+import { GiMineExplosion, GiTreeDoor, GiKidSlide, GiClown, GiPoliceOfficerHead, GiNewspaper, GiVideoCamera, GiFamilyHouse, GiSpikedDragonHead, GiBookCover, GiGhost, GiMusicalNotes, GiArchiveResearch, GiHearts, GiAlienSkull, GiTv, GiDrippingKnife, GiSubmarineMissile, GiCowboyBoot } from "react-icons/gi";
 
+const icons:any = {
+    28:GiMineExplosion,  //Action
+    12:GiTreeDoor,  //Adventure
+    16:GiKidSlide ,  //Animation
+    35:GiClown ,  //Comedy
+    80:GiPoliceOfficerHead,  //Crime
+    99:GiNewspaper ,  //Documentary
+    18:GiVideoCamera ,  //Drama
+    10751:GiFamilyHouse ,  //Family
+    14:GiSpikedDragonHead ,  //Fantasy
+    36:GiBookCover ,  //History
+    27:GiGhost,  //Horror
+    10402:GiMusicalNotes ,  //Music
+    9648:GiArchiveResearch ,  //Mystery
+    10749:GiHearts ,  //Romance
+    878:GiAlienSkull ,  //Science Fiction
+    10770:GiTv ,  //TV Movie
+    53:GiDrippingKnife ,  //Thriller
+    10752:GiSubmarineMissile ,  //War
+    37:GiCowboyBoot ,  // Western
+}
+  
 const Filter = () => {
 
     const navigate = useNavigate()
@@ -70,32 +95,44 @@ const Filter = () => {
         {GENRES && 
             <form>
                 <div className="grid grid-cols-2 gap-1 h-64 overflow-y-auto scrollbar-thin pr-2">
-                    {GENRES.map((genre:any) => (
-                        <button key={genre[0]} className="h-10 rounded-lg text-center p-1 text-xs bg-rose-900 hover:bg-rose-950 text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap " id={genre[0]} onClick={toggleGenre} title={genre[1]}>
-                            {genre[1]}
+                    {GENRES.map((genre:any) => {
+
+                      console.log(icons[genre[0]])
+
+                      const IconComponent = icons[genre[0]]
+
+                      console.log(IconComponent)
+
+                      return (
+                        <button key={genre[0]} className="h-10 rounded-lg text-center py-1 px-2 text-xs bg-rose-900 hover:bg-rose-950 text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap flex justify-between items-center" id={genre[0]} onClick={toggleGenre} title={genre[1]}>
+                            {genre[1]} <IconComponent size={20} fill="white"/>
                         </button>
-                    ))}
+                      )
+                    })}
+
                 </div>
                 <div className="h-12 flex w-full gap-2 mt-3">
 
                     {!loading &&
                       <>
-                        <button type="submit" className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg" onClick={handleFilter}> 
-                          Filter 
+                        <button title="Get a random movie" type="submit" className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2" onClick={handleFilter}> 
+                          <IoFilterSharp size={30} fill="white"/>
                         </button>
-                        <button type="submit"  className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg" onClick={handleRandom}> 
-                          Random 
+
+                        <button title="Filter based on genres" type="submit"  className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2" onClick={handleRandom}> 
+                          <FaDice size={30} fill="white"/>
                         </button>
                       </>
                     }
 
                     {loading &&
                       <>
-                        <button type="submit" className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer disabled rounded-lg shadow-lg"> 
-                          Filter 
+                        <button title="Get a random movie" type="submit" className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2 disabled"> 
+                          <IoFilterSharp size={30}/>
                         </button>
-                        <button type="submit"  className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer disabled rounded-lg shadow-lg"> 
-                          Random
+                        
+                        <button title="Filter based on genres" type="submit"  className="text-sm w-1/2 bg-rose-900 hover:bg-rose-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2 disabled"> 
+                          <FaDice size={30}/>
                         </button>
                       </>
                     }

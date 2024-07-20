@@ -1,26 +1,27 @@
 type Props = {
     head:string[];
     rows:any[][];
+    position:string
 }
 
-const Table = ({head, rows}: Props) => {
+const Table = ({head, rows, position}: Props) => {
 
     return (
         <>
             <table className="table w-full">
                 {/* head */}
                 <thead>
-                <tr className='text-left'>
+                <tr className={position}>
                     {head.map((text:string, index:number) => (
-                        <th key={index} className='font-bold text-center text-white'>{text}</th>
+                        <th key={index} className='font-bold text-center text-white text-xs'>{text}</th>
                     ))}
                 </tr>
                 </thead>
                 <tbody>
                 {rows.map((row:any, index:number) => (
-                    <tr className='text-center' key={`a${index}`}>
-                        {row.map((rowElements:string, index:number)=>(
-                            <td key={`b${index}`} className="text-white">{rowElements}</td>
+                    <tr className={position} key={`a${index}`}>
+                        {row.map((rowElements:string, index:number)=>( 
+                            <td key={`b${index}`} className="text-white text-xs">{rowElements}</td>
                         ))}
                     </tr>
                 ))}
