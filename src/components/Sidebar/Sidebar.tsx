@@ -25,10 +25,10 @@ const Sidebar = () => {
                     <Filter/>
                 </div>
 
-                <div className="p-5 bg-rose-700 rounded-lg shadow-lg">
+{/*                 <div className="p-5 bg-rose-700 rounded-lg shadow-lg">
                     <Information loading={loading} message={message}/>
                 </div>
-
+ */}
             </div>
 
             <div className="p-5 bg-rose-700 rounded-lg shadow-lg self-end w-full flex flex-col gap-2">

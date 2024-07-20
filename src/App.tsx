@@ -9,7 +9,7 @@ import Movie from './pages/Movie'
 import Sidebar from './components/Sidebar/Sidebar'
 import Search from './pages/Search'
 import ByGenre from './pages/ByGenre'
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import HiddenSidebar from './components/Sidebar/HiddenSidebar'
 import HiddenMenuButton from './components/HiddenMenuButton'
 import Random from './pages/Random'
@@ -20,8 +20,26 @@ import MovieContext, { MovieContextType } from './context/MovieContext'
 function App() {
 
     const hiddenMenu:any = useRef()
+    const feedbackRef:any = useRef()
 
-    const {apiKey} = useContext(MovieContext) as MovieContextType 
+    const {apiKey, message, updateMessage} = useContext(MovieContext) as MovieContextType 
+
+    useEffect(() => {
+
+      if (!feedbackRef.current) return;
+
+      const timeout = setTimeout(() => {
+          feedbackRef.current.classList.add('-translate-x-full')
+
+          setTimeout(() => {
+            updateMessage('', '')
+          }, 600);
+
+      }, 2000);
+
+      return () => clearTimeout(timeout)
+
+    }, [message, feedbackRef])
 
     return (
       <div className='h-screen flex flex-col gap-1 pb-1 bg-rose-600'>
@@ -31,6 +49,12 @@ function App() {
             <HiddenMenuButton func={() => toggleComponent(hiddenMenu)}/>
             <Header/>
           </header>
+
+          {message && message.message && message.color && 
+            <div className={`p-7 bg-${message.color}-800 text-white absolute bottom-0 w-full duration-500 animate-in slide-in-from-right z-40 grid place-items-center`} ref={feedbackRef}>
+                {message.message}
+            </div>
+          }
 
           <main className='flex justify-center h-full overflow-y-auto'>
             

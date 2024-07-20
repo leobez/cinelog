@@ -17,7 +17,7 @@ const Api = () => {
             return;
         }
         updateApiKey(apiKey)
-        navigate('/')
+        setTimeout(() => navigate('/'), 1000)
     }
 
     const handleRemove = (e:any):void => {

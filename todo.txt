@@ -1,6 +1,4 @@
--> BETTER FEEDBACK (CARDS ON TOP OF SCREEN)
--> BETTER RADIO BUTTONS
-
+-> SCROLL POSITION NOT WORKING ANYMORE
 -> COLOR SCHEME (
 	-> CREATE A PALLET FOR USER TO CHOOSE ON SIDEBAR. 
 	-> WHEN CHOSEN, SETS THE COLOR SCHEME OF THE APPLICATION
@@ -10,6 +8,7 @@
 
 
 TODO: 
+    -> Better radio buttons
     -> While poster img not loaded, show ghost card
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
