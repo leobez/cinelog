@@ -69,7 +69,7 @@ const Filter = () => {
         <div className="text-left mb-2 text-white"></div>
         {GENRES && 
             <form>
-                <div className="grid grid-cols-2 gap-2 h-64 overflow-y-auto scrollbar-thin pr-2">
+                <div className="grid grid-cols-2 gap-1 h-64 overflow-y-auto scrollbar-thin pr-2">
                     {GENRES.map((genre:any) => (
                         <button key={genre[0]} className="h-10 rounded-lg text-center p-1 text-xs bg-rose-900 hover:bg-rose-950 text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap " id={genre[0]} onClick={toggleGenre} title={genre[1]}>
                             {genre[1]}

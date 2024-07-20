@@ -23,7 +23,7 @@ const ImageSlider = ({movies}:Props) => {
         <div className="relative w-full mx-auto overflow-hidden">
             <div className="flex gap-1 transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 196}px)` }}>
                 {movies.map((movie:any, index:number) => (
-                    <div key={index} className="min-w-48 min-h-48 border-2 border-color05" >
+                    <div key={index} className="min-w-48 min-h-48 rounded-lg shadow-lg" >
                         <MovieCard movie={movie}/>
                     </div>
                 ))}
@@ -31,13 +31,13 @@ const ImageSlider = ({movies}:Props) => {
 
             <button 
                 onClick={goToPrevious} 
-                className="absolute h-full top-0 left-0 bg-color05 text-white px-4 py-2 opacity-95 hover:opacity-80">
+                className="absolute h-full top-0 left-0 bg-rose-950 text-white px-4 py-2 hover:opacity-90">
                 &#10094;
             </button>
 
             <button 
                 onClick={goToNext} 
-                className="absolute h-full top-0 right-0 bg-color05 text-white px-4 py-2 opacity-95 hover:opacity-80">
+                className="absolute h-full top-0 right-0 bg-rose-950 text-white px-4 py-2 hover:opacity-90">
                 &#10095;
             </button>
 

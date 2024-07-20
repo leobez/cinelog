@@ -61,44 +61,47 @@ const Movie = () => {
 
     return (
 
-        <div className='flex items-center flex-col scrollbar-thin border-color05 gap-4 overflow-hidden h-full relative'>
+        <div className='flex items-center flex-col scrollbar-thin border-color05 gap-4 overflow-hidden h-full relative mt-2'>
 
             {/* MISSING INFO */}
             {missingInfo && missingInfo.length > 0 && 
-                <div className='self-end'>
-                    <div className='w-64 flex flex-col'>
+                <div className='bg-rose-700 w-full p-5 rounded-lg shadow-lg flex flex-col'>
+
+                    <div className='w-fit self-end'>
                         <button 
-                            className='border-2 border-black py-2 px-4 self-end font-bold hover:bg-black hover:text-white' 
+                            className='rounded-lg bg-rose-900 shadow-lg py-2 px-4 self-end font-bold text-white hover:bg-rose-950' 
                             onClick={() => toggleComponent(missingInfoRef)}
                         >
                             ?
                         </button>
                     </div>
-                    <div className='relative text-sm'>
+
+                    <div className='relative text-sm self-end'>
                         <div 
-                            className='h-fit w-full mt-[0.5px] hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' 
+                            className='w-64 h-fit mt-1 hidden top-0 rounded-lg shadow-lg border p-5 border-rose-900 text-left animate-in -translate-x-full duration-400 absolute z-40 bg-rose-900 text-white overflow-y-auto scrollbar-thin' 
                             id='prod-detail' 
                             ref={missingInfoRef}
                         >   
-                        <p className='font-bold'>The following information are missing in this movie:</p>
+                        <p className='font-bold text-white'>The following information are missing in this movie:</p>
                         <ul className='list-disc pl-4'>
                             {missingInfo.map((info:string, index:number) => (
-                                <li key={index}>
+                                <li key={index} className='text-white'>
                                     {info};
                                 </li>
                             ))}
                         </ul>
                         </div>
                     </div>
+
                 </div>
             }
 
             {/* MOVIE */}
-            <div className='flex justify-center gap-4 sm:flex-row flex-col'>
+            <div className='flex justify-center gap-4 sm:flex-row flex-col bg-rose-700 p-5 rounded-lg shadow-lg'>
 
                 {/* POSTER */}
-                <div className='flex sm:w-3/6 w-full sm:min-h-full h-[500px] border-color05 border-2'>
-                    <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover object-top' />
+                <div className='flex sm:w-3/6 w-full sm:min-h-full h-[500px] shadow-lg rounded-lg'> 
+                    <img src={`${import.meta.env.VITE_POSTER_URL}/${movie.poster_path}`} alt={movie.title} className='h-full w-full object-cover object-top rounded-lg' />
                 </div>
 
                 {/* INFORMATION */}
@@ -106,21 +109,21 @@ const Movie = () => {
                     
                     {/* TITLE */}
                     <div className='text-left w-full'>
-                        <p title='Title'>{movie.title}</p>
-                        <div className='w-full h-[1px] bg-color05 my-2'></div>
-                        <p title='Original title'>{movie.original_title}</p>
+                        <p title='Title' className='text-white'>{movie.title}</p>
+                        <div className='w-full h-[1px] bg-white my-2'></div>
+                        <p title='Original title' className='text-white'>{movie.original_title}</p>
                     </div>
 
                     {/* GENRES */}
-                    <div className='flex flex-wrap gap-2 w-full'>
+                    <div className='flex flex-wrap gap-2 w-full' >
                         {movie.genres.map((genre:any) => (
-                            <div key={genre.id} className='badge p-3' title='Genres'>{genre.name}</div>
+                            <div key={genre.id} className='badge bg-rose-950 text-white p-4 border-none shadow-lg' title='Genres'>{genre.name}</div>
                         ))}
                     </div>
                     
                     {/* OVERVIEW */}
                     <div className='text-justify w-full' >
-                        <p title='Overview'>{movie.overview}</p>
+                        <p title='Overview' className='text-white'>{movie.overview}</p>
                     </div>
                     
                     {/* RELEASE DATE AND RUNTIME */}
@@ -141,11 +144,11 @@ const Movie = () => {
                     
                     {/* PRODUCTION DETAILS */}
                     <div>
-                        <button className='border-2 border-color05 w-full p-2 hover:bg-color05 hover:text-white' onClick={() => toggleComponent(prodDetailRef)}>
+                        <button className='w-full rounded-lg bg-rose-900 shadow-lg p-4 self-end font-bold text-white hover:bg-rose-950' onClick={() => toggleComponent(prodDetailRef)}>
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 mt-[0.5px] w-full hidden top-0 border-2 border-color05 p-2 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-white overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetailRef}>
+                            <div className='h-72 mt-1 w-full hidden top-0 shadow-lg rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-rose-900 overflow-y-auto scrollbar-thin' id='prod-detail' ref={prodDetailRef}>
                                  <Table
                                     head={[]}
                                     rows={[
@@ -165,12 +168,10 @@ const Movie = () => {
 
             </div>
             
-            <div className='h-[1px] border-black border w-full mb-2 mt-4'/>
-
             {/* SIMILAR MOVIES */}
             {similarMovies && similarMovies.length > 0 &&
-                <div className='w-full'>  
-                    <div className='text-left mb-2'>Similar movies:</div>  
+                <div className='w-full rounded-lg bg-rose-700 shadow-lg p-5'>  
+                    <div className='text-left mb-2 text-white font-bold'>Similar movies</div>  
                     <div className='mb-5'>
                         <ImageSlider movies={similarMovies}/>
                     </div>       

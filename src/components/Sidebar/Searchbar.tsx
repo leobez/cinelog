@@ -22,13 +22,13 @@ const Searchbar = () => {
         <form className="flex justify-center items-center h-1/2 w-full" onSubmit={handleSubmit}>
 
             <div className="w-10 h-10">
-                <button type="submit" className="border-y-2 border-color05 h-full w-full cursor-pointer bg-white rounded-l-lg">
+                <button type="submit" className="h-full w-full cursor-pointer bg-white rounded-l-lg outline-none border-rose-950 border-y-2 border-l-2">
                     &#128269;
                 </button>
             </div>
 
             <div className="flex-grow h-10 items-center justify-center">
-                <input type="text" name="searchQuery" id="searchQuery" className="bg-white border-y-2 border-color05 h-10 w-full px-1 rounded-r-lg" onChange={(e:any) => setQuery(e.target.value)}/>
+                <input type="text" name="searchQuery" id="searchQuery" className="bg-white outline-none border-rose-950 border-y-2 border-r-2 h-10 w-full px-1 rounded-r-lg" onChange={(e:any) => setQuery(e.target.value)}/>
             </div>
 
         </form>

@@ -7,20 +7,20 @@ const Table = ({head, rows}: Props) => {
 
     return (
         <>
-            <table className="table">
+            <table className="table w-full">
                 {/* head */}
                 <thead>
                 <tr className='text-left'>
                     {head.map((text:string, index:number) => (
-                        <th key={index} className='font-bold'>{text}</th>
+                        <th key={index} className='font-bold text-center text-white'>{text}</th>
                     ))}
                 </tr>
                 </thead>
                 <tbody>
                 {rows.map((row:any, index:number) => (
-                    <tr className='text-left' key={`a${index}`}>
+                    <tr className='text-center' key={`a${index}`}>
                         {row.map((rowElements:string, index:number)=>(
-                            <td key={`b${index}`}>{rowElements}</td>
+                            <td key={`b${index}`} className="text-white">{rowElements}</td>
                         ))}
                     </tr>
                 ))}
