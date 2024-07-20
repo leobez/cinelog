@@ -17,6 +17,10 @@ const Sidebar = () => {
                     <Searchbar/>
                 </div>
 
+                <div className="p-5 bg-rose-700 rounded-lg shadow-lg text-white">
+                    Color Changer (TODO)
+                </div>
+
                 <div className="p-5 bg-rose-700 rounded-lg shadow-lg">
                     <Filter/>
                 </div>
