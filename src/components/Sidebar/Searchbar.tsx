@@ -19,16 +19,16 @@ const Searchbar = () => {
     }
 
     return (
-        <form className="flex gap-1 justify-center items-center h-1/2 w-full" onSubmit={handleSubmit}>
-            
-            <div className="flex-grow h-10 items-center justify-center">
-                <input type="text" name="searchQuery" id="searchQuery" className="bg-white border-2 border-color05 h-10 w-full px-1" onChange={(e:any) => setQuery(e.target.value)}/>
-            </div>
+        <form className="flex justify-center items-center h-1/2 w-full" onSubmit={handleSubmit}>
 
             <div className="w-10 h-10">
-                <button type="submit" className="border-2 border-color05 h-full w-full hover:bg-color05 hover:text-white cursor-pointer">
+                <button type="submit" className="border-y-2 border-color05 h-full w-full cursor-pointer bg-white rounded-l-lg">
                     &#128269;
                 </button>
+            </div>
+
+            <div className="flex-grow h-10 items-center justify-center">
+                <input type="text" name="searchQuery" id="searchQuery" className="bg-white border-y-2 border-color05 h-10 w-full px-1 rounded-r-lg" onChange={(e:any) => setQuery(e.target.value)}/>
             </div>
 
         </form>

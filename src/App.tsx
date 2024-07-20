@@ -24,9 +24,9 @@ function App() {
     const {apiKey} = useContext(MovieContext) as MovieContextType 
 
     return (
-      <div className='h-screen flex flex-col pb-2 gap-2 bg-slate-100'>
+      <div className='h-screen flex flex-col gap-1 pb-1 bg-rose-600'>
         
-          <header className='h-24 p-4 flex align-middle bg-color05 relative gap-5'>
+          <header className='h-24 p-4 flex align-middle bg-rose-950 relative gap-5'>
             {/* HIDDEN BUTTON  */}
             <HiddenMenuButton func={() => toggleComponent(hiddenMenu)}/>
             <Header/>
@@ -35,13 +35,13 @@ function App() {
           <main className='flex justify-center h-full overflow-y-auto'>
             
             {/* WRAPPER */}
-            <div className='w-full lg:w-[1000px] flex gap-2 h-fit justify-center'>
+            <div className='w-full lg:w-[1000px] flex gap-1 h-fit justify-center'>
 
               {/* ROUTES CONTENT */}
               <BrowserRouter>
 
                 {/* SIDE-BAR */}
-                <div className='h-fit min-h-screen w-4/12 top-0 sticky shadow-md p-3 hidden lg:block bg-white'>
+                <div className='h-fit min-h-screen w-4/12 top-0 sticky p-3 hidden lg:block bg-rose-900 rounded-lg shadow-lg'>
                   <Sidebar/>
                 </div>
 
@@ -51,7 +51,7 @@ function App() {
                 </div>
               
                 {/* CONTENT */}
-                <div className='lg:w-8/12 w-11/12 min-h-screen flex flex-col gap-2 items-center bg-white p-3 shadow-md'>
+                <div className='lg:w-8/12 w-11/12 min-h-screen flex flex-col gap-2 items-center bg-rose-900 p-3 shadow-lg rounded-lg'>
 
                   <div className='shadow-md sticky top-0 bg-white z-10 w-full'>
                     <Categories/>

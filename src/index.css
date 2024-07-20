@@ -10,6 +10,7 @@
 #root, body, html {
     overflow: hidden;
     background-color: #f1f5f9;
+    color:white;
 }
 
 body {
@@ -36,14 +37,14 @@ body {
     --transitioncolor: #75413B;
 }
 
-.selected {
+/* .selected {
     background-color: var(--color03);
     color: white;
 }
 .unselected {
     background-color: white;
     color: black;
-}
+} */
 
 button, input[type="submit"] {
     transition: 0.2s;

@@ -33,14 +33,14 @@ export default {
 
   },
   safelist: [
-    'border-red-700',
-    'border-blue-700',
-    'border-green-700',
-    'border-orange-700',
-    'text-red-700',
-    'text-blue-700',
-    'text-green-700',
-    'text-orange-700',
+    'border-red-400',
+    'border-blue-400',
+    'border-green-400',
+    'border-orange-400',
+    'text-red-400',
+    'text-blue-400',
+    'text-green-400',
+    'text-orange-400',
   ],
   plugins: [require("daisyui"), require('tailwindcss-animate'), require('tailwind-scrollbar')],
 }
