@@ -27,7 +27,11 @@ const LoadingRandom = ({message}: Props) => {
         const interval = setInterval(() => {
             let currentOrder = order
             setCount((prev:number)=>prev+1)
+
+            // idk
             let lmao = count
+            lmao = null
+
             const last:any = currentOrder.pop()
             currentOrder.unshift(last)
             setOrder(currentOrder) 
