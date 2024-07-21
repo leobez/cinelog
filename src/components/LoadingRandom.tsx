@@ -20,11 +20,7 @@ const LoadingRandom = ({message}: Props) => {
         'https://image.tmdb.org/t/p/original//k7eYdWvhYQyRQoU2TB2A2Xu2TfD.jpg',
     ])
 
-    const [count, setCount] = useState<any>(0)
-
-    useEffect(() => {
-        console.log('order: ', order)
-    }, [order])
+    const [setCount] = useState<any>(0)
 
     useEffect(() => {
 

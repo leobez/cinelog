@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react'
 import MovieContext, { MovieContextType } from '../context/MovieContext'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TMDB_GENRES } from "../data/TMDB_GENRES"
-import Loading from '../components/Loading'
 import LoadingRandom from '../components/LoadingRandom'
 
 const Random = () => {
