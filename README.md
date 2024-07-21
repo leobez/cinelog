@@ -12,31 +12,50 @@ Currently hosted on Vercel: https://media-collection.vercel.app/
 
 ### Discover top rated, popular and upcoming movies!
 <p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/top_rated.png" alt="Top Rated" width="30%" style="border-radius: 10px; border: 2px solid white;"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/top_rated.png" alt="Top Rated" width="30%"/>
     &nbsp;
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/popular.png" alt="Popular" width="30%" style="border-radius: 10px;"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/popular.png" alt="Popular" width="30%"/>
     &nbsp;
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/upcoming.png" alt="Upcoming" width="30%" style="border-radius: 10px;"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/upcoming.png" alt="Upcoming" width="30%"/>
 </p>
 
+<hr>
+
 ### Filter movies by genre!
-> gif
+<p align="center">
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre1.png" alt="Top Rated" width="35%"/>
+    &nbsp;
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre2.png" alt="Popular" width="35%"/>
+</p>
+
+<hr>
 
 ### Filter movies by query!
-> gif
+<p align="center">
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/byquery.png" alt="Top Rated" width="35%"/>
+</p>
+
+<hr>
 
 ### Sort movies by various metrics!
-> gif
+<p align="center">
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/sort-order.png" alt="Top Rated" width="35%"/>
+</p>
+
+<hr>
 
 ### Don't know what to watch? Select some prefered genres and get a random movie!
-> gif
+![random](https://github.com/leobez/media-collection/blob/main/screenshots/random-gif.gif)
+
+<hr>
 
 ### Quick and responsive selectable color scheme!
 ![color-scheme](https://github.com/leobez/media-collection/blob/main/screenshots/color-scheme.gif)
 
+<hr>
 
 ### Fully responsive UI!
-> gif
+![random](https://github.com/leobez/media-collection/blob/main/screenshots/responsiv.gif)
 
 <hr>
 
@@ -46,7 +65,9 @@ To get one, access https://developer.themoviedb.org/v4/reference/intro/getting-s
 
 Once generated, you can put it on the /api page of the application and click "Save it" to save it on the browsers Local Storage. 
 
-> gif
+<p align="center">
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/api.png" alt="Top Rated" width="35%"/>
+</p>
 
 Once done, the app will be usable and every requisition will use this key. 
 
