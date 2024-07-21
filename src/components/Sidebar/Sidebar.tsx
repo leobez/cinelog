@@ -27,8 +27,8 @@ const Sidebar = () => {
                         <div className="absolute left-0 translate-x-[4px] -translate-y-[5px] h-5 w-5 bg-purple-700 rounded-full"/>
                         <div className="absolute right-0 -translate-x-[4px] -translate-y-[5px] h-5 w-5 bg-rose-700 rounded-full"/>
                     </button>
-                    <div className="relative ">
-                        <div ref={colorChangerRef} className={`w-56 hidden shadow-lg bg-${theme}-950 p-5 rounded-lg animate-in slide-in-from-left-full absolute w-full mt-1 duration-400`}>
+                    <div className="relative">
+                        <div ref={colorChangerRef} className={`min-w-64 hidden shadow-lg bg-${theme}-950 p-5 rounded-lg animate-in slide-in-from-left-full absolute w-full mt-1 duration-400`}>
                             <div className="text-left font-bold text-white mb-5">Select a color scheme:</div>
                             <ColorChanger/>
                         </div>
