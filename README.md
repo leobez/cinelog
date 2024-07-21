@@ -66,7 +66,7 @@ To get one, access https://developer.themoviedb.org/v4/reference/intro/getting-s
 Once generated, you can put it on the /api page of the application and click "Save it" to save it on the browsers Local Storage. 
 
 <p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/api.png" alt="Top Rated" width="35%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/api.png" alt="Top Rated" width="50%"/>
 </p>
 
 Once done, the app will be usable and every requisition will use this key. 
