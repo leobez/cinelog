@@ -3,6 +3,7 @@ import MovieContext, { MovieContextType } from '../context/MovieContext'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TMDB_GENRES } from "../data/TMDB_GENRES"
 import Loading from '../components/Loading'
+import LoadingRandom from '../components/LoadingRandom'
 
 const Random = () => {
 
@@ -12,7 +13,7 @@ const Random = () => {
 
     const [genres, setGenres] = useState<string[]>([])
     const [params] = useSearchParams()
-    const [LoadingRandom, setLoadingRandom] = useState<boolean>(true)
+    const [LoadingRandomBool, setLoadingRandom] = useState<boolean>(true)
 
     useEffect(() => {
 
@@ -40,8 +41,8 @@ const Random = () => {
 
     return (
         <>  
-            {LoadingRandom && genres.length > 0 && <Loading message={`Loading random based on genres: ${genres.join(',')}`}/>}
-            {LoadingRandom && genres.length===1 && genres[0]==='0' && <Loading message={`Loading random`}/>}
+            {LoadingRandomBool && genres.length > 0 && <LoadingRandom message={`Loading random based on genres: ${genres.join(',')}`}/>}
+            {LoadingRandomBool && genres.length===1 && <LoadingRandom message={`Loading random`}/>}
         </>
     )
 }

@@ -2,7 +2,7 @@ import Sidebar from './Sidebar'
 
 const HiddenSidebar = () => {
     return (
-        <div className='overflow-y-scroll min-h-screen'>
+        <div className='min-h-screen'>
             <Sidebar/>
         </div>
     )

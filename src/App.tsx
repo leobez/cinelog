@@ -73,7 +73,7 @@ function App() {
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className={`h-2/3 p-3 w-[310px] rounded-lg shadow-lg z-30 fixed left-0 bg-${theme}-900 mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto`} ref={hiddenMenu}>
+                <div className={`h-3/4 p-3 w-[310px] rounded-lg shadow-lg z-30 fixed left-0 bg-${theme}-900 mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto`} ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               
@@ -87,7 +87,7 @@ function App() {
                   <div className='w-full h-full'>
                     <Routes>
                       <Route path='*'           element={<div>404</div>}></Route>
-                      <Route path='/'           element={apiKey.length ? <Home/>:<Navigate to='/api'/>}></Route> 
+                      <Route path='/'           element={apiKey.length ? <Home/>:<Navigate to='/api'/>}></Route>
                       <Route path='/api'        element={<Api/>}></Route> 
                       <Route path='/popular'    element={apiKey.length ? <Popular/>:<Navigate to='/api'/>}></Route>
                       <Route path='/upcoming'   element={apiKey.length ? <Upcoming/>:<Navigate to='/api'/>}></Route>

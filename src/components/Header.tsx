@@ -1,4 +1,5 @@
 import { useEffect, useState} from "react"
+import { MdLocalMovies } from "react-icons/md";
 
 const Header = () => {
 
@@ -19,8 +20,9 @@ const Header = () => {
 
     return (
     <>
-        <div className="grid place-items-center text-2xl text-white font-bold">
+        <div className="flex gap-5 items-center text-2xl text-white font-bold">
             MOVIES
+            <MdLocalMovies size={30} fill="white"/>
         </div>
     </>
   )

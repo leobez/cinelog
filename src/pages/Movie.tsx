@@ -153,7 +153,7 @@ const Movie = () => {
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className={`h-72 mt-1 w-full hidden top-0 shadow-lg rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-${theme}-900 overflow-y-auto scrollbar-thin text-white`} id='prod-detail' ref={prodDetailRef}>
+                            <div className={`h-72 mt-1 w-full hidden top-0 shadow-lg border-${theme}-900 rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-${theme}-900 overflow-y-auto scrollbar-thin text-white`} id='prod-detail' ref={prodDetailRef}>
                                 <div className='max-w-72 overflow-hidden'>
                                 <Table
                                     head={[]}
@@ -177,13 +177,17 @@ const Movie = () => {
             </div>
             
             {/* SIMILAR MOVIES */}
-            {similarMovies && similarMovies.length > 0 &&
-                <div className={`w-full rounded-lg bg-${theme}-700 shadow-lg p-5`}>  
-                    <div className='text-left mb-2 text-white font-bold'>Similar movies</div>  
-                    <div className='mb-5'>
-                        <ImageSlider movies={similarMovies}/>
-                    </div>       
-                </div>
+            {similarMovies && similarMovies.length > 0 ? 
+                (   <div className={`w-full rounded-lg bg-${theme}-700 shadow-lg p-5`}>  
+                        <div className='text-left mb-2 text-white font-bold'>Similar movies</div>  
+                        <div className='mb-5'>
+                            <ImageSlider movies={similarMovies}/>
+                        </div>       
+                    </div>
+                ) : (
+                    <div className='h-72'>
+                    </div>
+                )
             }
 
         </div>

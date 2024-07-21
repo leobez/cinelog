@@ -16,7 +16,7 @@ const LoadMoreButton = ({LoadMoreFunc, loadingState}: Props) => {
                 {!loadingState && 
                     <button 
                         type="submit" 
-                        className={`text-sm rounded-lg shadow-lg bg-${theme}-900 p-4 text-white hover:bg-${theme}-950 flex justify-between items-center`}
+                        className={`text-sm rounded-lg w-fit shadow-lg bg-${theme}-900 p-4 text-white hover:bg-${theme}-950 flex justify-between items-center`}
                         onClick={LoadMoreFunc}
                         >
                         Load more <RiMore2Line size={20} fill="white"/>
@@ -26,7 +26,7 @@ const LoadMoreButton = ({LoadMoreFunc, loadingState}: Props) => {
                 {loadingState && 
                     <button 
                         type="submit" 
-                        className={`text-sm rounded-lg shadow-lg bg-${theme}-950 p-4 text-white disabled`}
+                        className={`text-sm rounded-lg w-fit shadow-lg bg-${theme}-950 flex justify-between items-center p-4 text-white disabled`}
                         >
                         Load more <RiMore2Line size={20} fill="white"/>
                     </button>
