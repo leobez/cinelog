@@ -23,14 +23,14 @@ export type MovieContextType = {
     page:number;
     list:any[];
     run:boolean;
-    apiKey:string;
+    apiKey:string|null;
 }
 
 const MovieContext = createContext<MovieContextType|null>(null)
 
 export const MovieListContextProvider = ({children}:any) => {
 
-    const [apiKey, setApiKey] = useState<string>('')
+    const [apiKey, setApiKey] = useState<string|null>(localStorage.getItem('tmdbApiKey') !== null ? localStorage.getItem('tmdbApiKey') : '')
     //const API_KEY = import.meta.env.VITE_API_KEY
     const URL_TOPRATED = import.meta.env.VITE_TOP_RATED_MOVIES_URL
     const URL_POPULAR = import.meta.env.VITE_POPULAR_MOVIES_URL
@@ -51,7 +51,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     useEffect(() => {
 
-        if (!apiKey.length) return;
+        if (!apiKey || !apiKey.length) return;
 
         resetStates()
 
@@ -69,7 +69,7 @@ export const MovieListContextProvider = ({children}:any) => {
                     return;
                 } else {
                     localStorage.setItem('tmdbApiKey', `${apiKey}`)
-                    updateMessage('API key added successfully', 'green')
+                    updateMessage('API key detected on Local Storage', 'green')
                     return;
                 }
             } catch (error) {
