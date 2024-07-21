@@ -26,7 +26,7 @@ const Api = () => {
         e.preventDefault()
         updateApiKey('')
         localStorage.removeItem('tmdbApiKey')
-        updateMessage('Api key was removed from local storage', 'green')
+        updateMessage('Api key cleared from local storage', 'green')
     }
 
     return (

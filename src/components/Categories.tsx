@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { PiRankingLight, PiShootingStar, PiCalendar} from "react-icons/pi";
 import { useContext } from 'react';
 import ThemeContext, { ThemeContextType } from '../context/ThemeContext';
+import { CiServer } from "react-icons/ci";
 
 const Categories = () => {
 
@@ -56,6 +57,7 @@ const Categories = () => {
                         `p-3 rounded-lg shadow-lg h-12 md:h-full w-full md:w-1/4 flex justify-between items-center hover:bg-${theme}-950 bg-${theme}-900 text-white duration-200 text-sm`
                     }> 
                     API
+                    <CiServer size={20} fill="white"/>
                 </NavLink>
 
             </div>

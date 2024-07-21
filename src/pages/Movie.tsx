@@ -81,7 +81,7 @@ const Movie = () => {
 
                     <div className='relative text-sm self-end'>
                         <div 
-                            className={`w-64 h-fit mt-1 hidden top-0 rounded-lg shadow-lg border p-5 border-${theme}-900 text-left animate-in -translate-x-full duration-400 absolute z-40 bg-${theme}-900 text-white overflow-y-auto scrollbar-thin' 
+                            className={`w-64 h-fit mt-1 hidden top-0 rounded-lg shadow-lg p-5 text-left animate-in -translate-x-full duration-400 absolute z-40 bg-${theme}-900 text-white overflow-y-auto scrollbar-thin' 
                             id='prod-detail`}
                             ref={missingInfoRef}
                         >   

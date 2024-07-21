@@ -1,15 +1,10 @@
--> COLOR SCHEME (
-	-> CREATE A PALLET FOR USER TO CHOOSE ON SIDEBAR. 
-	-> WHEN CHOSEN, SETS THE COLOR SCHEME OF THE APPLICATION
-	-> EX: CHANGE 'ROSE' FOR VARIABLE NAME. 
--> SCROLL POSITION NOT WORKING ANYMORE
-
+-> LOOK AT 'Railroad to Hell: A Chinaman's Chance' -> PAGE IMCOMPLETE
+-> LOAD MORE BUTTO BREAKS WHEN NO DATA
 -> ADD COOL SPINNING LOADING ANIMATION FOR LOADING RANDOM
 -> TRAILER
-
+-> BETTER RADIO BUTTONS
 
 TODO: 
-    -> Better radio buttons
     -> While poster img not loaded, show ghost card
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results

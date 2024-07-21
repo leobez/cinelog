@@ -4,6 +4,7 @@ import Information from "./Information"
 import { useContext } from "react"
 import MovieContext, { MovieContextType } from "../../context/MovieContext"
 import ThemeContext, { ThemeContextType } from "../../context/ThemeContext"
+import ColorChanger from "./ColorChanger"
 
 const Sidebar = () => {
 
@@ -20,7 +21,7 @@ const Sidebar = () => {
                 </div>
 
                 <div className={`p-5 bg-${theme}-700 rounded-lg shadow-lg text-white`}>
-                    Color Changer (TODO)
+                    <ColorChanger/>
                 </div>
 
                 <div className={`p-5 bg-${theme}-700 rounded-lg shadow-lg`}>

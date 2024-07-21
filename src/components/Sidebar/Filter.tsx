@@ -77,15 +77,15 @@ const Filter = () => {
 
       //console.log(classList)
 
-      if (classList.includes('unselected')) {
-        e.target.classList.remove('unselected')
-        e.target.classList.add('selected')
+      if (classList.includes(`bg-${theme}-800`)) {
+        e.target.classList.remove(`bg-${theme}-800`)
+        e.target.classList.add(`bg-${theme}-950`)
         //console.log('SELECTING: ', id)
         addGenre(id)
 
-      } else if (classList.includes('selected')) {
-        e.target.classList.remove('selected')
-        e.target.classList.add('unselected')
+      } else if (classList.includes(`bg-${theme}-950`)) {
+        e.target.classList.remove(`bg-${theme}-950`)
+        e.target.classList.add(`bg-${theme}-800`)
         //console.log('UNSELECTING: ', id)
         removeGenre(id)
 
@@ -102,7 +102,7 @@ const Filter = () => {
                       const IconComponent = icons[genre[0]]
 
                       return (
-                        <button key={genre[0]} className={`h-10 rounded-lg text-center py-1 px-2 text-xs bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer unselected text-ellipsis overflow-hidden whitespace-nowrap flex justify-between items-center`} id={genre[0]} onClick={toggleGenre} title={genre[1]}>
+                        <button key={genre[0]} className={`h-10 rounded-lg text-center py-1 px-2 text-xs bg-${theme}-800 hover:bg-${theme}-950 text-white cursor-pointer text-ellipsis overflow-hidden whitespace-nowrap flex justify-between items-center`} id={genre[0]} onClick={toggleGenre} title={genre[1]}>
                             {genre[1]} <IconComponent size={20} fill="white"/>
                         </button>
                       )

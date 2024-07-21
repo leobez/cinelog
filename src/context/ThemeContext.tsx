@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 export type ThemeContextType = {
     theme:string,
     updateTheme:(newTheme:string)=>void
+    possibleThemes:string[]
 }
 
 const ThemeContext = createContext<ThemeContextType|null>(null)
@@ -18,7 +19,7 @@ export const ThemeContextProvider = ({children}:any) => {
             emerald
             teal
             cyan
-            sky'
+            sky
             indigo
             violet
             fuchsia
@@ -26,7 +27,25 @@ export const ThemeContextProvider = ({children}:any) => {
             rose
     */
 
-    const [theme, setTheme] = useState<string>('rose')
+    const possibleThemes = [
+        'slate',
+        'stone',
+        'red',
+        'amber',
+        'yellow',
+        'lime',
+        'emerald',
+        'teal',
+        'cyan',
+        'sky',
+        'indigo',
+        'violet',
+        'fuchsia',
+        'pink',
+        'rose',
+    ]
+
+    const [theme, setTheme] = useState<string>('slate')
 
     const updateTheme = (newTheme:string) => {
         setTheme(newTheme)
@@ -36,7 +55,8 @@ export const ThemeContextProvider = ({children}:any) => {
         <ThemeContext.Provider value={
                 {
                     theme,
-                    updateTheme
+                    updateTheme,
+                    possibleThemes
                 }
             }>
 
