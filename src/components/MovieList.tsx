@@ -45,7 +45,7 @@ const MovieList = ({movieList}: Props) => {
                     {movieList.length > 0 && movieList.map((movie:any, index:number) => (
                         <div 
                             key={`${movie.id}/${index}`} 
-                            className={`rounded-lg shadow-lg w-1/3 md:w-1/4 lg:w-1/4 h-44 md:h-56 border-2 border-${theme}-700`}
+                            className={`rounded-lg shadow-lg w-1/2 md:w-1/4 lg:w-1/4 h-44 md:h-56 border-2 border-${theme}-700`}
                             onClick={handleClick} 
                             ref={containerRef}
                         >
