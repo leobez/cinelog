@@ -21,7 +21,7 @@ const MovieList = ({movieList}: Props) => {
     const handleClick = ():void => {
         // Save container current position, so it can be used to move user back to where they were before clicking.
         const ScrollNode = containerRef.current.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode // lmao
-        console.log(ScrollNode)
+        //console.log(ScrollNode)
         updateScrollPos(Number(ScrollNode.scrollTop))
     }   
 

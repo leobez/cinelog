@@ -1,8 +1,10 @@
--> BETTER PROD DETAILS
--> BETTER RADIO BUTTONS
--> TRAILER FINDER
+FIX LOADING RANDOM
+
 
 TODO: 
+    -> BETTER PROD DETAILS
+    -> BETTER RADIO BUTTONS
+    -> TRAILER FINDER
     -> While poster img not loaded, show ghost card
     -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results

@@ -51,7 +51,7 @@ const Sort = ({SubmitFunc, setSort, setOrder, sortByRef}: Props) => {
                                             value="title" 
                                             onChange={() => setSort('title')}
                                         />
-                                        <label htmlFor="title">Title</label>
+                                        <label htmlFor="title" className="text-white text-sm font-bold">Title</label>
                                     </div>
 
                                     <div className="flex gap-1">

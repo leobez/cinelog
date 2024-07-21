@@ -24,8 +24,6 @@ const LoadingRandom = ({message}: Props) => {
 
     useEffect(() => {
 
-        if (!loadingRef) return;
-
         const interval = setInterval(() => {
             let currentOrder = order
             setCount((prev:number)=>prev+1)
@@ -36,8 +34,7 @@ const LoadingRandom = ({message}: Props) => {
 
        return () => clearInterval(interval)
 
-    }, [loadingRef])
-
+    }, [])
 
     return (
         <div className='h-full w-full flex justify-center'>
