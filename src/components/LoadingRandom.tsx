@@ -27,11 +27,6 @@ const LoadingRandom = ({message}: Props) => {
         const interval = setInterval(() => {
             let currentOrder = order
             setCount((prev:number)=>prev+1)
-
-            // idk
-            let lmao = count
-            lmao = null
-
             const last:any = currentOrder.pop()
             currentOrder.unshift(last)
             setOrder(currentOrder) 
@@ -61,7 +56,7 @@ const LoadingRandom = ({message}: Props) => {
                                             : ''                                       
                                         }
                                     `
-                                } key={`${element}${index}`}>
+                                } key={`${element}${index}${count}`}>
 
                                 <img src={element} alt={element} className="object-cover object-top h-full w-full rounded-lg"/>
 
