@@ -20,17 +20,18 @@ const LoadingRandom = ({message}: Props) => {
         'https://image.tmdb.org/t/p/original//k7eYdWvhYQyRQoU2TB2A2Xu2TfD.jpg',
     ])
 
-    const [setCount] = useState<any>(0)
+    const [count, setCount] = useState<any>(0)
 
     useEffect(() => {
 
         const interval = setInterval(() => {
             let currentOrder = order
             setCount((prev:number)=>prev+1)
+            let lmao = count
             const last:any = currentOrder.pop()
             currentOrder.unshift(last)
             setOrder(currentOrder) 
-        }, 600) 
+        }, 500) 
 
        return () => clearInterval(interval)
 
@@ -40,13 +41,13 @@ const LoadingRandom = ({message}: Props) => {
         <div className='h-full w-full flex justify-center'>
 
             <div className="h-fit relative w-full flex flex-col justify-center items-center pt-64 overflow-clip">
-                <div className="relative flex duration-400 transition-transform" ref={loadingRef}>
+                <div className="relative flex transition-transform" ref={loadingRef}>
                     {order && order.map((element:any, index:number) => (
                         <>
                             <div 
                                 className={
                                     `
-                                        bg-white rounded-lg shadow-lg duration-100 animate-in ease-in-out
+                                        bg-white rounded-lg shadow-lg duration-200 animate-in ease-in-out
                                         ${
                                             index===2 ?     'h-80 w-56              slide-in-from-left-52    translate-x-0 -translate-y-44' 
                                             : index===0 ?   'h-56 w-36 -rotate-45   slide-in-from-right-52     translate-x-full translate-y-1/2' 

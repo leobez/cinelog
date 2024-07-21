@@ -533,7 +533,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const max = (moviePool.length-1)
             const min = 0
             const randomNum = Math.floor(Math.random() * (max - min + 1) + min)
-            await sleep(4000);
+            await sleep(3000);
 
             setLoading(false)
 
