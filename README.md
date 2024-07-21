@@ -32,7 +32,8 @@ Currently hosted on Vercel: https://media-collection.vercel.app/
 > gif
 
 ### Quick and responsive selectable color scheme!
-> gif
+![color-scheme](https://github.com/leobez/media-collection/blob/main/screenshots/color-scheme.gif)
+
 
 ### Fully responsive UI!
 > gif
@@ -55,6 +56,7 @@ Tech Stack:
 - React.js
 - TypeScript
 - Vercel
+- React icons
 - Tailwind CSS
     - Tailwind animated
     - Tailwind scrollbars
