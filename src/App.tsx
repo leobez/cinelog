@@ -87,14 +87,14 @@ function App() {
                   <div className='w-full h-full'>
                     <Routes>
                       <Route path='*'           element={<div>404</div>}></Route>
-                      <Route path='/'           element={apiKey.length ? <Home/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/'           element={apiKey && apiKey.length ? <Home/>:<Navigate to='/api'/>}></Route>
                       <Route path='/api'        element={<Api/>}></Route> 
-                      <Route path='/popular'    element={apiKey.length ? <Popular/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/upcoming'   element={apiKey.length ? <Upcoming/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/search'     element={apiKey.length ? <Search/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/bygenre'    element={apiKey.length ? <ByGenre/>:<Navigate to='/api'/>}></Route> 
-                      <Route path='/movie/:id'  element={apiKey.length ? <Movie/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/random'     element={apiKey.length ? <Random/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/popular'    element={apiKey && apiKey.length ? <Popular/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/upcoming'   element={apiKey && apiKey.length ? <Upcoming/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/search'     element={apiKey && apiKey.length ? <Search/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/bygenre'    element={apiKey && apiKey.length ? <ByGenre/>:<Navigate to='/api'/>}></Route> 
+                      <Route path='/movie/:id'  element={apiKey && apiKey.length ? <Movie/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/random'     element={apiKey && apiKey.length ? <Random/>:<Navigate to='/api'/>}></Route>
                     </Routes>
                   </div>  
 
