@@ -1,6 +1,6 @@
 # Media collection
 
-Website that uses public a API to show movies with some filtering capabilities. 
+Website that uses a public API to show movies with some filtering capabilities. 
 
 Movie API: [TMDB](https://www.themoviedb.org/?language=pt-BR)
 
