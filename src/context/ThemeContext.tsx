@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 export type ThemeContextType = {
-    theme:string,
+    theme:string|null,
     updateTheme:(newTheme:string)=>void
     possibleThemes:string[]
 }
@@ -45,10 +45,11 @@ export const ThemeContextProvider = ({children}:any) => {
         'rose',
     ]
 
-    const [theme, setTheme] = useState<string>('slate')
+    const [theme, setTheme] = useState<string|null>(localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'slate')
 
     const updateTheme = (newTheme:string) => {
         setTheme(newTheme)
+        localStorage.setItem('theme', newTheme)
     }
 
     return (

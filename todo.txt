@@ -1,8 +1,6 @@
--> SAVE THEME ON LOCAL STORAGE
 -> BETTER PROD DETAILS
--> TRAILER
 -> BETTER RADIO BUTTONS
-
+-> TRAILER FINDER
 
 TODO: 
     -> While poster img not loaded, show ghost card
