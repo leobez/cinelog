@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import MovieCard from './MovieCard';
+import ThemeContext, { ThemeContextType } from '../context/ThemeContext';
 
 type Props = {
     movies:any
@@ -8,6 +9,8 @@ type Props = {
 const ImageSlider = ({movies}:Props) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const {theme} = useContext(ThemeContext) as ThemeContextType 
 
     const goToPrevious = () => {
         const newIndex = currentIndex === 0 ? movies.length - 3 : currentIndex - 1;
@@ -31,13 +34,13 @@ const ImageSlider = ({movies}:Props) => {
 
             <button 
                 onClick={goToPrevious} 
-                className="absolute h-full top-0 left-0 bg-rose-950 text-white px-4 py-2 hover:opacity-90">
+                className={`absolute h-full top-0 left-0 bg-${theme}-950 text-white px-4 py-2 hover:opacity-90`}>
                 &#10094;
             </button>
 
             <button 
                 onClick={goToNext} 
-                className="absolute h-full top-0 right-0 bg-rose-950 text-white px-4 py-2 hover:opacity-90">
+                className={`absolute h-full top-0 right-0 bg-${theme}-950 text-white px-4 py-2 hover:opacity-90`}>
                 &#10095;
             </button>
 

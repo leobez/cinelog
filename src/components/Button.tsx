@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import ThemeContext, { ThemeContextType } from "../context/ThemeContext";
+
 type Props = {
     text:string;
     loading:boolean;
@@ -6,12 +9,14 @@ type Props = {
 
 const Button = ({text,loading,func}: Props) => {
 
+    const {theme} = useContext(ThemeContext) as ThemeContextType 
+
     return (
         <>
             {!loading && 
                 <button 
                     type="submit" 
-                    className="text-sm rounded-lg shadow-lg bg-rose-900 p-4 text-white hover:bg-rose-950" 
+                    className={`text-sm rounded-lg shadow-lg bg-${theme}-900 p-4 text-white hover:bg-${theme}-950`}
                     onClick={func}
                     >
                     {text}
@@ -21,7 +26,7 @@ const Button = ({text,loading,func}: Props) => {
             {loading && 
                 <button 
                     type="submit" 
-                    className="text-sm rounded-lg shadow-lg bg-rose-900 p-4 text-white disabled hover:bg-rose-950"
+                    className={`text-sm rounded-lg shadow-lg bg-${theme}-900 p-4 text-white disabled hover:bg-${theme}-950`}
                     >
                     Loading...
                 </button>}

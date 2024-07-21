@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef } from "react"
 import MovieCard from "./MovieCard"
 import MovieContext, { MovieContextType } from "../context/MovieContext";
+import ThemeContext, { ThemeContextType } from "../context/ThemeContext";
 
 type Props = {
     movieList: any[];
@@ -9,6 +10,8 @@ type Props = {
 const MovieList = ({movieList}: Props) => { 
 
     const containerRef:any = useRef<HTMLDivElement>()
+
+    const {theme} = useContext(ThemeContext) as ThemeContextType 
 
     const {
         scrollPos,
@@ -36,12 +39,12 @@ const MovieList = ({movieList}: Props) => {
 
     return (
         <>
-            <div className="flex items-center justify-center rounded-lg shadow-lg p-5 bg-rose-700">
+            <div className={`flex items-center justify-center rounded-lg shadow-lg p-5 bg-${theme}-700`}>
                 <div className="relative flex flex-wrap w-11/12">
                     {movieList.length > 0 && movieList.map((movie:any, index:number) => (
                         <div 
                             key={`${movie.id}/${index}`} 
-                            className="rounded-lg shadow-lg w-1/3 md:w-1/4 lg:w-1/4 h-44 md:h-56 border-2 border-rose-700"
+                            className={`rounded-lg shadow-lg w-1/3 md:w-1/4 lg:w-1/4 h-44 md:h-56 border-2 border-${theme}-700`}
                             onClick={handleClick} 
                             ref={containerRef}
                         >

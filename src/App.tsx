@@ -16,6 +16,7 @@ import Random from './pages/Random'
 import { toggleComponent } from './utils/toggleComponent'
 import Api from './pages/Api'
 import MovieContext, { MovieContextType } from './context/MovieContext'
+import ThemeContext, { ThemeContextType } from './context/ThemeContext'
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
     const feedbackRef:any = useRef()
 
     const {apiKey, message, updateMessage} = useContext(MovieContext) as MovieContextType 
+
+    const {theme} = useContext(ThemeContext) as ThemeContextType 
 
     useEffect(() => {
 
@@ -42,9 +45,9 @@ function App() {
     }, [message, feedbackRef])
 
     return (
-      <div className='h-screen flex flex-col gap-1 pb-1 bg-rose-600'>
+      <div className={`h-screen flex flex-col gap-1 pb-1 bg-${theme}-600`}>
         
-          <header className='h-24 p-4 flex align-middle bg-rose-950 relative gap-5'>
+          <header className={`h-24 p-4 flex align-middle bg-${theme}-950 relative gap-5`}>
             {/* HIDDEN BUTTON  */}
             <HiddenMenuButton func={() => toggleComponent(hiddenMenu)}/>
             <Header/>
@@ -65,19 +68,19 @@ function App() {
               <BrowserRouter>
 
                 {/* SIDE-BAR */}
-                <div className='h-fit min-h-screen w-4/12 top-0 sticky p-3 hidden lg:block bg-rose-900 rounded-lg shadow-lg'>
+                <div className={`h-fit min-h-screen w-4/12 top-0 sticky p-3 hidden lg:block bg-${theme}-900 rounded-lg shadow-lg`}>
                   <Sidebar/>
                 </div>
 
                 {/* HIDDEN SIDEBAR */}
-                <div className='h-2/3 p-3 w-[310px] rounded-lg shadow-lg z-30 fixed left-0 bg-rose-900 mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto' ref={hiddenMenu}>
+                <div className={`h-2/3 p-3 w-[310px] rounded-lg shadow-lg z-30 fixed left-0 bg-${theme}-900 mt-[-8px] hidden lg:hidden animate-in slide-in-from-left-full duration-200 overflow-y-auto`} ref={hiddenMenu}>
                   <HiddenSidebar/>
                 </div>
               
                 {/* CONTENT */}
-                <div className='lg:w-8/12 w-11/12 min-h-screen flex flex-col gap-2 items-center bg-rose-900 p-3 shadow-lg rounded-lg'>
+                <div className={`lg:w-8/12 w-11/12 min-h-screen flex flex-col gap-2 items-center bg-${theme}-900 p-3 shadow-lg rounded-lg`}>
 
-                  <div className='sticky top-0 z-10 w-full rounded-lg shadow-lg bg-rose-700'>
+                  <div className={`sticky top-0 z-10 w-full rounded-lg shadow-lg bg-${theme}-700`}>
                     <Categories/>
                   </div>
 

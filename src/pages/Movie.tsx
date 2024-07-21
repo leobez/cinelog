@@ -7,6 +7,7 @@ import { useInitialLoadingMovie } from '../hooks/useInitialLoadingMovie'
 import Table from '../components/Movie/Table'
 import { getMovieMissingInfo } from '../utils/getMovieMissingInfo'
 import { toggleComponent } from '../utils/toggleComponent'
+import ThemeContext, { ThemeContextType } from '../context/ThemeContext'
 
 const Movie = () => {
 
@@ -15,6 +16,8 @@ const Movie = () => {
         GET_movies_similar, 
         loading
     } = useContext(MovieContext) as MovieContextType
+
+    const {theme} = useContext(ThemeContext) as ThemeContextType
 
     const {id} = useParams()
 
@@ -65,11 +68,11 @@ const Movie = () => {
 
             {/* MISSING INFO */}
             {missingInfo && missingInfo.length > 0 && 
-                <div className='bg-rose-700 w-full p-5 rounded-lg shadow-lg flex flex-col'>
+                <div className={`bg-${theme}-700 w-full p-5 rounded-lg shadow-lg flex flex-col`}>
 
                     <div className='w-fit self-end'>
                         <button 
-                            className='rounded-lg bg-rose-900 shadow-lg py-2 px-4 self-end font-bold text-white hover:bg-rose-950' 
+                            className={`rounded-lg bg-${theme}-900 shadow-lg py-2 px-4 self-end font-bold text-white hover:bg-${theme}-950`} 
                             onClick={() => toggleComponent(missingInfoRef)}
                         >
                             ?
@@ -78,8 +81,8 @@ const Movie = () => {
 
                     <div className='relative text-sm self-end'>
                         <div 
-                            className='w-64 h-fit mt-1 hidden top-0 rounded-lg shadow-lg border p-5 border-rose-900 text-left animate-in -translate-x-full duration-400 absolute z-40 bg-rose-900 text-white overflow-y-auto scrollbar-thin' 
-                            id='prod-detail' 
+                            className={`w-64 h-fit mt-1 hidden top-0 rounded-lg shadow-lg border p-5 border-${theme}-900 text-left animate-in -translate-x-full duration-400 absolute z-40 bg-${theme}-900 text-white overflow-y-auto scrollbar-thin' 
+                            id='prod-detail`}
                             ref={missingInfoRef}
                         >   
                         <p className='font-bold text-white'>The following information are missing in this movie:</p>
@@ -97,7 +100,7 @@ const Movie = () => {
             }
 
             {/* MOVIE */}
-            <div className='flex justify-center gap-4 sm:flex-row flex-col bg-rose-700 p-5 rounded-lg shadow-lg'>
+            <div className={`flex justify-center gap-4 sm:flex-row flex-col bg-${theme}-700 p-5 rounded-lg shadow-lg`}>
 
                 {/* POSTER */}
                 <div className='flex sm:w-3/6 w-full sm:min-h-full h-[500px] shadow-lg rounded-lg'> 
@@ -117,7 +120,7 @@ const Movie = () => {
                     {/* GENRES */}
                     <div className='flex flex-wrap gap-2 w-full' >
                         {movie.genres.map((genre:any) => (
-                            <div key={genre.id} className='badge bg-rose-950 text-white p-4 border-none shadow-lg' title='Genres'>{genre.name}</div>
+                            <div key={genre.id} className={`badge bg-${theme}-950 text-white p-4 border-none shadow-lg`} title='Genres'>{genre.name}</div>
                         ))}
                     </div>
                     
@@ -146,11 +149,11 @@ const Movie = () => {
                     
                     {/* PRODUCTION DETAILS */}
                     <div>
-                        <button className='w-full rounded-lg bg-rose-900 shadow-lg p-4 self-end font-bold text-white hover:bg-rose-950' onClick={() => toggleComponent(prodDetailRef)}>
+                        <button className={`w-full rounded-lg bg-${theme}-900 shadow-lg p-4 self-end font-bold text-white hover:bg-${theme}-950`} onClick={() => toggleComponent(prodDetailRef)}>
                             Production details
                         </button>
                         <div className='relative'>
-                            <div className='h-72 mt-1 w-full hidden top-0 shadow-lg rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-rose-900 overflow-y-auto scrollbar-thin text-white' id='prod-detail' ref={prodDetailRef}>
+                            <div className={`h-72 mt-1 w-full hidden top-0 shadow-lg rounded-lg p-5 text-left animate-in -translate-x-full duration-400 absolute -right-full z-40 bg-${theme}-900 overflow-y-auto scrollbar-thin text-white`} id='prod-detail' ref={prodDetailRef}>
                                 <div className='max-w-72 overflow-hidden'>
                                 <Table
                                     head={[]}
@@ -175,7 +178,7 @@ const Movie = () => {
             
             {/* SIMILAR MOVIES */}
             {similarMovies && similarMovies.length > 0 &&
-                <div className='w-full rounded-lg bg-rose-700 shadow-lg p-5'>  
+                <div className={`w-full rounded-lg bg-${theme}-700 shadow-lg p-5`}>  
                     <div className='text-left mb-2 text-white font-bold'>Similar movies</div>  
                     <div className='mb-5'>
                         <ImageSlider movies={similarMovies}/>

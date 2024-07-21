@@ -3,6 +3,8 @@ type Props = {
     message:any; // .message and .color
 }
 
+// Currently not used
+
 const Information = ({loading, message}: Props) => {
 
     return (

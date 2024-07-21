@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MovieContext, { MovieContextType } from '../../context/MovieContext'
 import { FaSearch } from 'react-icons/fa';
+import ThemeContext, { ThemeContextType } from '../../context/ThemeContext';
 
 const Searchbar = () => {
 
@@ -9,6 +10,7 @@ const Searchbar = () => {
     const navigate = useNavigate()
 
     const {updateMessage} = useContext(MovieContext) as MovieContextType
+    const {theme} = useContext(ThemeContext) as ThemeContextType 
 
     const handleSubmit = (e:any):void => {
         e.preventDefault()
@@ -23,13 +25,13 @@ const Searchbar = () => {
         <form className="flex justify-center items-center h-1/2 w-full" onSubmit={handleSubmit}>
 
             <div className="w-10 h-10">
-                <button type="submit" className="h-full w-full cursor-pointer bg-white rounded-l-lg outline-none border-rose-950 border-y-2 border-l-2 grid place-items-center">
+                <button type="submit" className={`h-full w-full cursor-pointer bg-white rounded-l-lg outline-none border-${theme}-950 border-y-2 border-l-2 grid place-items-center`}>
                     <FaSearch size={20} fill="black"/>
                 </button>
             </div>
 
             <div className="flex-grow h-10 items-center justify-center">
-                <input type="text" name="searchQuery" id="searchQuery" className="bg-white outline-none border-rose-950 border-y-2 border-r-2 h-10 w-full px-1 rounded-r-lg" onChange={(e:any) => setQuery(e.target.value)}/>
+                <input type="text" name="searchQuery" id="searchQuery" className={`bg-white outline-none border-${theme}-950 border-y-2 border-r-2 h-10 w-full px-1 rounded-r-lg`} onChange={(e:any) => setQuery(e.target.value)}/>
             </div>
 
         </form>
