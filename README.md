@@ -11,7 +11,13 @@ Currently hosted on Vercel: https://media-collection.vercel.app/
 ## Features
 
 ### Discover top rated, popular and upcoming movies!
-> gif
+<p align="center">
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/top_rated.png" alt="Top Rated" width="30%" style="border-radius: 10px; border: 2px solid white;"/>
+    &nbsp;
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/popular.png" alt="Popular" width="30%" style="border-radius: 10px;"/>
+    &nbsp;
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/upcoming.png" alt="Upcoming" width="30%" style="border-radius: 10px;"/>
+</p>
 
 ### Filter movies by genre!
 > gif
