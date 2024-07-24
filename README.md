@@ -12,34 +12,34 @@ Currently hosted on Vercel: https://media-collection.vercel.app/
 
 ### Discover top rated, popular and upcoming movies!
 <p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/top_rated.png" alt="Top Rated" width="30%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/top_rated.png" alt="Top Rated" width="40%"/>
     &nbsp;
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/popular.png" alt="Popular" width="30%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/popular.png" alt="Popular" width="40%"/>
     &nbsp;
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/upcoming.png" alt="Upcoming" width="30%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/upcoming.png" alt="Upcoming" width="40%"/>
 </p>
 
 <hr>
 
 ### Filter movies by genre!
 <p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre1.png" alt="Top Rated" width="35%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre1.png" alt="Top Rated" width="40%"/>
     &nbsp;
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre2.png" alt="Popular" width="35%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/bygenre2.png" alt="Popular" width="40%"/>
 </p>
 
 <hr>
 
 ### Filter movies by query!
 <p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/byquery.png" alt="Top Rated" width="35%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/byquery.png" alt="Top Rated" width="40%"/>
 </p>
 
 <hr>
 
 ### Sort movies by various metrics!
 <p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/sort-order.png" alt="Top Rated" width="35%"/>
+  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/sort-order.png" alt="Top Rated" width="40%"/>
 </p>
 
 <hr>
