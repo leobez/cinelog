@@ -21,7 +21,7 @@ const Header = () => {
     return (
     <>
         <div className="flex gap-5 items-center text-2xl text-white font-bold">
-            MOVIES
+            CINELOG
             <MdLocalMovies size={30} fill="white"/>
         </div>
     </>

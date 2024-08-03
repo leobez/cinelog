@@ -85,7 +85,7 @@ const Movie = () => {
                             id='prod-detail`}
                             ref={missingInfoRef}
                         >   
-                        <p className='font-bold text-white'>The following information are missing in this movie:</p>
+                        <p className='font-bold text-white'>The following information is missing in this movie:</p>
                         <ul className='list-disc pl-4'>
                             {missingInfo.map((info:string, index:number) => (
                                 <li key={index} className='text-white'>
