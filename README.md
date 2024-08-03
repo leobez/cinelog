@@ -4,7 +4,7 @@ Website that uses a public API to show movies with some filtering capabilities.
 
 Movie API: [TMDB](https://www.themoviedb.org/?language=pt-BR)
 
-Currently hosted on Vercel: https://cinelog.vercel.app/
+Currently hosted on Vercel: https://cinelogleob.vercel.app
 
 <hr>
 
