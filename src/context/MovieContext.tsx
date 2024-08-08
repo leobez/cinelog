@@ -8,7 +8,7 @@ export type MovieContextType = {
     GET_movies_bygenres:(genres:number[])=>Promise<void>;
     GET_movies_similar:(id:number)=>Promise<any>; // Returns list of movies                  
     GET_movie_byid:(id:number)=>Promise<any>; // Returns object of movie                   
-    GET_movie_randombygenres:(genres:number[])=>Promise<number>; // Returns random number id
+    GET_movie_randombygenres:(genres:number[], signal:AbortSignal)=>Promise<number>; // Returns random number id
     updateMessage:(message:string, color:string)=>void;
     updateLoading:()=>void;
     updatePage:()=>void;
@@ -480,7 +480,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    const GET_movie_randombygenres = async(genres:number[]):Promise<any> => {
+    const GET_movie_randombygenres = async(genres:number[], signal:AbortSignal):Promise<any> => {
 
         resetStates()
 
@@ -500,7 +500,7 @@ export const MovieListContextProvider = ({children}:any) => {
             for (let page=1; page<=5; page++) {
 
                 const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
-                const RESULT = await fetch(URL)
+                const RESULT = await fetch(URL, {signal})
                 //console.log('RESULT: ', RESULT)
                 const DATA = await RESULT.json()
 

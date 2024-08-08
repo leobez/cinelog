@@ -39,9 +39,14 @@ const Filter = () => {
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
+/*     useEffect(() => {
+      console.log('selectedGenres: ', selectedGenres)
+    }, [selectedGenres]) */
+
     const {loading, updateMessage} = useContext(MovieContext) as MovieContextType
 
     const addGenre = (id:number) => {
+      if (selectedGenres.length >= 3) return;
       setSelectedGenres((prev:any)=>[...prev, id])
     } 
 
@@ -78,17 +83,17 @@ const Filter = () => {
       //console.log(classList)
 
       if (classList.includes(`bg-${theme}-800`)) {
-        e.target.classList.remove(`bg-${theme}-800`)
-        e.target.classList.add(`bg-${theme}-950`)
-        //console.log('SELECTING: ', id)
-        addGenre(id)
-
+        if (selectedGenres.length < 3) {
+          e.target.classList.remove(`bg-${theme}-800`)
+          e.target.classList.add(`bg-${theme}-950`)
+          //console.log('SELECTING: ', id)
+          addGenre(id)
+        }
       } else if (classList.includes(`bg-${theme}-950`)) {
         e.target.classList.remove(`bg-${theme}-950`)
         e.target.classList.add(`bg-${theme}-800`)
         //console.log('UNSELECTING: ', id)
         removeGenre(id)
-
       }
     }
 
@@ -103,34 +108,55 @@ const Filter = () => {
 
                       return (
                         <button key={genre[0]} className={`h-10 rounded-lg text-center py-1 px-2 text-xs bg-${theme}-800 hover:bg-${theme}-950 text-white cursor-pointer text-ellipsis overflow-hidden whitespace-nowrap flex justify-between items-center`} id={genre[0]} onClick={toggleGenre} title={genre[1]}>
-                            {genre[1]} <IconComponent size={20} fill="white"/>
+                            {genre[1]} <IconComponent size={20} fill="white" style={{pointerEvents: 'none'}}/>
                         </button>
                       )
                     })}
 
                 </div>
+
                 <div className="h-12 flex w-full gap-2 mt-3">
 
                     {!loading &&
                       <>
-                        <button title="Filter based on genres" type="submit" className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2`} onClick={handleFilter}> 
-                          <IoFilterSharp size={30} fill="white"/>
+                        <button 
+                          title="Filter based on genres" 
+                          type="submit" 
+                          className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2`} 
+                          onClick={handleFilter}
+                        > 
+                          <IoFilterSharp size={30} fill="white" style={{pointerEvents: 'none'}}/>
                         </button>
 
-                        <button title="Get a random movie" type="submit"  className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2`} onClick={handleRandom}> 
-                          <FaDice size={30} fill="white"/>
+                        <button 
+                          title="Get a random movie" 
+                          type="submit"  
+                          className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2`} 
+                          onClick={handleRandom}
+                        > 
+                          <FaDice size={30} fill="white" style={{pointerEvents: 'none'}}/>
                         </button>
                       </>
                     }
 
                     {loading &&
                       <>
-                        <button title="Get a random movie" type="submit" className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2 disabled`}> 
-                          <IoFilterSharp size={30}/>
+                        <button 
+                          title="Get a random movie" 
+                          type="submit" 
+                          className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2 disabled`}
+                          disabled
+                        > 
+                          <IoFilterSharp size={30} style={{pointerEvents: 'none'}}/>
                         </button>
                         
-                        <button title="Filter based on genres" type="submit"  className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2 disabled`}> 
-                          <FaDice size={30}/>
+                        <button 
+                          title="Filter based on genres" 
+                          type="submit"  
+                          className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2 disabled`}
+                          disabled
+                        > 
+                          <FaDice size={30} style={{pointerEvents: 'none'}}/>
                         </button>
                       </>
                     }

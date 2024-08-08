@@ -13,7 +13,7 @@ const Loading = ({message}: Props) => {
         <div className={`h-full w-full grid place-items-center gap-4 rounded-lg shadow-lg bg-${theme}-700 p-5`}>
             <div className="flex flex-col items-center justify-center gap-3">
                 <span className="loading loading-spinner loading-lg text-white"/>
-                <p className='font-bold text-white text-sm'>{message}</p>
+                <p className='font-bold text-white text-sm break-words w-64'>{message}</p>
             </div>
         </div>
     )

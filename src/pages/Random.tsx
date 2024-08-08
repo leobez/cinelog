@@ -16,6 +16,9 @@ const Random = () => {
 
     useEffect(() => {
 
+        const controller = new AbortController()
+        const signal:AbortSignal = controller.signal;
+
         const ASYNC_GET_movie_randombygenres = async() => {
 
             const genresIds = params.get('genres')?.split(',').map((value:string)=>Number(value))
@@ -25,17 +28,19 @@ const Random = () => {
             if (!genresNames) return;
             setGenres(genresNames)
 
-            const tempId = await GET_movie_randombygenres(genresIds)
+            const tempId = await GET_movie_randombygenres(genresIds, signal)
             setLoadingRandom(false)
 
             if (!tempId) return;
 
             setLoadingRandom(false)
-            navigate(`/movie/${tempId}`) //
+            navigate(`/movie/${tempId}`)
         }
 
         ASYNC_GET_movie_randombygenres()
 
+        return () => controller.abort()
+        
     }, [])
 
     return (
