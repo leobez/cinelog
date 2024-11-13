@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "vercel": "vercel",
-    "vercelprod": "vercel --prod"
+    "vercelprod": "vercel --prod",
+    "verceldev": "vercel dev"
   },
   "dependencies": {
     "react": "^18.2.0",

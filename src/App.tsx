@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -14,7 +14,6 @@ import HiddenSidebar from './components/Sidebar/HiddenSidebar'
 import HiddenMenuButton from './components/HiddenMenuButton'
 import Random from './pages/Random'
 import { toggleComponent } from './utils/toggleComponent'
-import Api from './pages/Api'
 import MovieContext, { MovieContextType } from './context/MovieContext'
 import ThemeContext, { ThemeContextType } from './context/ThemeContext'
 
@@ -23,7 +22,7 @@ function App() {
     const hiddenMenu:any = useRef()
     const feedbackRef:any = useRef()
 
-    const {apiKey, message, updateMessage} = useContext(MovieContext) as MovieContextType 
+    const {message, updateMessage} = useContext(MovieContext) as MovieContextType 
 
     const {theme} = useContext(ThemeContext) as ThemeContextType 
 
@@ -87,14 +86,13 @@ function App() {
                   <div className='w-full h-full'>
                     <Routes>
                       <Route path='*'           element={<div>404</div>}></Route>
-                      <Route path='/'           element={apiKey && apiKey.length ? <Home/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/api'        element={<Api/>}></Route> 
-                      <Route path='/popular'    element={apiKey && apiKey.length ? <Popular/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/upcoming'   element={apiKey && apiKey.length ? <Upcoming/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/search'     element={apiKey && apiKey.length ? <Search/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/bygenre'    element={apiKey && apiKey.length ? <ByGenre/>:<Navigate to='/api'/>}></Route> 
-                      <Route path='/movie/:id'  element={apiKey && apiKey.length ? <Movie/>:<Navigate to='/api'/>}></Route>
-                      <Route path='/random'     element={apiKey && apiKey.length ? <Random/>:<Navigate to='/api'/>}></Route>
+                      <Route path='/'           element={<Home/>}></Route>
+                      <Route path='/popular'    element={<Popular/>}></Route>
+                      <Route path='/upcoming'   element={<Upcoming/>}></Route>
+                      <Route path='/search'     element={<Search/>}></Route>
+                      <Route path='/bygenre'    element={<ByGenre/>}></Route> 
+                      <Route path='/movie/:id'  element={<Movie/>}></Route>
+                      <Route path='/random'     element={<Random/>}></Route>
                     </Routes>
                   </div>  
 

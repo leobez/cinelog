@@ -4,12 +4,18 @@
 	-> COMMENT FEATURE
 	-> SEE USER AND FAVORITE MOVIES
 
+
+TODO:
+    -> CREATE SERVERLESS FUNCTION TO PROXY API CALLS
+    -> BETTER TEXT FOR SIDE MENU (FILTER, RANDOM)
+    -> SHORTER SLEEP FUNCTION FOR RANDOM
+    -> FILTER WHEN CLICKING GENRE INSTEAD OF SEPARET BUTTON
+
+
 TODO: 
     -> BETTER PROD DETAILS
     -> BETTER RADIO BUTTONS
     -> TRAILER FINDER
     -> While poster img not loaded, show ghost card
-    -> Add tutorial or message boxes to show how to use each functionality
     -> Query shows possible results
-    -> Maybe pagination or infinite scrolling
     -> ... Games
