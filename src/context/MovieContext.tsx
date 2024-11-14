@@ -28,11 +28,6 @@ const MovieContext = createContext<MovieContextType|null>(null)
 
 export const MovieListContextProvider = ({children}:any) => {
 
-    const URL_BYQUERY = import.meta.env.VITE_QUERY
-    const URL_SIMILAR = import.meta.env.VITE_SIMILAR
-    const URL_BY_GENRES = import.meta.env.VITE_DISCOVER
-    const URL_BYID = import.meta.env.VITE_FIND_BY_ID
-
     const [loading, setLoading]     = useState<boolean>(false)
     const [message, setMessage]     = useState<any>(null)
     const [page, setPage]           = useState<number>(0)
@@ -41,39 +36,9 @@ export const MovieListContextProvider = ({children}:any) => {
     const [run, setRun]             = useState<boolean>(false)
     const [sort, setSort]           = useState<string[]>([])//Only used on GET_movies_bygenres
     const [scrollPos, setScrollPos] = useState<number>(0)
-
-/*     useEffect(() => {
-
-        if (!apiKey || !apiKey.length) return;
-
-        resetStates()
-
-        const testApiKey = async() => {
-            try {
-                // Test if api key works
-                const URL = `${URL_TOPRATED}?api_key=${apiKey}&page=1`
-                const RESULT = await fetch(URL)
-                const DATA = await RESULT.json()
-                //console.log(DATA)
-                if (DATA.status_code === 7) {
-                    // failed
-                    updateMessage('Api Key invalid', 'red')
-                    setApiKey('')
-                    return;
-                } else {
-                    localStorage.setItem('tmdbApiKey', `${apiKey}`)
-                    updateMessage('API key detected on Local Storage', 'green')
-                    return;
-                }
-            } catch (error) {
-                return false
-            }
-        }
-
-        testApiKey()
-
-    }, [apiKey]) */
     
+    const API_URL = "http://localhost:3000/api"
+
     useEffect(() => {
         setScrollPos(0)
         setList([])
@@ -89,20 +54,6 @@ export const MovieListContextProvider = ({children}:any) => {
         setRun((prev:boolean) => !prev) 
     }, [sort])
 
-    // Used for when selecting random movie
-    const sleep = (ms:number) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    // Always used when making API calls
-    const resetStates = ():void => {
-        setLoading(false)
-        setMessage(null)
-    }
-
-
-
-    
     // -- API CALLS -- //
     const GET_movies_toprated = async():Promise<any> => {
         
@@ -111,9 +62,14 @@ export const MovieListContextProvider = ({children}:any) => {
         try {
 
             setLoading(true)
-            const URL = `http://localhost:3000/api/TopRatedMovies?page=${page}`    
+            const URL = `${API_URL}/TopRatedMovies?page=${page}`    
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
+
+            // Validating error
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -154,9 +110,13 @@ export const MovieListContextProvider = ({children}:any) => {
         try {
 
             setLoading(true)
-            const URL = `http://localhost:3000/api/PopularMovies?page=${page}`    
+            const URL = `${API_URL}/PopularMovies?page=${page}`    
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
+
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -197,10 +157,13 @@ export const MovieListContextProvider = ({children}:any) => {
         try {
 
             setLoading(true)
-            const URL = `http://localhost:3000/api/UpcomingMovies?page=${page}`    
+            const URL = `${API_URL}/UpcomingMovies?page=${page}`    
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            //console.log('DATA RECEIVED: ', DATA)
+
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -234,7 +197,6 @@ export const MovieListContextProvider = ({children}:any) => {
 
     }
 
-    // -- STILL FIX THESE -- //
     const GET_movies_byquery = async(query:string):Promise<any> => {
 
         resetStates()
@@ -250,16 +212,21 @@ export const MovieListContextProvider = ({children}:any) => {
                 updateMessage('Invalid query', 'orange')
                 return;
             }
+
             if (query.length > 40) {
                 setLoading(false)
                 updateMessage('Max. query length is 40', 'orange')
                 return;
             }
 
-            const URL = ``
+            const URL = `${API_URL}/ByQuery?page=${page}&q=${query}`    
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            //console.log('DATA RECEIVED: ', DATA)
+
+            // Validating error
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -298,22 +265,13 @@ export const MovieListContextProvider = ({children}:any) => {
 
         resetStates()
 
-        const API_KEY = localStorage.getItem('tmdbApiKey')
-
-        if (!API_KEY) {
-            updateMessage('No api Key', 'red')
-            return;
-        }
-
         let URL = ''
 
         if (sort[0] && sort[1] && sort[0].length && sort[1].length) {
-            URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}&sort_by=${sort[0]}.${sort[1]}`
+            URL = `${API_URL}/ByGenres?genres=${genres?.join(',')}&page=${page}&sort_by=${sort[0]}.${sort[1]}`
         } else {
-            URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
+            URL = `${API_URL}/ByGenres?genres=${genres?.join(',')}&page=${page}`
         }
-
-        //console.log('URL: ', URL)
 
         try {
 
@@ -329,6 +287,11 @@ export const MovieListContextProvider = ({children}:any) => {
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
             //console.log('DATA RECEIVED: ', DATA)
+
+            // Validating error
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -366,20 +329,18 @@ export const MovieListContextProvider = ({children}:any) => {
 
         resetStates()
 
-        const API_KEY = localStorage.getItem('tmdbApiKey')
-
-        if (!API_KEY) {
-            updateMessage('No api Key', 'red')
-            return;
-        }
-
         try {
 
             setLoading(true)
-            const URL = `${URL_SIMILAR}/${id}/similar?api_key=${API_KEY}`
+            const URL = `${API_URL}/SimilarMovies?id=${id}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
             //console.log('DATA RECEIVED: ', DATA)
+
+            // Validating error
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (DATA.results.length === 0) {
@@ -413,20 +374,18 @@ export const MovieListContextProvider = ({children}:any) => {
 
         resetStates()
 
-        const API_KEY = localStorage.getItem('tmdbApiKey')
-
-        if (!API_KEY) {
-            updateMessage('No api Key', 'red')
-            return;
-        }
-
         try {
 
             setLoading(true)
-            const URL = `${URL_BYID}/${id}?api_key=${API_KEY}`
+            const URL = `${API_URL}/ById?id=${id}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            //console.log('DATA RECEIVED: ', DATA)
+            console.log('DATA RECEIVED: ', DATA)
+
+            // Validating error
+            if (DATA.error) {
+                throw new Error();
+            }
 
             // Validate data
             if (!DATA) {
@@ -451,13 +410,6 @@ export const MovieListContextProvider = ({children}:any) => {
 
         resetStates()
 
-        const API_KEY = localStorage.getItem('tmdbApiKey')
-
-        if (!API_KEY) {
-            updateMessage('No api Key', 'red')
-            return;
-        }
-
         try {
 
             let moviePool:any[] = []
@@ -466,7 +418,7 @@ export const MovieListContextProvider = ({children}:any) => {
 
             for (let page=1; page<=5; page++) {
 
-                const URL = `${URL_BY_GENRES}/movie?api_key=${API_KEY}&with_genres=${genres?.join(',')}&page=${page}`
+                const URL = `${API_URL}/RandomByGenres?genres=${genres?.join(',')}&page=${page}`
                 const RESULT = await fetch(URL, {signal})
                 //console.log('RESULT: ', RESULT)
                 const DATA = await RESULT.json()
@@ -500,7 +452,6 @@ export const MovieListContextProvider = ({children}:any) => {
             const max = (moviePool.length-1)
             const min = 0
             const randomNum = Math.floor(Math.random() * (max - min + 1) + min)
-            await sleep(3000);
 
             setLoading(false)
 
@@ -514,7 +465,14 @@ export const MovieListContextProvider = ({children}:any) => {
         }
     }
 
-    // UTILS
+    
+    // -- UTILS -- //
+    // Always used when making API calls
+    const resetStates = ():void => {
+        setLoading(false)
+        setMessage(null)
+    }
+
     const updateMessage = (message:string, color:string):void => {
         setMessage({message, color})
     }

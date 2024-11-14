@@ -1,14 +1,14 @@
 const API_KEY = process.env.API_KEY
-const ENV_URL = process.env.UPCOMING_MOVIES_URL;
+const ENV_URL = process.env.SIMILAR_URL
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 
 export default async function handler(req, res) {
 
     // Get 'page' parameter from url
-    const page = req.query.page;
+    const id = req.query.id;
 
-    if (!page) {
-        res.status(400).json({ error: "Parameter 'page' is mandatory." });
+    if (!id) {
+        res.status(400).json({ error: "Parameter 'id' is mandatory." });
         return;
     }
 
@@ -20,10 +20,9 @@ export default async function handler(req, res) {
 
     // Execute api call
     try {
-
-        const URL = `${ENV_URL}?api_key=${API_KEY}&page=${page}`
+        const URL = `${ENV_URL}/${id}/similar?api_key=${API_KEY}`
         console.log('URL: ', URL)
-
+        
         const RESULT = await fetch(URL)
         const DATA = await RESULT.json()
         res.status(200).json(DATA)

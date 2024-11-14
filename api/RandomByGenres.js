@@ -1,14 +1,20 @@
 const API_KEY = process.env.API_KEY
-const ENV_URL = process.env.UPCOMING_MOVIES_URL;
+const ENV_URL = process.env.BY_GENRE_URL
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 
 export default async function handler(req, res) {
 
     // Get 'page' parameter from url
     const page = req.query.page;
+    const genres = req.query.genres
 
     if (!page) {
         res.status(400).json({ error: "Parameter 'page' is mandatory." });
+        return;
+    }
+
+    if (!genres) {
+        res.status(400).json({ error: "Parameter 'genres' is mandatory." });
         return;
     }
 
@@ -21,7 +27,7 @@ export default async function handler(req, res) {
     // Execute api call
     try {
 
-        const URL = `${ENV_URL}?api_key=${API_KEY}&page=${page}`
+        const URL = `${ENV_URL}/movie?api_key=${API_KEY}&with_genres=${genres}&page=${page}`
         console.log('URL: ', URL)
 
         const RESULT = await fetch(URL)
