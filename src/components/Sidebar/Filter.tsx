@@ -101,6 +101,9 @@ const Filter = () => {
       <>
         {GENRES && 
             <form>
+                <div>
+                  <p className="text-white text-left pt-2 pb-4">Select your preferred movie genres (max: 3)</p>
+                </div>
                 <div className="grid grid-cols-2 gap-1 h-64 overflow-y-auto scrollbar-thin pr-2">
                     {GENRES.map((genre:any) => {
 
@@ -125,6 +128,7 @@ const Filter = () => {
                           className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2`} 
                           onClick={handleFilter}
                         > 
+                          Filter
                           <IoFilterSharp size={30} fill="white" style={{pointerEvents: 'none'}}/>
                         </button>
 
@@ -134,6 +138,7 @@ const Filter = () => {
                           className={`text-sm w-1/2 bg-${theme}-900 hover:bg-${theme}-950 text-white cursor-pointer rounded-lg shadow-lg flex items-center justify-center gap-2`} 
                           onClick={handleRandom}
                         > 
+                          Random
                           <FaDice size={30} fill="white" style={{pointerEvents: 'none'}}/>
                         </button>
                       </>

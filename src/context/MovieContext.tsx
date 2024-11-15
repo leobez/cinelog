@@ -37,7 +37,7 @@ export const MovieListContextProvider = ({children}:any) => {
     const [sort, setSort]           = useState<string[]>([])//Only used on GET_movies_bygenres
     const [scrollPos, setScrollPos] = useState<number>(0)
     
-    const API_URL = "http://localhost:3000/api"
+    const API_URL = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         setScrollPos(0)
@@ -380,7 +380,7 @@ export const MovieListContextProvider = ({children}:any) => {
             const URL = `${API_URL}/ById?id=${id}`
             const RESULT = await fetch(URL)
             const DATA = await RESULT.json()
-            console.log('DATA RECEIVED: ', DATA)
+            //console.log('DATA RECEIVED: ', DATA)
 
             // Validating error
             if (DATA.error) {
