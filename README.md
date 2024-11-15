@@ -2,6 +2,8 @@
 
 Website that uses a public API to show movies with some filtering capabilities. 
 
+All API calls goes through a node.js proxy API first, thats also hosted on Vercel.
+
 Movie API: [TMDB](https://www.themoviedb.org/?language=pt-BR)
 
 Currently hosted on Vercel: https://cinelogleob.vercel.app
@@ -59,22 +61,9 @@ Currently hosted on Vercel: https://cinelogleob.vercel.app
 
 <hr>
 
-To use this application you need an Api Key from TMDB.
-
-To get one, access https://developer.themoviedb.org/v4/reference/intro/getting-started, create an account and generate a Key.
-
-Once generated, you can put it on the /api page of the application and click "Save it" to save it on the browsers Local Storage. 
-
-<p align="center">
-  <img src="https://github.com/leobez/media-collection/blob/main/screenshots/api.png" alt="Top Rated" width="40%"/>
-</p>
-
-Once done, the app will be usable and every requisition will use this key. 
-
-<hr>
-
 Tech Stack: 
 - React.js
+- Node js
 - TypeScript
 - Vercel
 - React icons
