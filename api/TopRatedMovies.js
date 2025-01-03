@@ -1,8 +1,12 @@
+import { rateLimiter } from "./rateLimiter.js";
+
 const API_KEY = process.env.API_KEY
 const ENV_URL = process.env.TOP_RATED_MOVIES_URL;
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 
 export default async function handler(req, res) {
+
+    if (!rateLimiter(req, res)) return; // Bloqueia requisições excedentes
 
     // Get 'page' parameter from url
     const page = req.query.page;

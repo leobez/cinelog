@@ -2,8 +2,6 @@
 
 Website that uses a public API to show movies with some filtering capabilities. 
 
-All API calls goes through a node.js proxy API first, thats also hosted on Vercel.
-
 Movie API: [TMDB](https://www.themoviedb.org/?language=pt-BR)
 
 Currently hosted on Vercel: https://cinelogleob.vercel.app

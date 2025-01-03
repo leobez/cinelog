@@ -1,5 +1,0 @@
-React
-Node.js
-React-router-dom
-Redux
-Tailwind
